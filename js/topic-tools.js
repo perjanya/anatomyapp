@@ -12,9 +12,9 @@
         <button id="tts-stop">⏹ Stop</button>
       </div>
       <div class="gen-controls">
-        <button id="mcqs">MCQs</button>
-        <button id="clinical-case">Clinical Case</button>
-        <button id="gen-exam">Exam Question</button>
+        <button id="mcqs" class="btn-primary">MCQs</button>
+        <button id="clinical-case" class="btn-case">Clinical Case</button>
+        <button id="gen-exam" class="btn-exam">Add Exam Question</button>
       </div>
       <div class="results" id="tools-results"></div>
       <div class="external-links">
@@ -34,10 +34,12 @@
     document.getElementById('tts-stop').addEventListener('click', stopTTS);
     document.getElementById('mcqs').addEventListener('click', requestMCQs);
     document.getElementById('clinical-case').addEventListener('click', requestClinicalCase);
-    document.getElementById('gen-exam').addEventListener('click', generateExamQuestion);
+    document.getElementById('gen-exam').addEventListener('click', showExamInput);
     document.getElementById('add-link').addEventListener('click', addExternalLink);
 
     loadLinks();
+    // show any saved exam question on UI
+    displaySavedExamOnLoad();
   }
 
   function getTopicKey(){
@@ -240,11 +242,55 @@
   }
 
   function generateExamQuestion(){
+    // retained for backward-compatibility but not called directly; exam questions are now added manually.
     const sents = extractSentences();
     const candidate = sents.find(s=>s.length>60) || sents[0] || document.title;
     const out = document.getElementById('tools-results');
     out.innerHTML = `<h3>Potential Exam Question</h3><div class="exam-box">Describe: ${candidate}</div>`;
   }
+
+  // Exam question manual input/save
+  function showExamInput(){
+    const out = document.getElementById('tools-results');
+    out.innerHTML = `<h3>Exam Question (manual)</h3>
+      <textarea id="exam-input" placeholder="Paste or type your exam question here" style="width:100%;height:120px"></textarea>
+      <div style="margin-top:8px"><button id="save-exam" class="btn-exam">Save Exam Question</button> <button id="clear-exam">Clear</button></div>
+      <div id="exam-saved" style="margin-top:12px"></div>`;
+    const saved = localStorage.getItem(getTopicKey() + ':exam');
+    if (saved) document.getElementById('exam-input').value = saved;
+    document.getElementById('save-exam').addEventListener('click', saveExamQuestion);
+    document.getElementById('clear-exam').addEventListener('click', ()=>{
+      localStorage.removeItem(getTopicKey() + ':exam');
+      document.getElementById('exam-saved').textContent = 'Exam question cleared.';
+      document.getElementById('exam-input').value = '';
+      setTimeout(()=>document.getElementById('exam-saved').textContent = '', 2500);
+    });
+  }
+
+  function saveExamQuestion(){
+    const val = document.getElementById('exam-input').value.trim();
+    if (!val) return alert('Enter an exam question');
+    localStorage.setItem(getTopicKey() + ':exam', val);
+    const out = document.getElementById('exam-saved');
+    out.textContent = 'Saved.';
+    setTimeout(()=>out.textContent = '', 2500);
+  }
+
+  function displaySavedExamOnLoad(){
+    const saved = localStorage.getItem(getTopicKey() + ':exam');
+    if (!saved) return;
+    const container = document.querySelector('.topic-tools');
+    if (!container) return;
+    let el = container.querySelector('#exam-display');
+    if (!el){
+      el = document.createElement('div'); el.id = 'exam-display'; el.style.marginTop='10px'; el.className='exam-box';
+      container.appendChild(el);
+    }
+    el.innerHTML = `<h4>Saved Exam Question</h4><div>${escapeHtml(saved)}</div><div style="margin-top:6px"><button id="edit-exam">Edit</button></div>`;
+    container.querySelector('#edit-exam').addEventListener('click', showExamInput);
+  }
+
+  function escapeHtml(s){ return s.replace(/[&<>"']/g, c=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
   // small utils
   function shuffle(a){ for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
@@ -254,7 +300,15 @@
   function injectStyles(){
     const css = `
     .topic-tools{border-top:1px dashed #e5e7eb;padding:12px 0;margin-top:18px}
-    .topic-tools button{margin-right:8px;padding:8px 10px;border-radius:6px;border:1px solid #e6edf8;background:#fff}
+    .topic-tools button{margin-right:8px;padding:8px 10px;border-radius:8px;border:1px solid transparent;background:#fff;cursor:pointer}
+    .topic-tools .gen-controls{margin-top:8px}
+    .topic-tools .gen-controls button{padding:10px 12px;margin-right:10px;font-weight:600}
+    .btn-primary{background:linear-gradient(180deg,#2563eb,#1d4ed8);color:#fff;border-color:#1e40af}
+    .btn-primary:hover{filter:brightness(1.05)}
+    .btn-case{background:linear-gradient(180deg,#06b6d4,#0891b2);color:#fff;border-color:#038892}
+    .btn-case:hover{filter:brightness(1.05)}
+    .btn-exam{background:linear-gradient(180deg,#f59e0b,#d97706);color:#fff;border-color:#b45309}
+    .btn-exam:hover{filter:brightness(1.03)}
     .topic-tools .results{margin-top:12px}
     .mcq{background:#fff;padding:8px;border-radius:6px;margin-bottom:8px;border:1px solid #eef2f6}
     .exam-box{background:#fffbeb;border-left:4px solid #f59e0b;padding:10px;border-radius:4px}
