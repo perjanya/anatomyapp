@@ -1,6 +1,8 @@
 // Vercel serverless function (CommonJS) to proxy to OpenAI and return structured MCQs/cases.
 // Security: if SIMPLE_API_KEY env var is set, the function requires the header 'x-api-key' to match.
 
+const axios = require('axios');
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
@@ -22,26 +24,24 @@ module.exports = async function handler(req, res) {
     const system = 'You are a helpful medical educator that writes high-quality, clinically relevant multiple-choice questions and short clinical cases. Return JSON in the format { items: [...] } where each item is an object.';
     const userPrompt = `From the content below, generate ${count} ${type} items. Return JSON only. Content:\n\n${text}`;
 
-    // Use global fetch (Node 18+ / Vercel runtime). If unavailable, Vercel will throw an informative error.
-    const r = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_KEY}`
-      },
-      body: JSON.stringify({
+    // Use axios to call OpenAI (axios is in dependencies)
+    const response = await axios.post(
+      'https://api.openai.com/v1/chat/completions',
+      {
         model: 'gpt-4o-mini',
         messages: [ { role: 'system', content: system }, { role: 'user', content: userPrompt } ],
         max_tokens: 900
-      })
-    });
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${OPENAI_KEY}`
+        },
+        timeout: 120000
+      }
+    );
 
-    if (!r.ok) {
-      const t = await r.text();
-      return res.status(502).json({ error: 'LLM API error', detail: t });
-    }
-
-    const j = await r.json();
+    const j = response.data;
     const reply = (j.choices && j.choices[0] && (j.choices[0].message?.content || j.choices[0].text)) || '';
 
     // Try to parse JSON from the reply; if parsing fails, return raw text under items[].raw
