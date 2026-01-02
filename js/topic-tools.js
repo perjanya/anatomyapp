@@ -300,15 +300,17 @@
   function injectStyles(){
     const css = `
     .topic-tools{border-top:1px dashed #e5e7eb;padding:12px 0;margin-top:18px}
-    .topic-tools button{margin-right:8px;padding:8px 10px;border-radius:8px;border:1px solid transparent;background:#fff;cursor:pointer}
+    /* make default buttons visually neutral so specific classes control appearance */
+    .topic-tools button{margin-right:8px;padding:8px 10px;border-radius:8px;border:1px solid transparent;background:transparent;cursor:pointer;color:inherit}
     .topic-tools .gen-controls{margin-top:8px}
     .topic-tools .gen-controls button{padding:10px 12px;margin-right:10px;font-weight:600}
-    .btn-primary{background:linear-gradient(180deg,#2563eb,#1d4ed8);color:#fff;border-color:#1e40af}
-    .btn-primary:hover{filter:brightness(1.05)}
-    .btn-case{background:linear-gradient(180deg,#06b6d4,#0891b2);color:#fff;border-color:#038892}
-    .btn-case:hover{filter:brightness(1.05)}
-    .btn-exam{background:linear-gradient(180deg,#f59e0b,#d97706);color:#fff;border-color:#b45309}
-    .btn-exam:hover{filter:brightness(1.03)}
+    /* increase specificity to override general rules */
+    .topic-tools .btn-primary{background:linear-gradient(180deg,#2563eb,#1d4ed8);color:#fff;border-color:#1e40af}
+    .topic-tools .btn-primary:hover{filter:brightness(1.05)}
+    .topic-tools .btn-case{background:linear-gradient(180deg,#06b6d4,#0891b2);color:#fff;border-color:#038892}
+    .topic-tools .btn-case:hover{filter:brightness(1.05)}
+    .topic-tools .btn-exam{background:linear-gradient(180deg,#f59e0b,#d97706);color:#fff;border-color:#b45309}
+    .topic-tools .btn-exam:hover{filter:brightness(1.03)}
     .topic-tools .results{margin-top:12px}
     .mcq{background:#fff;padding:8px;border-radius:6px;margin-bottom:8px;border:1px solid #eef2f6}
     .exam-box{background:#fffbeb;border-left:4px solid #f59e0b;padding:10px;border-radius:4px}
