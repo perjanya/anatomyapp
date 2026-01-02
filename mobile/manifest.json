@@ -1,0 +1,9 @@
+{
+  "name": "Healiiosmed Notes",
+  "short_name": "Healiiosmed",
+  "start_url": "/mobile/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "icons": []
+}

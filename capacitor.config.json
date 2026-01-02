@@ -1,0 +1,6 @@
+{
+  "appId": "com.heliosmed.app",
+  "appName": "Heliosmed",
+  "webDir": "mobile",
+  "bundledWebRuntime": false
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Healiiosmed — Anatomy Topics</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="logo-wrap">
+        <img src="assets/logo.jpg" alt="Heliosmed logo" class="logo-img" />
+        <div class="brand">Heliosmed</div>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="screen">
+        <div class="grid">
+          <!-- Topic cards inserted by JS -->
+        </div>
+
+        <div class="profile-card">
+          <div class="avatar">VS</div>
+          <div class="profile-info">
+            <div class="name">Dr. Viveka S</div>
+            <div class="role">Professor, Department of Anatomy</div>
+            <div class="org">Shridevi Medical College, Tumkur</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="topic" class="screen hidden">
+        <div class="topic-header">
+          <button id="backBtn" class="back">← Back</button>
+          <h2 id="topic-title">Topic</h2>
+        </div>
+        <ul id="sublist" class="sublist"></ul>
+      </section>
+
+      <div id="toast" class="toast hidden"></div>
+    </main>
+
+    <nav class="bottombar">
+      <div class="copyright">© Healiiosmed</div>
+    </nav>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="config.js"></script>
+</body>
+</html>
