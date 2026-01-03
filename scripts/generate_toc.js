@@ -4,8 +4,9 @@ const mammoth = require('mammoth');
 const marked = require('marked');
 
 // Configuration
-const sourceDir = path.join(__dirname, '..', 'content', 'upper-limb');
-const outDataDir = path.join(__dirname, '..', 'data');
+const sourceDir = path.join(__dirname, '..', 'www', 'content', 'upper-limb');
+const outDir = path.join(__dirname, '..', 'www', 'content', 'upper-limb');
+const outDataDir = path.join(__dirname, '..', 'www', 'data');
 
 if (!fs.existsSync(sourceDir)) {
   console.error('Source directory does not exist:', sourceDir);
