@@ -14,7 +14,9 @@ if (!fs.existsSync(sourceDir)) {
 if (!fs.existsSync(outDataDir)) fs.mkdirSync(outDataDir, { recursive: true });
 
 (async () => {
-  const files = fs.readdirSync(sourceDir).filter(f => !f.startsWith('.'));
+  const files = fs.readdirSync(sourceDir)
+    .filter(f => !f.startsWith('.') && !f.startsWith('~')) // Skip hidden and temp files
+    .filter(f => path.extname(f).toLowerCase() === '.docx'); // Only process .docx files
   const items = [];
 
   for (const file of files){
@@ -23,48 +25,43 @@ if (!fs.existsSync(outDataDir)) fs.mkdirSync(outDataDir, { recursive: true });
     const full = path.join(sourceDir, file);
 
     try{
-      if (ext === '.docx'){
-        const result = await mammoth.convertToHtml({path: full});
-        const html = result.value;
-        // extract title: first heading or first line
-        const titleMatch = html.match(/<h[1-6]>(.*?)<\/h[1-6]>/i);
-        const title = titleMatch ? titleMatch[1].trim() : basename.replace(/[-_]/g,' ');
-        const outHtmlPath = path.join(sourceDir, basename + '.html');
-        // include site CSS and topic-tools script (relative path from content/upper-limb -> ../../)
-        const wrapped = `<!doctype html><html><head><meta charset="utf-8"><title>${title}</title><link rel="stylesheet" href="../../css/style.css"></head><body>${html}<script src="../../js/topic-tools.js"></script></body></html>`;
-        fs.writeFileSync(outHtmlPath, wrapped);
-        items.push({ title, url: `content/upper-limb/${basename}.html` });
-      } else if (ext === '.md' || ext === '.markdown'){
-        const md = fs.readFileSync(full, 'utf8');
-        const titleMatch = md.match(/^#\s+(.+)$/m);
-        const title = titleMatch ? titleMatch[1].trim() : basename.replace(/[-_]/g,' ');
-        const html = marked(md);
-        const outHtmlPath = path.join(sourceDir, basename + '.html');
-        const wrapped = `<!doctype html><html><head><meta charset="utf-8"><title>${title}</title><link rel="stylesheet" href="../../css/style.css"></head><body>${html}<script src="../../js/topic-tools.js"></script></body></html>`;
-        fs.writeFileSync(outHtmlPath, wrapped);
-        items.push({ title, url: `content/upper-limb/${basename}.html` });
-      } else if (ext === '.html'){
-        // leave existing html files as-is, but ensure they include topic-tools by appending a script tag if not present
-        let html = fs.readFileSync(full, 'utf8');
-        const titleMatch = html.match(/<title>(.*?)<\/title>/i);
-        const title = titleMatch ? titleMatch[1].trim() : basename.replace(/[-_]/g,' ');
-        if (!/topic-tools\.js/.test(html)){
-          // attempt to insert before </body>
-          if (/<\/body>/i.test(html)){
-            html = html.replace(/<\/body>/i, '<script src="../../js/topic-tools.js"></script></body>');
-            fs.writeFileSync(full, html, 'utf8');
-          }
-        }
-        items.push({ title, url: `content/upper-limb/${file}` });
-      } else {
-        // ignore other files
-      }
+      const result = await mammoth.convertToHtml({path: full});
+      const html = result.value;
+      // extract title: first heading or first line
+      const titleMatch = html.match(/<h[1-6]>(.*?)<\/h[1-6]>/i);
+      let title = titleMatch ? titleMatch[1].trim() : basename.replace(/[-_]/g,' ');
+      
+      // Clean up HTML tags from title
+      title = title.replace(/<[^>]*>/g, '').trim();
+      
+      const outHtmlPath = path.join(sourceDir, basename + '.html');
+      // include site CSS and topic-tools script (relative path from content/upper-limb -> ../../)
+      const wrapped = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${title}</title>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/anatomy-modern.css">
+</head>
+<body>
+<div class="content-wrapper">
+<main class="topic-content">
+${html}
+</main>
+</div>
+<script src="../../js/topic-tools.js"></script>
+</body>
+</html>`;
+      fs.writeFileSync(outHtmlPath, wrapped, 'utf8');
+      items.push({ title, url: `content/upper-limb/${basename}.html` });
     } catch(err){
       console.error('Failed to process', file, err);
     }
   }
 
-  const outJson = path.join(outDataDir, 'toc-upper-limb.json');
+  const outJson = path.join(outDataDir, 'toc.json');
   fs.writeFileSync(outJson, JSON.stringify(items, null, 2), 'utf8');
   console.log('Wrote', outJson, 'with', items.length, 'entries');
 })();

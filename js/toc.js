@@ -127,10 +127,13 @@ if (tocItems.length === 0){
 // Additionally, try to load pre-generated TOC JSON for Upper limb
 async function loadGeneratedUpperLimb(){
   try{
-    const res = await fetch('data/toc-upper-limb.json', {cache: 'no-store'});
+    const res = await fetch('data/toc.json', {cache: 'no-store'});
     if (!res.ok) return;
     const list = await res.json();
     if (!Array.isArray(list) || list.length===0) return;
+
+    // Clear existing TOC and load topics from JSON instead
+    tocList.innerHTML = '';
 
     // create a header entry in the TOC
     const headerLi = document.createElement('li');
@@ -140,8 +143,13 @@ async function loadGeneratedUpperLimb(){
 
     list.forEach(item => {
       const li = document.createElement('li');
-      li.textContent = item.title;
+      // Clean up HTML tags from title
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = item.title;
+      const cleanTitle = tempDiv.textContent || tempDiv.innerText || item.title;
+      li.textContent = cleanTitle;
       li.style.marginLeft = '12px';
+      li.style.cursor = 'pointer';
       li.onclick = () => { window.location.href = item.url; };
       tocList.appendChild(li);
     });
