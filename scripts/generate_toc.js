@@ -26,7 +26,26 @@ if (!fs.existsSync(outDataDir)) fs.mkdirSync(outDataDir, { recursive: true });
     const full = path.join(sourceDir, file);
 
     try{
-      const result = await mammoth.convertToHtml({path: full});
+      // Configure mammoth to preserve paragraph styles as CSS classes
+      const options = {
+        path: full,
+        styleMap: [
+          // Map Word styles to HTML classes for boxes
+          "p[style-name='box'] => div.box:fresh",
+          "p[style-name='info-box'] => div.info-box:fresh",
+          "p[style-name='tip-box'] => div.tip-box:fresh",
+          "p[style-name='success-box'] => div.success-box:fresh",
+          "p[style-name='warning-box'] => div.warning-box:fresh",
+          "p[style-name='note-box'] => div.note-box:fresh",
+          "p[style-name='important-box'] => div.important-box:fresh",
+          "p[style-name='clinical-box'] => div.clinical-box:fresh",
+          "p[style-name='alert-box'] => div.alert-box:fresh",
+          "p[style-name='definition-box'] => div.definition-box:fresh",
+          "p[style-name='neutral-box'] => div.neutral-box:fresh"
+        ]
+      };
+      
+      const result = await mammoth.convertToHtml(options);
       const html = result.value;
       // extract title: first heading or first line
       const titleMatch = html.match(/<h[1-6]>(.*?)<\/h[1-6]>/i);

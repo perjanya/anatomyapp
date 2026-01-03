@@ -20,6 +20,8 @@ let tocIndex = 0;
 const tocItems = [];
 
 // Walk content child nodes and convert short <p> headings into generated headings
+// Only do this if content element exists (i.e., on topic pages, not TOC pages)
+if (content) {
 const children = Array.from(content.childNodes);
 for(let i=0;i<children.length;i++){
   const node = children[i];
@@ -123,34 +125,37 @@ if (tocItems.length === 0){
     });
   }
 }
+} // end if (content)
 
 // Additionally, try to load pre-generated TOC JSON for Upper limb
 async function loadGeneratedUpperLimb(){
   try{
+    console.log('Loading TOC from data/toc.json...');
     const res = await fetch('data/toc.json', {cache: 'no-store'});
+    console.log('Fetch response:', res.ok, res.status);
     if (!res.ok) return;
     const list = await res.json();
+    console.log('TOC data loaded:', list);
     if (!Array.isArray(list) || list.length===0) return;
 
     // Clear existing TOC and load topics from JSON instead
     tocList.innerHTML = '';
 
-    // create a header entry in the TOC
-    const headerLi = document.createElement('li');
-    headerLi.textContent = 'Upper limb';
-    headerLi.style.fontWeight = '700';
-    tocList.appendChild(headerLi);
-
     list.forEach(item => {
       const li = document.createElement('li');
+      li.className = 'toc-item';
+      
+      const link = document.createElement('a');
+      link.className = 'toc-link';
+      link.href = item.url;
+      
       // Clean up HTML tags from title
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = item.title;
       const cleanTitle = tempDiv.textContent || tempDiv.innerText || item.title;
-      li.textContent = cleanTitle;
-      li.style.marginLeft = '12px';
-      li.style.cursor = 'pointer';
-      li.onclick = () => { window.location.href = item.url; };
+      link.textContent = cleanTitle;
+      
+      li.appendChild(link);
       tocList.appendChild(li);
     });
   }catch(e){
@@ -162,6 +167,7 @@ loadGeneratedUpperLimb();
 
 // If a structured TOC is provided, render it and wire items to generated headings when possible.
 function renderTOCStructure(){
+  if (!content) return; // Only for topic pages with content
   const structure = window.TOC_STRUCTURE;
   if (!structure || typeof structure !== 'object') return;
   // clear existing list
