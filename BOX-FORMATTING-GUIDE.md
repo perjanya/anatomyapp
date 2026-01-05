@@ -1,77 +1,143 @@
-# Box Formatting Guide for Word Documents
+# Box Formatting and Media Guide for Word Documents
 
-## How to Create Boxes in Word
+## ✨ Simple Automated Method (RECOMMENDED)
 
-To create styled boxes in your Word documents that will be converted to beautiful HTML boxes, use **Word Styles**.
+The easiest way to create boxes and embed videos is to use **text markers** in your Word document.
 
-### Method 1: Using Paragraph Styles (Recommended)
+### How to Use Text Markers:
 
-1. **Select the text** you want to appear in a box
-2. **Apply a custom style name** by:
-   - Going to Home → Styles → Create a Style
-   - Or typing the style name directly
+1. **In your Word document**, add a marker before the text you want in a box:
+   ```
+   [CLINICAL]Needle is inserted vertically - Four finger breadth below the acromial process
+   ```
 
-3. **Use these exact style names** for different box types:
+2. **Save the document**
 
-#### Available Box Types:
+3. **Run the generator**:
+   ```powershell
+   node scripts/generate_toc.js
+   ```
+   
+4. **Done!** The HTML will automatically have styled boxes and embedded videos.
 
-| Style Name in Word | Result in HTML | Use Case | Color |
-|-------------------|----------------|----------|-------|
-| `box` or `info-box` | Info Box | General information, key points | Blue |
-| `tip-box` or `success-box` | Tip/Success Box | Helpful tips, success notes | Green |
-| `warning-box` | Warning Box | Warnings, cautions | Orange |
-| `note-box` or `important-box` | Note/Important Box | Important notes, highlights | Purple |
-| `clinical-box` or `alert-box` | Clinical/Alert Box | Critical info, clinical notes | Red |
-| `definition-box` or `neutral-box` | Definition Box | Definitions, neutral content | Gray |
+---
 
-### Method 2: Using Custom XML (Alternative)
+## 📦 Available Box Markers:
 
-If your Word-to-HTML converter supports it, wrap content with:
+| Marker in Word | HTML Result | Color | Use Case |
+|---------------|-------------|-------|----------|
+| `[CLINICAL]...` | Clinical Box | Red | Critical clinical information |
+| `[WARNING]...` | Warning Box | Orange | Warnings, cautions |
+| `[NOTE]...` | Note Box | Purple | Important notes, highlights |
+| `[INFO]...` | Info Box | Blue | General information |
+| `[TIP]...` | Tip Box | Green | Helpful tips |
+| `[SUCCESS]...` | Success Box | Green | Success notes |
+
+### Box Examples:
+
+**Clinical Box:**
 ```
-<div class="info-box">
-Your content here
+[CLINICAL]Damage to the axillary nerve can paralyze the deltoid muscle.
+```
+
+**Warning Box:**
+```
+[WARNING]Axillary nerve is at risk of injury during deltoid injections.
+```
+
+**Note Box:**
+```
+[NOTE]Axillary nerve supplies deltoid and teres minor muscles.
+```
+
+---
+
+## 🎥 Embedding YouTube Videos:
+
+To embed a YouTube video in your Word document, use the `[YOUTUBE]` marker:
+
+### Method 1: Full YouTube URL
+```
+[YOUTUBE]https://www.youtube.com/watch?v=dQw4w9WgXcQ
+```
+
+### Method 2: Short YouTube URL
+```
+[YOUTUBE]https://youtu.be/dQw4w9WgXcQ
+```
+
+### Method 3: Just the Video ID (11 characters)
+```
+[YOUTUBE]dQw4w9WgXcQ
+```
+
+### Optional: Closing Tag
+```
+[YOUTUBE]https://www.youtube.com/watch?v=dQw4w9WgXcQ[/YOUTUBE]
+```
+
+### Real Example:
+```
+[NOTE]Watch this video for a detailed explanation of the shoulder joint anatomy:
+
+[YOUTUBE]https://www.youtube.com/watch?v=SHOULDER_VIDEO_ID
+```
+
+**How to find the Video ID:**
+- From `https://www.youtube.com/watch?v=dQw4w9WgXcQ` → the ID is `dQw4w9WgXcQ`
+- From `https://youtu.be/dQw4w9WgXcQ` → the ID is `dQw4w9WgXcQ`
+- The video ID is always 11 characters long
+
+---
+
+## Optional: Closing Tags
+
+You can optionally use closing tags for clarity (but they're not required):
+```
+[CLINICAL]Your clinical note here[/CLINICAL]
+```
+
+---
+
+## Alternative Method: Manual HTML Editing
+
+If you need to add boxes directly to HTML files:
+
+```html
+<div class="clinical-box">
+  <p>Your clinical note here</p>
 </div>
 ```
 
-### Example Word Formatting:
+Available classes: `clinical-box`, `warning-box`, `note-box`, `info-box`, `tip-box`, `success-box`
 
-**For an Info Box:**
-1. Type your content:
+---
+
+## Workflow Summary:
+
+1. **Write your Word document** with text markers:
+   - Add `[CLINICAL]`, `[WARNING]`, `[NOTE]`, etc. before important text
+   - Add `[YOUTUBE]video_id` to embed YouTube videos
+   
+2. **Save the .docx file** in `www/content/upper-limb/`
+
+3. **Generate HTML**:
+   ```powershell
+   node scripts/generate_toc.js
    ```
-   Important Anatomical Point
-   The deltoid muscle has three parts: anterior, middle, and posterior.
+
+4. **Test locally**:
+   ```powershell
+   cd www
+   python -m http.server 8000
    ```
-2. Select all the text
-3. Apply style name: `info-box`
-4. The conversion will create a blue box with this content
+   Then open http://localhost:8000
 
-**For a Clinical Box:**
-1. Type your content:
-   ```
-   Clinical Significance
-   Damage to the axillary nerve can paralyze the deltoid muscle.
-   ```
-2. Select all the text
-3. Apply style name: `clinical-box`
-4. The conversion will create a red box with this content
+---
 
-### Tips for Best Results:
+## Visual Preview:
 
-✅ **DO:**
-- Use the exact style names listed above
-- Put the box title in **bold** at the start
-- Keep box content focused and concise
-- Use one box type per concept
-
-❌ **DON'T:**
-- Mix multiple box types in one selection
-- Use very long paragraphs in boxes
-- Nest boxes inside boxes
-- Use custom fonts or colors (the CSS handles styling)
-
-### Visual Preview:
-
-When converted, your boxes will have:
+### Boxes will have:
 - Gradient background
 - Colored left border (5px)
 - Rounded corners (12px radius)
@@ -79,26 +145,22 @@ When converted, your boxes will have:
 - Hover animation (lifts up slightly)
 - Responsive design (adapts to mobile)
 
-### Manual HTML Editing (If Needed):
-
-If you need to manually add boxes in HTML files, use:
-
-```html
-<div class="info-box">
-  <strong>Title Here</strong>
-  <p>Your content goes here.</p>
-</div>
-```
-
-Replace `info-box` with any of the box class names above.
+### Videos will have:
+- Responsive 16:9 aspect ratio
+- Rounded corners
+- Full-width on mobile
+- Professional embed styling
 
 ---
 
 ## Quick Reference:
 
-- **Blue boxes** → General info: `box`, `info-box`
-- **Green boxes** → Tips/Success: `tip-box`, `success-box`  
-- **Orange boxes** → Warnings: `warning-box`
-- **Purple boxes** → Notes/Important: `note-box`, `important-box`
-- **Red boxes** → Clinical/Alerts: `clinical-box`, `alert-box`
-- **Gray boxes** → Definitions: `definition-box`, `neutral-box`
+**Boxes:**
+- **Red** → Clinical notes: `[CLINICAL]`
+- **Orange** → Warnings: `[WARNING]`
+- **Purple** → Important notes: `[NOTE]`
+- **Blue** → General info: `[INFO]`
+- **Green** → Tips/Success: `[TIP]` or `[SUCCESS]`
+
+**Media:**
+- **YouTube Videos** → `[YOUTUBE]video_id_or_url`

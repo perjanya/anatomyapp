@@ -30,18 +30,23 @@ if (!fs.existsSync(outDataDir)) fs.mkdirSync(outDataDir, { recursive: true });
       const options = {
         path: full,
         styleMap: [
-          // Map Word styles to HTML classes for boxes
-          "p[style-name='box'] => div.box:fresh",
-          "p[style-name='info-box'] => div.info-box:fresh",
-          "p[style-name='tip-box'] => div.tip-box:fresh",
-          "p[style-name='success-box'] => div.success-box:fresh",
-          "p[style-name='warning-box'] => div.warning-box:fresh",
-          "p[style-name='note-box'] => div.note-box:fresh",
-          "p[style-name='important-box'] => div.important-box:fresh",
+          // Map Word styles to HTML classes for boxes (using both style-name and style-id)
           "p[style-name='clinical-box'] => div.clinical-box:fresh",
-          "p[style-name='alert-box'] => div.alert-box:fresh",
-          "p[style-name='definition-box'] => div.definition-box:fresh",
-          "p[style-name='neutral-box'] => div.neutral-box:fresh"
+          "p[style-id='clinical-box'] => div.clinical-box:fresh",
+          "p[style-name='warning-box'] => div.warning-box:fresh",
+          "p[style-id='warning-box'] => div.warning-box:fresh",
+          "p[style-name='note-box'] => div.note-box:fresh",
+          "p[style-id='note-box'] => div.note-box:fresh",
+          "p[style-name='note1-box'] => div.note-box:fresh",
+          "p[style-id='note1-box'] => div.note-box:fresh",
+          "p[style-name='info-box'] => div.info-box:fresh",
+          "p[style-id='info-box'] => div.info-box:fresh",
+          "p[style-name='tip-box'] => div.tip-box:fresh",
+          "p[style-id='tip-box'] => div.tip-box:fresh",
+          "p[style-name='success-box'] => div.success-box:fresh",
+          "p[style-id='success-box'] => div.success-box:fresh",
+          "p[style-name='important-box'] => div.important-box:fresh",
+          "p[style-id='important-box'] => div.important-box:fresh"
         ]
       };
       
@@ -71,6 +76,7 @@ if (!fs.existsSync(outDataDir)) fs.mkdirSync(outDataDir, { recursive: true });
 ${html}
 </main>
 </div>
+<script src="../../js/interactive-features.js"></script>
 <script src="../../js/topic-tools.js"></script>
 </body>
 </html>`;
@@ -84,4 +90,12 @@ ${html}
   const outJson = path.join(outDataDir, 'toc.json');
   fs.writeFileSync(outJson, JSON.stringify(items, null, 2), 'utf8');
   console.log('Wrote', outJson, 'with', items.length, 'entries');
+  
+  // Auto-process box markers
+  console.log('\nProcessing box markers...');
+  require('./process_boxes.js');
+  
+  // Auto-process MCQs
+  console.log('\nProcessing MCQs...');
+  require('./process_mcqs.js');
 })();

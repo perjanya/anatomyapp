@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Test</title>
+    <link rel="stylesheet" href="css/anatomy-modern.css">
+    <style>
+        body {
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h2 {
+            margin-top: 2rem;
+        }
+        .test-info {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>YouTube Video Embed Test</h1>
+    
+    <div class="test-info">
+        <p><strong>Testing video ID:</strong> l9Rs4i8FcT4</p>
+        <p><strong>Direct link:</strong> <a href="https://www.youtube.com/watch?v=l9Rs4i8FcT4" target="_blank">Open in YouTube</a></p>
+    </div>
+
+    <h2>Method 1: Standard Embed</h2>
+    <div class="video-container">
+        <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/l9Rs4i8FcT4" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <h2>Method 2: With nocookie domain</h2>
+    <div class="video-container">
+        <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube-nocookie.com/embed/l9Rs4i8FcT4" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <h2>Method 3: Test with Known Working Video (dQw4w9WgXcQ)</h2>
+    <div class="video-container">
+        <iframe 
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="test-info" style="margin-top: 2rem;">
+        <h3>Troubleshooting:</h3>
+        <ul>
+            <li>If Method 3 works but others don't → The video ID might be invalid or the video is restricted</li>
+            <li>If none work → Check browser console for errors (F12)</li>
+            <li>If you see "Video unavailable" → The video might be private, deleted, or region-locked</li>
+            <li>Try clicking the direct link above to verify the video exists</li>
+        </ul>
+    </div>
+</body>
+</html>

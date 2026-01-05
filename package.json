@@ -5,6 +5,7 @@
   "main": "scripts/generate_toc.js",
   "scripts": {
     "gen-toc": "node scripts/generate_toc.js",
+    "process-boxes": "node scripts/process_boxes.js",
     "cap:init": "npx @capacitor/cli init --web-dir mobile",
     "cap:add-android": "npx cap add android",
     "cap:copy": "npx cap copy",

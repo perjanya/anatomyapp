@@ -37,6 +37,28 @@ h1 {
   border-bottom: 3px solid #1e3a8a;
   padding-bottom: 0.5rem;
   margin-bottom: 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-right: 2rem;
+}
+
+h1::after {
+  content: '▼';
+  position: absolute;
+  right: 0.5rem;
+  font-size: 0.7em;
+  transition: transform 0.3s ease;
+}
+
+h1.collapsed::after {
+  transform: rotate(-90deg);
+}
+
+h1:hover {
+  background: rgba(30, 58, 138, 0.05);
+  padding-left: 0.5rem;
+  transition: all 0.3s ease;
 }
 
 h2 {
@@ -257,6 +279,7 @@ tr:hover {
 /* Primary Info Box - Blue */
 .box, .info-box {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.08) 100%);
+  border: 2px solid rgba(37, 99, 235, 0.3);
   border-left: 5px solid #2563eb;
   border-radius: 12px;
   padding: 1.5rem;
@@ -266,6 +289,7 @@ tr:hover {
 }
 
 .box:hover, .info-box:hover {
+  border-color: rgba(37, 99, 235, 0.5);
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.2);
   transform: translateY(-2px);
 }
@@ -273,6 +297,7 @@ tr:hover {
 /* Success/Tip Box - Green */
 .tip-box, .success-box {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(34, 197, 94, 0.08) 100%);
+  border: 2px solid rgba(16, 185, 129, 0.3);
   border-left: 5px solid #10b981;
   border-radius: 12px;
   padding: 1.5rem;
@@ -282,6 +307,7 @@ tr:hover {
 }
 
 .tip-box:hover, .success-box:hover {
+  border-color: rgba(16, 185, 129, 0.5);
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.2);
   transform: translateY(-2px);
 }
@@ -289,6 +315,7 @@ tr:hover {
 /* Warning Box - Orange */
 .warning-box {
   background: linear-gradient(135deg, rgba(251, 146, 60, 0.05) 0%, rgba(249, 115, 22, 0.08) 100%);
+  border: 2px solid rgba(245, 158, 11, 0.3);
   border-left: 5px solid #f59e0b;
   border-radius: 12px;
   padding: 1.5rem;
@@ -298,6 +325,7 @@ tr:hover {
 }
 
 .warning-box:hover {
+  border-color: rgba(245, 158, 11, 0.5);
   box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2);
   transform: translateY(-2px);
 }
@@ -305,6 +333,7 @@ tr:hover {
 /* Important/Note Box - Purple */
 .note-box, .important-box {
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(124, 58, 237, 0.08) 100%);
+  border: 2px solid rgba(139, 92, 246, 0.3);
   border-left: 5px solid #8b5cf6;
   border-radius: 12px;
   padding: 1.5rem;
@@ -314,6 +343,7 @@ tr:hover {
 }
 
 .note-box:hover, .important-box:hover {
+  border-color: rgba(139, 92, 246, 0.5);
   box-shadow: 0 6px 20px rgba(139, 92, 246, 0.2);
   transform: translateY(-2px);
 }
@@ -321,6 +351,7 @@ tr:hover {
 /* Clinical/Alert Box - Red */
 .clinical-box, .alert-box {
   background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(220, 38, 38, 0.08) 100%);
+  border: 2px solid rgba(239, 68, 68, 0.3);
   border-left: 5px solid #ef4444;
   border-radius: 12px;
   padding: 1.5rem;
@@ -330,6 +361,7 @@ tr:hover {
 }
 
 .clinical-box:hover, .alert-box:hover {
+  border-color: rgba(239, 68, 68, 0.5);
   box-shadow: 0 6px 20px rgba(239, 68, 68, 0.2);
   transform: translateY(-2px);
 }
@@ -337,6 +369,7 @@ tr:hover {
 /* Neutral/Definition Box - Gray */
 .definition-box, .neutral-box {
   background: linear-gradient(135deg, rgba(100, 116, 139, 0.05) 0%, rgba(71, 85, 105, 0.08) 100%);
+  border: 2px solid rgba(100, 116, 139, 0.3);
   border-left: 5px solid #64748b;
   border-radius: 12px;
   padding: 1.5rem;
@@ -346,6 +379,7 @@ tr:hover {
 }
 
 .definition-box:hover, .neutral-box:hover {
+  border-color: rgba(100, 116, 139, 0.5);
   box-shadow: 0 6px 20px rgba(100, 116, 139, 0.2);
   transform: translateY(-2px);
 }
@@ -468,8 +502,244 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ==================== VIDEO EMBED ==================== */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #000;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
 /* ==================== SELECTION ==================== */
 ::selection {
   background: rgba(37, 99, 235, 0.2);
   color: #1e3a8a;
+}
+
+/* ==================== COLLAPSIBLE H1 SECTIONS ==================== */
+.h1-content {
+  max-height: 10000px;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.h1-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+}
+
+/* ==================== INTERACTIVE MCQs ==================== */
+.mcq-container {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(139, 92, 246, 0.05) 100%);
+  border: 2px solid rgba(99, 102, 241, 0.2);
+  border-left: 5px solid #6366f1;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+}
+
+.mcq-container h2, .mcq-container h3 {
+  color: #6366f1;
+  margin-top: 0;
+}
+
+.mcq-question {
+  background: white;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  border: 2px solid #e0e7ff;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+  transition: all 0.3s ease;
+}
+
+.mcq-question:hover {
+  border-color: #a5b4fc;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.12);
+}
+
+.mcq-question-text {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.mcq-options {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.mcq-option {
+  background: #f8fafc;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  border-radius: 10px;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.mcq-option::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.mcq-option:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateX(4px);
+}
+
+.mcq-option.selected {
+  background: #e0e7ff;
+  border-color: #6366f1;
+}
+
+.mcq-option.correct {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  border-color: #10b981;
+  animation: celebrateCorrect 0.6s ease;
+}
+
+.mcq-option.correct::before {
+  content: '✓';
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mcq-option.incorrect {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border-color: #ef4444;
+  animation: shake 0.4s ease;
+}
+
+.mcq-option.incorrect::before {
+  content: '✗';
+  background: #ef4444;
+  border-color: #ef4444;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mcq-option.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.mcq-feedback {
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 500;
+  animation: fadeIn 0.4s ease;
+}
+
+.mcq-feedback.correct {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  border: 2px solid #10b981;
+  color: #065f46;
+}
+
+.mcq-feedback.incorrect {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border: 2px solid #ef4444;
+  color: #991b1b;
+}
+
+/* Celebration Animation */
+@keyframes celebrateCorrect {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.05); }
+  50% { transform: scale(0.98); }
+  75% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-5px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Confetti for correct answers */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #6366f1;
+  position: absolute;
+  animation: confetti-fall 3s linear forwards;
+  z-index: 1000;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.mcq-score {
+  text-align: center;
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #6366f1;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid #c7d2fe;
 }
