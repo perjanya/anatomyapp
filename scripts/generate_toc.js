@@ -3,18 +3,24 @@ const path = require('path');
 const mammoth = require('mammoth');
 const marked = require('marked');
 
-// Configuration
-const sourceDir = path.join(__dirname, '..', 'www', 'content', 'upper-limb');
-const outDir = path.join(__dirname, '..', 'www', 'content', 'upper-limb');
+// Configuration - Process all regions
+const contentDir = path.join(__dirname, '..', 'www', 'content');
 const outDataDir = path.join(__dirname, '..', 'www', 'data');
 
-if (!fs.existsSync(sourceDir)) {
-  console.error('Source directory does not exist:', sourceDir);
+if (!fs.existsSync(contentDir)) {
+  console.error('Content directory does not exist:', contentDir);
   process.exit(1);
 }
 if (!fs.existsSync(outDataDir)) fs.mkdirSync(outDataDir, { recursive: true });
 
-(async () => {
+// Process a single region folder
+async function processRegion(regionName) {
+  const sourceDir = path.join(contentDir, regionName);
+  if (!fs.existsSync(sourceDir)) {
+    console.log(`Skipping ${regionName} - directory does not exist`);
+    return [];
+  }
+
   const files = fs.readdirSync(sourceDir)
     .filter(f => !f.startsWith('.') && !f.startsWith('~')) // Skip hidden and temp files
     .filter(f => path.extname(f).toLowerCase() === '.docx'); // Only process .docx files
@@ -60,7 +66,7 @@ if (!fs.existsSync(outDataDir)) fs.mkdirSync(outDataDir, { recursive: true });
       title = title.replace(/<[^>]*>/g, '').trim();
       
       const outHtmlPath = path.join(sourceDir, basename + '.html');
-      // include site CSS and topic-tools script (relative path from content/upper-limb -> ../../)
+      // include site CSS and topic-tools script (relative path from content/[region] -> ../../)
       const wrapped = `<!doctype html>
 <html lang="en">
 <head>
@@ -81,15 +87,37 @@ ${html}
 </body>
 </html>`;
       fs.writeFileSync(outHtmlPath, wrapped, 'utf8');
-      items.push({ title, url: `content/upper-limb/${basename}.html` });
+      items.push({ title, url: `content/${regionName}/${basename}.html` });
     } catch(err){
       console.error('Failed to process', file, err);
     }
   }
 
+  console.log(`Processed ${regionName}: ${items.length} topics`);
+  return items;
+}
+
+// Main execution
+(async () => {
+  // Get all region folders in content directory
+  const regions = fs.readdirSync(contentDir)
+    .filter(f => fs.statSync(path.join(contentDir, f)).isDirectory());
+
+  console.log(`Found regions: ${regions.join(', ')}\n`);
+
+  // Process each region
+  const allRegions = {};
+  for (const region of regions) {
+    const items = await processRegion(region);
+    if (items.length > 0) {
+      allRegions[region] = items;
+    }
+  }
+
+  // Write combined TOC
   const outJson = path.join(outDataDir, 'toc.json');
-  fs.writeFileSync(outJson, JSON.stringify(items, null, 2), 'utf8');
-  console.log('Wrote', outJson, 'with', items.length, 'entries');
+  fs.writeFileSync(outJson, JSON.stringify(allRegions, null, 2), 'utf8');
+  console.log(`\nWrote ${outJson} with ${Object.keys(allRegions).length} regions`);
   
   // Auto-process box markers
   console.log('\nProcessing box markers...');

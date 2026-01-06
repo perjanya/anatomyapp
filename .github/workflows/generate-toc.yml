@@ -1,0 +1,38 @@
+name: Generate TOC and HTML
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'www/content/**/*.docx'
+      - 'www/content/**/*.md'
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Generate TOC and HTML
+        run: node scripts/generate_toc.js
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add www/content www/data
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate HTML and TOC from docx files" && git push)
