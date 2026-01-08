@@ -1,18 +1,36 @@
-[
-  {
-    "title": "Lymphatic drainage of breast",
-    "url": "content/upper-limb/breastlymphatic.html"
-  },
-  {
-    "title": "Deltoid",
-    "url": "content/upper-limb/deltoid.html"
-  },
-  {
-    "title": "Shoulder joint",
-    "url": "content/upper-limb/Rotator cuff muscles.html"
-  },
-  {
-    "title": "Shoulder joint",
-    "url": "content/upper-limb/Shoulder joint.html"
-  }
-]
+{
+  "upper-limb": [
+    {
+      "title": "Lymphatic drainage of breast",
+      "url": "content/upper-limb/breastlymphatic.html"
+    },
+    {
+      "title": "Clavicle",
+      "url": "content/upper-limb/Clavicle.html"
+    },
+    {
+      "title": "Clavipectoral fascia",
+      "url": "content/upper-limb/clavipectoral fascia.html"
+    },
+    {
+      "title": "Deltoid",
+      "url": "content/upper-limb/deltoid.html"
+    },
+    {
+      "title": "Humerus",
+      "url": "content/upper-limb/Humerus.html"
+    },
+    {
+      "title": "Shoulder joint",
+      "url": "content/upper-limb/Rotator cuff muscles.html"
+    },
+    {
+      "title": "Scapula",
+      "url": "content/upper-limb/Scapula.html"
+    },
+    {
+      "title": "Shoulder joint",
+      "url": "content/upper-limb/Shoulder joint.html"
+    }
+  ]
+}
