@@ -134,9 +134,21 @@ async function loadGeneratedUpperLimb(){
     const res = await fetch('data/toc.json', {cache: 'no-store'});
     console.log('Fetch response:', res.ok, res.status);
     if (!res.ok) return;
-    const list = await res.json();
-    console.log('TOC data loaded:', list);
-    if (!Array.isArray(list) || list.length===0) return;
+    const data = await res.json();
+    console.log('TOC data loaded:', data);
+    
+    // Handle both old array format and new object format
+    let list = [];
+    if (Array.isArray(data)) {
+      list = data;
+    } else if (data && typeof data === 'object') {
+      // New format: { "upper-limb": [...], "thorax": [...], ... }
+      // Get the region from the page URL or default to 'upper-limb'
+      const region = window.location.pathname.match(/\/([^\/]+)\.html$/)?.[1] || 'upper-limb';
+      list = data[region] || [];
+    }
+    
+    if (!list || list.length === 0) return;
 
     // Clear existing TOC and load topics from JSON instead
     tocList.innerHTML = '';
