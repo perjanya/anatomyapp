@@ -230,27 +230,62 @@ pre code {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
-  border-radius: 8px;
+  margin: 2rem 0;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: white;
+  border: 1px solid #e5e7eb;
+}
+
+thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 th {
-  background: #1e3a8a;
+  background: transparent;
   color: white;
-  padding: 1rem;
+  padding: 1.2rem 1.5rem;
   text-align: left;
   font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
 }
 
 td {
-  padding: 0.8rem 1rem;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 1.2rem 1.5rem;
+  border-bottom: none;
+  vertical-align: top;
 }
 
-tr:hover {
-  background: rgba(37, 99, 235, 0.05);
+td:first-child {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+tbody tr:hover {
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  transform: translateX(4px);
+}
+
+/* Striped rows for better readability */
+tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+tbody tr:nth-child(even):hover {
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
 }
 
 /* ==================== SECTION WRAPPERS ==================== */
