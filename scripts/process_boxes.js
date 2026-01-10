@@ -4,7 +4,7 @@ const path = require('path');
 // Process HTML files to convert text markers to styled boxes
 // Markers: [CLINICAL], [WARNING], [NOTE], [INFO], [TIP], [SUCCESS]
 
-const contentDir = path.join(__dirname, '..', 'www', 'content', 'upper-limb');
+const contentBaseDir = path.join(__dirname, '..', 'www', 'content');
 
 // Box type mappings
 const boxPatterns = [
@@ -75,22 +75,28 @@ function processBoxes(html) {
 
 // Process all HTML files in the content directory
 function processAllFiles() {
-  const files = fs.readdirSync(contentDir)
-    .filter(f => f.endsWith('.html'));
+  const regions = fs.readdirSync(contentBaseDir)
+    .filter(f => fs.statSync(path.join(contentBaseDir, f)).isDirectory());
   
   let processedCount = 0;
   
-  for (const file of files) {
-    const filePath = path.join(contentDir, file);
-    let content = fs.readFileSync(filePath, 'utf8');
-    const original = content;
+  for (const region of regions) {
+    const regionDir = path.join(contentBaseDir, region);
+    const files = fs.readdirSync(regionDir)
+      .filter(f => f.endsWith('.html'));
     
-    content = processBoxes(content);
-    
-    if (content !== original) {
-      fs.writeFileSync(filePath, content, 'utf8');
-      processedCount++;
-      console.log(`✓ Processed boxes in: ${file}`);
+    for (const file of files) {
+      const filePath = path.join(regionDir, file);
+      let content = fs.readFileSync(filePath, 'utf8');
+      const original = content;
+      
+      content = processBoxes(content);
+      
+      if (content !== original) {
+        fs.writeFileSync(filePath, content, 'utf8');
+        processedCount++;
+        console.log(`✓ Processed boxes in: ${region}/${file}`);
+      }
     }
   }
   

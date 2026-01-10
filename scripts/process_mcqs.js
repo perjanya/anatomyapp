@@ -34,6 +34,9 @@ function processMCQsInHTML(htmlPath) {
   // Replace the MCQ section with interactive HTML
   html = html.replace(/___MCQ_START___[\s\S]*?___MCQ_END___/, mcqHTML);
   
+  // Clean up any <p> tags wrapping the MCQ container (invalid HTML)
+  html = html.replace(/<p>(\s*<div class="mcq-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
+  
   // Write back
   fs.writeFileSync(htmlPath, html, 'utf8');
   console.log(`  ✓ Converted ${questions.length} MCQ(s) in: ${path.basename(htmlPath)}`);
@@ -165,13 +168,21 @@ function processAllHTMLFiles(contentDir) {
 
 // Main execution
 if (require.main === module) {
-  const contentDir = path.join(__dirname, '..', 'www', 'content', 'upper-limb');
+  const contentBaseDir = path.join(__dirname, '..', 'www', 'content');
+  const regions = fs.readdirSync(contentBaseDir)
+    .filter(f => fs.statSync(path.join(contentBaseDir, f)).isDirectory());
   
   console.log('\nProcessing MCQs in HTML files...');
-  const count = processAllHTMLFiles(contentDir);
+  let totalCount = 0;
   
-  if (count > 0) {
-    console.log(`\n✓ Processed MCQs in ${count} file(s).\n`);
+  for (const region of regions) {
+    const regionDir = path.join(contentBaseDir, region);
+    const count = processAllHTMLFiles(regionDir);
+    totalCount += count;
+  }
+  
+  if (totalCount > 0) {
+    console.log(`\n✓ Processed MCQs in ${totalCount} file(s).\n`);
   } else {
     console.log('\nNo MCQs found to process.\n');
   }
