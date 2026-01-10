@@ -1,10 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Rubik:wght@500;700&display=swap');
 
-:root{
-  --accent:#1976d2;
-  --muted:#6b7280;
-  --bg:#fafafa;
-  --content-max:1100px;
+:root {
+  --accent: #1976d2;
+  --accent-dark: #0d47a1;
+  --muted: #6b7280;
+  --bg: #fafafa;
+  --content-max: 1100px;
+  --shadow-light: 0 6px 18px rgba(15, 23, 42, 0.06);
+  --shadow-medium: 0 8px 25px rgba(15, 23, 42, 0.12);
+  --gradient-primary: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+  --gradient-secondary: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  --gradient-box: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  /* Dark mode vars */
+  --bg-dark: #0f172a;
+  --text-dark: #f1f5f9;
+  --muted-dark: #94a3b8;
+  --shadow-dark: 0 8px 25px rgba(0, 0, 0, 0.3);
+  --gradient-box-dark: linear-gradient(180deg, #1e293b 0%, #334155 100%);
 }
 
 body {
@@ -12,9 +24,57 @@ body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: var(--bg);
   color: #111827;
-  -webkit-font-smoothing:antialiased;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
+body.dark-mode {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+/* Enhanced Headings: Larger sizes, modern Rubik font for hierarchy, accent colors for engagement */
+h1, h2, h3 {
+  font-family: Rubik, Inter, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+  color: var(--accent);
+  transition: color 0.2s ease;
+}
+
+h1 {
+  font-size: 2.5rem; /* Increased from default ~2rem */
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2rem; /* Increased for better scannability */
+  border-bottom: 2px solid var(--gradient-secondary);
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.5rem; /* Increased for sub-sections */
+  color: var(--accent-dark);
+}
+
+body.dark-mode h1 {
+  background: linear-gradient(135deg, #42a5f5 0%, #90caf9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.dark-mode h2, body.dark-mode h3 {
+  color: #bbdefb;
+}
+
+/* Container: Unchanged grid, but added subtle animation for modern feel */
 .container {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -23,88 +83,249 @@ body {
   margin: 24px auto;
   align-items: start;
   padding: 0 16px;
+  transition: all 0.3s ease;
 }
 
+/* Enhanced #content Box: Deeper gradient, rounded corners, subtle glow for student appeal (feels premium/modern) */
 #content {
-  padding: 20px 8px;
+  padding: 24px; /* Slightly increased padding for breathing room */
   overflow-y: auto;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+  background: var(--gradient-box);
+  border-radius: 12px; /* Softer corners */
+  box-shadow: var(--shadow-medium);
   line-height: 1.6;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+#content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  border-radius: 12px 12px 0 0;
+}
+
+body.dark-mode #content {
+  background: var(--gradient-box-dark);
+  box-shadow: var(--shadow-dark);
 }
 
 #content p {
   margin: 0 0 0.9rem 0;
 }
 
+/* Enhanced #toc Box: Vibrant gradient, sticky with smooth scroll, icons for interactivity (student-friendly navigation) */
 #toc {
-  padding: 18px;
-  border-radius: 8px;
-  background: linear-gradient(180deg,#ffffff, #fbfdff);
-  box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--gradient-box);
+  box-shadow: var(--shadow-medium);
   position: sticky;
   top: 24px;
   height: calc(100vh - 48px);
   overflow-y: auto;
-  border: 1px solid #eef2f7;
+  border: 1px solid #e2e8f0;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
-#toc h2{ font-family: Rubik, Inter, sans-serif; margin:0 0 8px 0; color:var(--accent); }
+#toc::before {
+  content: '📚 Quick Nav';
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: var(--gradient-primary);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
 
-#toc-list { list-style: none; padding: 0; margin: 8px 0 0 0; }
+body.dark-mode #toc {
+  background: var(--gradient-box-dark);
+  border-color: #475569;
+  box-shadow: var(--shadow-dark);
+}
+
+body.dark-mode #toc::before {
+  background: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+}
+
+#toc h2 {
+  font-family: Rubik, Inter, sans-serif;
+  margin: 0 0 8px 0;
+  color: var(--accent);
+  font-size: 1.3rem; /* Slight increase for prominence */
+}
+
+#toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
 
 #toc-list li {
   cursor: pointer;
   margin: 8px 0;
   color: var(--muted);
-  transition: color .15s ease, transform .12s ease;
+  transition: color 0.15s ease, transform 0.12s ease;
+  padding: 4px 8px; /* Added padding for better touch targets on mobile */
+  border-radius: 6px;
+}
+
+body.dark-mode #toc-list li {
+  color: var(--muted-dark);
 }
 
 /* Section header inside the TOC (e.g. Upper limb) */
-.toc-section-header{
+.toc-section-header {
   color: var(--accent);
   font-weight: 700;
   margin: 10px 0 6px 0;
+  font-size: 1.1rem;
 }
 
-.toc-subitem{ margin-left: 12px; color: var(--muted); }
+.toc-subitem {
+  margin-left: 12px;
+  color: var(--muted);
+}
 
-#toc-list li:hover { color: var(--accent); transform: translateX(3px); }
+#toc-list li:hover {
+  color: var(--accent);
+  transform: translateX(3px);
+  background: var(--gradient-secondary); /* Subtle hover bg for engagement */
+}
 
-#toc-list li.active { color: var(--accent); font-weight: 600; }
+body.dark-mode #toc-list li:hover {
+  background: linear-gradient(135deg, #334155 0%, #475569 100%);
+}
 
-/* Images: center, responsive, constrained height for long images */
-img{
+#toc-list li.active {
+  color: var(--accent);
+  font-weight: 600;
+  background: var(--gradient-primary);
+  color: white; /* High contrast for active state */
+}
+
+/* Images: Enhanced with subtle scale on hover for interactivity */
+img {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 12px auto;
-  border-radius: 6px;
-  box-shadow: 0 6px 14px rgba(2,6,23,0.06);
+  border-radius: 8px;
+  box-shadow: 0 6px 14px rgba(2, 6, 23, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.figure { text-align:center; }
-.figure figcaption{ color:var(--muted); font-size:0.9rem; margin-top:6px }
+img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(25, 118, 210, 0.15);
+}
 
-/* Highlight important headings */
-.important-heading{
+.figure {
+  text-align: center;
+}
+
+.figure figcaption {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+body.dark-mode .figure figcaption {
+  color: var(--muted-dark);
+}
+
+/* Highlight important headings: Enhanced gradient for visual pop */
+.important-heading {
   display: inline-block;
-  background: linear-gradient(90deg, rgba(25,118,210,0.08), rgba(25,118,210,0.02));
-  padding: 6px 10px;
+  background: linear-gradient(90deg, rgba(25, 118, 210, 0.12), rgba(25, 118, 210, 0.06));
+  padding: 8px 12px; /* Slightly larger for emphasis */
   border-left: 4px solid var(--accent);
-  border-radius: 4px;
+  border-radius: 6px;
   font-family: Rubik, Inter, sans-serif;
+  margin: 12px 0;
 }
 
-/* Generic section headings generated by JS */
-.generated-heading{ cursor: pointer; margin: 18px 0 8px 0; font-family: Rubik, Inter, sans-serif; }
-.generated-heading small{ color:var(--muted); margin-left:8px; font-weight:400 }
+/* Generic section headings generated by JS: Added hover effect */
+.generated-heading {
+  cursor: pointer;
+  margin: 18px 0 8px 0;
+  font-family: Rubik, Inter, sans-serif;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
 
-.collapsible { overflow: hidden; transition: max-height .28s ease; }
+.generated-heading:hover {
+  color: var(--accent-dark);
+  transform: translateY(-1px);
+}
 
-/* Responsive */
-@media (max-width: 900px){
-  .container{ grid-template-columns: 1fr; }
-  #toc{ position: static; height: auto; }
+.generated-heading small {
+  color: var(--muted);
+  margin-left: 8px;
+  font-weight: 400;
+}
+
+.collapsible {
+  overflow: hidden;
+  transition: max-height 0.28s ease;
+}
+
+/* Responsive: Enhanced for mobile – stack, larger touch targets */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 16px auto;
+    padding: 0 8px;
+  }
+
+  #toc {
+    position: static;
+    height: auto;
+    order: -1; /* TOC first on mobile for quick access */
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.25rem; }
+
+  #toc-list li {
+    padding: 6px 10px; /* Larger for thumb-friendly */
+  }
+}
+
+/* Dark Mode Toggle (Add to HTML: <button id="dark-toggle">🌙</button>) */
+#dark-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-medium);
+  transition: background 0.3s ease;
+  z-index: 1000;
+}
+
+body.dark-mode #dark-toggle {
+  background: linear-gradient(135deg, #42a5f5 0%, #1976d2 100%);
+}
+
+/* Print Styles: Clean for note-taking */
+@media print {
+  body { background: white; color: black; }
+  .container { grid-template-columns: 1fr; }
+  #toc { display: none; } /* Hide TOC for print */
+  box-shadow { none !important; }
 }

@@ -1,6 +1,6 @@
 {
   "name": "notes-to-website-tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Small tooling to generate TOC JSON from content files",
   "main": "scripts/generate_toc.js",
   "scripts": {
@@ -8,10 +8,13 @@
     "process-boxes": "node scripts/process_boxes.js",
     "cap:init": "npx @capacitor/cli init --web-dir mobile",
     "cap:add-android": "npx cap add android",
+    "cap:sync": "npx cap sync",
     "cap:copy": "npx cap copy",
-    "cap:open-android": "npx cap open android"
+    "cap:open-android": "npx cap open android",
+    "cap:build": "npx cap sync && npx cap open android"
   },
   "dependencies": {
+    "@capacitor/app": "^5.0.0",
     "axios": "^1.13.2",
     "body-parser": "^2.2.1",
     "express": "^5.2.1",

@@ -291,6 +291,32 @@
     return array;
   }
 
+  // ==================== DARK MODE TOGGLE ====================
+  function initDarkModeToggle() {
+    const toggle = document.getElementById('dark-toggle');
+    if (!toggle) return;
+    
+    // Check for saved preference or default to light mode
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'enabled') {
+      document.body.classList.add('dark-mode');
+      toggle.textContent = '☀️';
+    }
+    
+    // Toggle dark mode on click
+    toggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        toggle.textContent = '☀️';
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        toggle.textContent = '🌙';
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    });
+  }
+
   // ==================== INITIALIZATION ====================
   function init() {
     // Wait for DOM to be ready
@@ -301,6 +327,7 @@
     
     initCollapsibleH1s();
     initInteractiveMCQs();
+    initDarkModeToggle();
   }
 
   init();

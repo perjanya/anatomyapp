@@ -77,11 +77,21 @@ async function processRegion(regionName) {
 <link rel="stylesheet" href="../../css/anatomy-modern.css">
 </head>
 <body>
-<div class="content-wrapper">
-<main class="topic-content">
+<!-- Dark Mode Toggle -->
+<button id="dark-toggle" aria-label="Toggle dark mode">🌙</button>
+
+<div class="container">
+  <main id="content">
 ${html}
-</main>
+  </main>
+  
+  <aside id="toc">
+    <h2>Topics</h2>
+    <ul id="toc-list"></ul>
+  </aside>
 </div>
+
+<script src="../../js/toc.js"></script>
 <script src="../../js/interactive-features.js"></script>
 <script src="../../js/topic-tools.js"></script>
 </body>
