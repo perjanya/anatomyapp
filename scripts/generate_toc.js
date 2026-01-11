@@ -74,7 +74,6 @@ async function processRegion(regionName) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${title}</title>
 <link rel="stylesheet" href="../../css/style.css">
-<link rel="stylesheet" href="../../css/anatomy-modern.css">
 </head>
 <body>
 <!-- Dark Mode Toggle -->
@@ -93,7 +92,6 @@ ${html}
 
 <script src="../../js/toc.js"></script>
 <script src="../../js/interactive-features.js"></script>
-<script src="../../js/topic-tools.js"></script>
 </body>
 </html>`;
       fs.writeFileSync(outHtmlPath, wrapped, 'utf8');

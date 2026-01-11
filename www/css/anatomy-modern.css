@@ -166,6 +166,21 @@ img:hover {
               0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+/* Zoomed image on click */
+img.zoomed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+  max-width: 95vw;
+  max-height: 95vh;
+  z-index: 9999;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  background: white;
+  padding: 10px;
+}
+
 /* ==================== LINKS ==================== */
 a {
   color: #2563eb;

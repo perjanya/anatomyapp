@@ -118,8 +118,8 @@ App.addListener('backButton', handleBackButton);
 - [scripts/regenerate_single.js](scripts/regenerate_single.js) - Fast single-file updates
 
 ### Styling
-- [www/css/anatomy-modern.css](www/css/anatomy-modern.css) - Modern UI: box styles, MCQ styles, collapsible H1s, dark mode
-- [www/css/style.css](www/css/style.css) - Legacy base styles (still loaded)
+- [www/css/anatomy-modern.css](www/css/anatomy-modern.css) - Modern UI: box styles, MCQ styles, collapsible H1s
+- [www/css/style.css](www/css/style.css) - Base styles (clean, no dark mode)
 
 ### Mobile
 - [mobile/app.js](mobile/app.js) - PWA logic, navigation stack, TOC rendering

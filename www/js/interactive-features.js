@@ -291,29 +291,33 @@
     return array;
   }
 
-  // ==================== DARK MODE TOGGLE ====================
-  function initDarkModeToggle() {
-    const toggle = document.getElementById('dark-toggle');
-    if (!toggle) return;
-    
-    // Check for saved preference or default to light mode
-    const savedMode = localStorage.getItem('darkMode');
-    if (savedMode === 'enabled') {
-      document.body.classList.add('dark-mode');
-      toggle.textContent = '☀️';
-    }
-    
-    // Toggle dark mode on click
-    toggle.addEventListener('click', function() {
-      document.body.classList.toggle('dark-mode');
-      
-      if (document.body.classList.contains('dark-mode')) {
-        toggle.textContent = '☀️';
-        localStorage.setItem('darkMode', 'enabled');
-      } else {
-        toggle.textContent = '🌙';
-        localStorage.setItem('darkMode', 'disabled');
-      }
+  // ==================== INITIALIZATION ====================
+  function initInteractiveMedia() {
+    // Make images zoomable on click
+    const images = document.querySelectorAll('#content img');
+    images.forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', function() {
+        if (this.classList.contains('zoomed')) {
+          this.classList.remove('zoomed');
+          this.style.cursor = 'zoom-in';
+        } else {
+          // Remove zoom from other images
+          document.querySelectorAll('#content img.zoomed').forEach(i => {
+            i.classList.remove('zoomed');
+            i.style.cursor = 'zoom-in';
+          });
+          this.classList.add('zoomed');
+          this.style.cursor = 'zoom-out';
+        }
+      });
+    });
+
+    // Make YouTube containers draggable/interactive
+    const videoContainers = document.querySelectorAll('.video-container');
+    videoContainers.forEach(container => {
+      container.style.cursor = 'move';
+      container.setAttribute('title', 'Click and drag to reposition');
     });
   }
 
@@ -327,7 +331,7 @@
     
     initCollapsibleH1s();
     initInteractiveMCQs();
-    initDarkModeToggle();
+    initInteractiveMedia();
   }
 
   init();
