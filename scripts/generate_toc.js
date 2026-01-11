@@ -74,23 +74,15 @@ async function processRegion(regionName) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${title}</title>
 <link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../../css/anatomy-modern.css">
 </head>
 <body>
-<!-- Dark Mode Toggle -->
-<button id="dark-toggle" aria-label="Toggle dark mode">🌙</button>
-
 <div class="container">
   <main id="content">
 ${html}
   </main>
-  
-  <aside id="toc">
-    <h2>Topics</h2>
-    <ul id="toc-list"></ul>
-  </aside>
 </div>
 
-<script src="../../js/toc.js"></script>
 <script src="../../js/interactive-features.js"></script>
 </body>
 </html>`;

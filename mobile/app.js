@@ -1,4 +1,7 @@
 (function(){
+  // Navigation history stack
+  let navigationStack = ['home'];
+  
   // Default topics (used as fallback if remote JSON isn't available)
   let topics = [ 'Upper limb', 'Lower limb', 'Thorax', 'Abdomen', 'Head and neck', 'Embryology', 'Histology' ];
   let subtopics = {
@@ -59,9 +62,14 @@
   const grid = document.querySelector('.grid');
   const homeScreen = document.getElementById('home');
   const topicScreen = document.getElementById('topic');
+  const menuScreen = document.getElementById('menu');
   const topicTitle = document.getElementById('topic-title');
   const sublist = document.getElementById('sublist');
   const backBtn = document.getElementById('backBtn');
+  const homeBtn = document.getElementById('homeBtn');
+  const menuBtn = document.getElementById('menuBtn');
+  const menuBackBtn = document.getElementById('menuBackBtn');
+  const tocContainer = document.getElementById('toc-container');
   const toast = document.getElementById('toast');
 
   function showToast(msg, t=1800){
@@ -93,6 +101,8 @@
     });
     homeScreen.classList.add('hidden');
     topicScreen.classList.remove('hidden');
+    menuScreen.classList.add('hidden');
+    navigationStack.push('topic');
   }
 
   function openSubtopic(topic, sub){
@@ -122,12 +132,121 @@
   }
 
   backBtn.onclick = () => {
+    navigateBack();
+  };
+
+  homeBtn.onclick = () => {
+    navigateToHome();
+  };
+
+  menuBtn.onclick = () => {
+    openMenu();
+  };
+
+  menuBackBtn.onclick = () => {
+    navigateBack();
+  };
+
+  function navigateBack() {
+    if (navigationStack.length > 1) {
+      navigationStack.pop();
+      const previous = navigationStack[navigationStack.length - 1];
+      showScreen(previous);
+    } else {
+      navigateToHome();
+    }
+  }
+
+  function navigateToHome() {
+    navigationStack = ['home'];
+    showScreen('home');
+  }
+
+  function openMenu() {
+    homeScreen.classList.add('hidden');
+    topicScreen.classList.add('hidden');
+    menuScreen.classList.remove('hidden');
+    navigationStack.push('menu');
+    buildCollapsibleTOC();
+  }
+
+  function showScreen(screenName) {
+    homeScreen.classList.add('hidden');
+    topicScreen.classList.add('hidden');
+    menuScreen.classList.add('hidden');
+    
+    if (screenName === 'home') {
+      homeScreen.classList.remove('hidden');
+    } else if (screenName === 'topic') {
+      topicScreen.classList.remove('hidden');
+    } else if (screenName === 'menu') {
+      menuScreen.classList.remove('hidden');
+    }
+  }
+
+  function buildCollapsibleTOC() {
+    tocContainer.innerHTML = '';
+    topics.forEach(topic => {
+      const section = document.createElement('div');
+      section.className = 'toc-section';
+      
+      const header = document.createElement('div');
+      header.className = 'toc-header';
+      header.innerHTML = `<span class="toc-arrow">▶</span><span>${topic}</span>`;
+      
+      const content = document.createElement('div');
+      content.className = 'toc-content';
+      
+      const items = subtopics[topic] || [];
+      items.forEach(item => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'toc-item';
+        itemEl.textContent = (typeof item === 'string') ? item : (item.title || item.name || '');
+        itemEl.onclick = () => {
+          openSubtopic(topic, item);
+          navigateToHome();
+        };
+        content.appendChild(itemEl);
+      });
+      
+      header.onclick = () => {
+        const isExpanded = section.classList.contains('expanded');
+        section.classList.toggle('expanded');
+        header.querySelector('.toc-arrow').textContent = isExpanded ? '▶' : '▼';
+      };
+      
+      section.appendChild(header);
+      section.appendChild(content);
+      tocContainer.appendChild(section);
+    });
+  }
+
+  // Android back button handler using Capacitor App plugin
+  function setupBackButtonHandler() {
+    if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App) {
+      window.Capacitor.Plugins.App.addListener('backButton', ({canGoBack}) => {
+        if (navigationStack.length > 1) {
+          navigateBack();
+        } else {
+          // If at home, ask to exit
+          if (confirm('Exit app?')) {
+            window.Capacitor.Plugins.App.exitApp();
+          }
+        }
+      });
+    }
+  }
+
+  backBtn.onclick = () => {
     topicScreen.classList.add('hidden');
     homeScreen.classList.remove('hidden');
   };
 
   // start: try to load remote topics, then build UI
   loadRemoteTopics();
+  
+  // Setup Android back button handler
+  setupBackButtonHandler();
 
   // register service worker (optional, used later for push/offline)
   if ('serviceWorker' in navigator){

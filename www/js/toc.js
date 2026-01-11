@@ -159,7 +159,9 @@ async function loadGeneratedUpperLimb(){
       
       const link = document.createElement('a');
       link.className = 'toc-link';
-      link.href = item.url;
+      // Add a cache-busting query param to ensure fresh HTML loads in production
+      const versionParam = `v=${new Date().toISOString().slice(0,10).replace(/-/g,'')}`; // e.g., 20260111
+      link.href = `${item.url}?${versionParam}`;
       
       // Clean up HTML tags from title
       const tempDiv = document.createElement('div');

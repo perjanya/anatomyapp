@@ -10,10 +10,23 @@
 <body>
   <div id="app">
     <header class="topbar">
+      <button id="menuBtn" class="icon-btn" title="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
       <div class="logo-wrap">
         <img src="assets/logo.jpg" alt="Heliosmed logo" class="logo-img" />
         <div class="brand">Heliosmed</div>
       </div>
+      <button id="homeBtn" class="icon-btn" title="Home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </button>
     </header>
 
     <main>
@@ -40,6 +53,14 @@
         <ul id="sublist" class="sublist"></ul>
       </section>
 
+      <section id="menu" class="screen hidden">
+        <div class="topic-header">
+          <button id="menuBackBtn" class="back">← Back</button>
+          <h2>Table of Contents</h2>
+        </div>
+        <div id="toc-container" class="toc-container"></div>
+      </section>
+
       <div id="toast" class="toast hidden"></div>
     </main>
 
@@ -48,6 +69,13 @@
     </nav>
   </div>
 
+  <script type="module">
+    import { Capacitor } from 'https://cdn.jsdelivr.net/npm/@capacitor/core@5/dist/index.js';
+    import { App } from 'https://cdn.jsdelivr.net/npm/@capacitor/app@5/dist/index.js';
+    window.Capacitor = Capacitor;
+    if (!Capacitor.Plugins) Capacitor.Plugins = {};
+    Capacitor.Plugins.App = App;
+  </script>
   <script src="app.js"></script>
   <script src="config.js"></script>
 </body>
