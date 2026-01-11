@@ -3,6 +3,7 @@
   "outputDirectory": "www",
   "framework": null,
   "installCommand": null,
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- www/",
   "headers": [
     {
       "source": "/css/(.*).css",
