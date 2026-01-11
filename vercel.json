@@ -5,6 +5,18 @@
   "installCommand": null,
   "headers": [
     {
+      "source": "/css/(.*).css",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    },
+    {
+      "source": "/js/(.*).js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    },
+    {
       "source": "/content/(.*).html",
       "headers": [
         { "key": "Cache-Control", "value": "no-store" }
