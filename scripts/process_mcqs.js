@@ -8,19 +8,24 @@ const path = require('path');
 function processMCQsInHTML(htmlPath) {
   let html = fs.readFileSync(htmlPath, 'utf8');
   
-  // Check if file contains MCQ markers
+  // Check if file contains MCQ markers (with or without <p> tags)
   if (!html.includes('___MCQ_START___')) {
     return; // No MCQs to process
   }
   
-  // Extract MCQ section
-  const mcqMatch = html.match(/___MCQ_START___([\s\S]*?)___MCQ_END___/);
-  if (!mcqMatch) {
+  // Extract MCQ section - handle <p> wrapped markers
+  // Pattern 1: <p>___MCQ_START___</p>...<p>___MCQ_END___</p> or with more underscores
+  // Pattern 2: ___MCQ_START___ ... ___MCQ_END___ (or more underscores)
+  const mcqMatch = html.match(/<p>___+MCQ_START___+<\/p>([\s\S]*?)<p>___+MCQ_END___+<\/p>/);
+  const mcqMatch2 = html.match(/___+MCQ_START___+([\s\S]*?)___+MCQ_END___+/);
+  
+  if (!mcqMatch && !mcqMatch2) {
     console.warn(`  ⚠ MCQ markers found but malformed in: ${path.basename(htmlPath)}`);
     return;
   }
   
-  const mcqText = mcqMatch[1];
+  const fullMatch = mcqMatch || mcqMatch2;
+  const mcqText = fullMatch[1];
   const questions = parseMCQs(mcqText);
   
   if (questions.length === 0) {
@@ -31,8 +36,9 @@ function processMCQsInHTML(htmlPath) {
   // Generate interactive HTML
   const mcqHTML = generateMCQHTML(questions);
   
-  // Replace the MCQ section with interactive HTML
-  html = html.replace(/___MCQ_START___[\s\S]*?___MCQ_END___/, mcqHTML);
+  // Replace the MCQ section with interactive HTML (handle both patterns, with variable underscores)
+  html = html.replace(/<p>___+MCQ_START___+<\/p>[\s\S]*?<p>___+MCQ_END___+<\/p>/, mcqHTML);
+  html = html.replace(/___+MCQ_START___+[\s\S]*?___+MCQ_END___+/, mcqHTML);
   
   // Clean up any <p> tags wrapping the MCQ container (invalid HTML)
   html = html.replace(/<p>(\s*<div class="mcq-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
@@ -167,25 +173,30 @@ function processAllHTMLFiles(contentDir) {
 }
 
 // Main execution
-if (require.main === module) {
+try {
   const contentBaseDir = path.join(__dirname, '..', 'www', 'content');
+  console.log('Reading content directory:', contentBaseDir);
   const regions = fs.readdirSync(contentBaseDir)
     .filter(f => fs.statSync(path.join(contentBaseDir, f)).isDirectory());
   
-  console.log('\nProcessing MCQs in HTML files...');
+  console.log('Found regions:', regions);
+
   let totalCount = 0;
-  
+
   for (const region of regions) {
     const regionDir = path.join(contentBaseDir, region);
+    console.log(`Processing region: ${region}`);
     const count = processAllHTMLFiles(regionDir);
     totalCount += count;
   }
-  
+
   if (totalCount > 0) {
-    console.log(`\n✓ Processed MCQs in ${totalCount} file(s).\n`);
-  } else {
-    console.log('\nNo MCQs found to process.\n');
+    console.log(`✓ Processed MCQs in ${totalCount} file(s).`);
   }
+  console.log('MCQ processing complete');
+} catch (err) {
+  console.error('Error processing MCQs:', err.message);
+  console.error(err.stack);
 }
 
 module.exports = { processMCQsInHTML, parseMCQs };

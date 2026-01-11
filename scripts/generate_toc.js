@@ -121,9 +121,22 @@ ${html}
   
   // Auto-process box markers
   console.log('\nProcessing box markers...');
-  require('./process_boxes.js');
+  try {
+    require('./process_boxes.js');
+  } catch(err) {
+    console.error('Error processing boxes:', err);
+  }
   
   // Auto-process MCQs
   console.log('\nProcessing MCQs...');
-  require('./process_mcqs.js');
-})();
+  try {
+    require('./process_mcqs.js');
+  } catch(err) {
+    console.error('Error processing MCQs:', err);
+  }
+  
+  console.log('\n✓ Generation complete!');
+})().catch(err => {
+  console.error('Fatal error:', err);
+  process.exit(1);
+});
