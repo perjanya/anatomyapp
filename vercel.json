@@ -2,5 +2,19 @@
   "buildCommand": null,
   "outputDirectory": "www",
   "framework": null,
-  "installCommand": null
+  "installCommand": null,
+  "headers": [
+    {
+      "source": "/content/(.*).html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
 }
