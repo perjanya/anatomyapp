@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Embryology - Table of Contents</title>
+  <link rel="stylesheet" href="css/anatomy-modern.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .toc-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+
+    .back-link:hover {
+      transform: translateX(-5px);
+    }
+
+    h1 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 1rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .toc-item {
+      margin: 1rem 0;
+    }
+
+    .toc-link {
+      display: block;
+      padding: 1.25rem;
+      background: #f8fafc;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+
+    .toc-link:hover {
+      background: #e0e7ff;
+      border-left-color: #667eea;
+      transform: translateX(8px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .toc-container {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="toc-container">
+  <a href="index.html" class="back-link">← Back to Home</a>
+  
+  <h1>🌱 Embryology</h1>
+  
+  <ul class="toc-list" id="toc-list">
+    <!-- Topics will be loaded dynamically from toc.json -->
+  </ul>
+</div>
+
+<script type="module" src="https://unpkg.com/@capacitor/core@latest/dist/capacitor.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/app-init.js"></script>
+
+</body>
+</html>
