@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Gradient background -->
+  <defs>
+    <linearGradient id="bgGradient512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="armGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bgGradient512)" rx="110"/>
+  
+  <!-- Skeleton icon (simple anatomical silhouette) -->
+  <g transform="translate(256, 256)">
+    <!-- Head -->
+    <circle cx="0" cy="-110" r="45" fill="url(#iconGradient512)" stroke="white" stroke-width="5"/>
+    
+    <!-- Spine/backbone -->
+    <line x1="0" y1="-60" x2="0" y2="90" stroke="url(#iconGradient512)" stroke-width="8" stroke-linecap="round"/>
+    
+    <!-- Ribs -->
+    <g stroke="url(#iconGradient512)" stroke-width="6" stroke-linecap="round" fill="none">
+      <line x1="0" y1="-35" x2="-40" y2="-25"/>
+      <line x1="0" y1="-35" x2="40" y2="-25"/>
+      <line x1="0" y1="-10" x2="-50" y2="-5"/>
+      <line x1="0" y1="-10" x2="50" y2="-5"/>
+      <line x1="0" y1="15" x2="-40" y2="25"/>
+      <line x1="0" y1="15" x2="40" y2="25"/>
+    </g>
+    
+    <!-- Arms - Upper Limb Highlight -->
+    <g stroke="url(#armGradient)" stroke-width="10" stroke-linecap="round" fill="none" filter="drop-shadow(0 0 8px rgba(255,215,0,0.6))">
+      <line x1="0" y1="-25" x2="-95" y2="40"/>
+      <line x1="0" y1="-25" x2="95" y2="40"/>
+    </g>
+    
+    <!-- Legs -->
+    <g stroke="url(#iconGradient512)" stroke-width="8" stroke-linecap="round" fill="none">
+      <line x1="-20" y1="90" x2="-30" y2="140"/>
+      <line x1="20" y1="90" x2="30" y2="140"/>
+    </g>
+  </g>
+  
+  <!-- Corner accent -->
+  <circle cx="450" cy="62" r="20" fill="white" opacity="0.7"/>
+</svg>

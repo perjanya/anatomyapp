@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <!-- Gradient background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="192" height="192" fill="url(#bgGradient)" rx="45"/>
+  
+  <!-- Skeleton icon (simple anatomical silhouette) -->
+  <g transform="translate(96, 96)">
+    <!-- Head -->
+    <circle cx="0" cy="-45" r="18" fill="url(#iconGradient)" stroke="white" stroke-width="2"/>
+    
+    <!-- Spine/backbone -->
+    <line x1="0" y1="-25" x2="0" y2="35" stroke="url(#iconGradient)" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Ribs -->
+    <g stroke="url(#iconGradient)" stroke-width="2.5" stroke-linecap="round" fill="none">
+      <line x1="0" y1="-15" x2="-15" y2="-10"/>
+      <line x1="0" y1="-15" x2="15" y2="-10"/>
+      <line x1="0" y1="-5" x2="-18" y2="-2"/>
+      <line x1="0" y1="-5" x2="18" y2="-2"/>
+      <line x1="0" y1="5" x2="-15" y2="8"/>
+      <line x1="0" y1="5" x2="15" y2="8"/>
+    </g>
+    
+    <!-- Arms -->
+    <g stroke="url(#iconGradient)" stroke-width="3" stroke-linecap="round" fill="none">
+      <line x1="0" y1="-10" x2="-28" y2="8"/>
+      <line x1="0" y1="-10" x2="28" y2="8"/>
+    </g>
+    
+    <!-- Legs -->
+    <g stroke="url(#iconGradient)" stroke-width="3" stroke-linecap="round" fill="none">
+      <line x1="-8" y1="35" x2="-12" y2="55"/>
+      <line x1="8" y1="35" x2="12" y2="55"/>
+    </g>
+  </g>
+  
+  <!-- Corner accent -->
+  <circle cx="162" cy="30" r="8" fill="white" opacity="0.7"/>
+</svg>

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 720">
+  <!-- Gradient background -->
+  <defs>
+    <linearGradient id="splashGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5a4a8f;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="30%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#667eea;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="540" height="720" fill="url(#splashGradient)"/>
+  
+  <!-- Glow effect -->
+  <circle cx="270" cy="216" r="300" fill="url(#glow)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="80" cy="150" r="40" fill="white" opacity="0.1"/>
+  <circle cx="460" cy="200" r="60" fill="white" opacity="0.08"/>
+  <circle cx="100" cy="600" r="50" fill="white" opacity="0.1"/>
+  <circle cx="450" cy="650" r="45" fill="white" opacity="0.09"/>
+  
+  <!-- Main icon container -->
+  <circle cx="270" cy="240" r="100" fill="white" opacity="0.15" stroke="white" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Skeleton icon (large) -->
+  <g transform="translate(270, 240)">
+    <!-- Head -->
+    <circle cx="0" cy="-55" r="28" fill="white" stroke="white" stroke-width="2"/>
+    
+    <!-- Spine/backbone -->
+    <line x1="0" y1="-25" x2="0" y2="30" stroke="white" stroke-width="5" stroke-linecap="round"/>
+    
+    <!-- Ribs -->
+    <g stroke="white" stroke-width="3" stroke-linecap="round" fill="none">
+      <line x1="0" y1="-10" x2="-18" y2="-6"/>
+      <line x1="0" y1="-10" x2="18" y2="-6"/>
+      <line x1="0" y1="5" x2="-22" y2="8"/>
+      <line x1="0" y1="5" x2="22" y2="8"/>
+    </g>
+    
+    <!-- Arms -->
+    <g stroke="white" stroke-width="4" stroke-linecap="round" fill="none">
+      <line x1="0" y1="-5" x2="-30" y2="10"/>
+      <line x1="0" y1="-5" x2="30" y2="10"/>
+    </g>
+    
+    <!-- Legs -->
+    <g stroke="white" stroke-width="4" stroke-linecap="round" fill="none">
+      <line x1="-8" y1="30" x2="-12" y2="50"/>
+      <line x1="8" y1="30" x2="12" y2="50"/>
+    </g>
+  </g>
+  
+  <!-- App title -->
+  <text x="270" y="410" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="1">
+    Anatomy Learning Hub
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="270" y="460" font-family="Arial, sans-serif" font-size="18" fill="white" fill-opacity="0.85" text-anchor="middle">
+    Interactive Medical Education
+  </text>
+  
+  <!-- Loading indicator (subtle) -->
+  <g transform="translate(270, 540)">
+    <circle cx="-30" cy="0" r="6" fill="white" opacity="0.6"/>
+    <circle cx="0" cy="0" r="6" fill="white" opacity="0.8"/>
+    <circle cx="30" cy="0" r="6" fill="white" opacity="0.6"/>
+  </g>
+  
+  <!-- Bottom accent -->
+  <rect width="540" height="80" y="640" fill="linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.1) 100%)"/>
+  
+  <!-- Dr. Viveka S attribution -->
+  <text x="270" y="695" font-family="Arial, sans-serif" font-size="14" fill="white" fill-opacity="0.7" text-anchor="middle">
+    Dr. Viveka S • Shridevi Medical College
+  </text>
+</svg>
