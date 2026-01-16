@@ -52,6 +52,41 @@ function processBoxes(html) {
   // Fix: Remove <p> tags wrapping video containers (invalid HTML)
   processed = processed.replace(/<p>(\s*<div class="video-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
   
+  // Process SVG files with optional animation directives
+  // Pattern: [SVG]filename.svg|animations="id:type:count|id:type"[/SVG]
+  // or simple: [SVG]filename.svg[/SVG]
+  const svgPattern = /\[SVG\](.*?)(?:\[\/SVG\]|(?=<\/p>|<p>|\[))/gi;
+  processed = processed.replace(svgPattern, (match, content) => {
+    const contentTrim = content.trim();
+    
+    // Parse SVG filename and animation directive
+    // Format: "filename.svg" or "filename.svg|animations="directive""
+    const [filenamePart, ...rest] = contentTrim.split('|');
+    const filename = filenamePart.trim();
+    const animationPart = rest.join('|'); // Rejoin in case animation string contains pipes
+    
+    if (filename) {
+      // Extract animation directive if present
+      let dataAttr = '';
+      if (animationPart) {
+        // Parse: animations="id1:draw:5|id2:pulse"
+        const animMatch = animationPart.match(/animations="([^"]*)"/i);
+        if (animMatch && animMatch[1]) {
+          dataAttr = ` data-animations="${animMatch[1]}"`;
+        }
+      }
+      
+      // SVG files are in the same directory as the HTML file
+      return `<div class="svg-container"${dataAttr}>
+  <img src="${filename}" alt="SVG Diagram" class="responsive-svg" />
+</div>`;
+    }
+    return match;
+  });
+  
+  // Fix: Remove <p> tags wrapping SVG containers (invalid HTML)
+  processed = processed.replace(/<p>(\s*<div class="svg-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
+  
   // Process each box type
   for (const { marker, class: className } of boxPatterns) {
     processed = processed.replace(marker, (match, content) => {

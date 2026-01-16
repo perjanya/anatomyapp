@@ -83,7 +83,10 @@ ${html}
   </main>
 </div>
 
+<script src="../../js/svg-animator.js"></script>
 <script src="../../js/interactive-features.js"></script>
+<script src="../../js/quadrant-interactive.js"></script>
+<script src="../../js/topic-tools.js"></script>
 </body>
 </html>`;
       fs.writeFileSync(outHtmlPath, wrapped, 'utf8');

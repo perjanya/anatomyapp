@@ -575,6 +575,24 @@ html {
   border-radius: 12px;
 }
 
+/* ==================== SVG EMBED ==================== */
+.svg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.svg-container .responsive-svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* ==================== SELECTION ==================== */
 ::selection {
   background: rgba(37, 99, 235, 0.2);
@@ -792,4 +810,35 @@ html {
   background: white;
   border-radius: 12px;
   border: 2px solid #c7d2fe;
+}
+/* ==================== INTERACTIVE SVG QUADRANTS ==================== */
+.svg-container svg {
+  user-select: none;
+}
+
+/* Quadrant highlighting on click */
+.quadrant-highlight {
+  animation: highlightPulse 0.6s ease-out;
+}
+
+@keyframes highlightPulse {
+  0% {
+    r: 0;
+    opacity: 1;
+  }
+  100% {
+    r: 150px;
+    opacity: 0;
+  }
+}
+
+/* Quadrant info labels (optional) */
+.quadrant-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+  fill: #1e3a8a;
+  opacity: 0.8;
 }

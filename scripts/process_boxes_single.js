@@ -46,6 +46,23 @@ function processBoxes(html) {
   // Fix: Remove <p> tags wrapping video containers
   processed = processed.replace(/<p>(\s*<div class="video-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
   
+  // Process SVG files
+  // Pattern: [SVG]filename.svg[/SVG] or [SVG]filename.svg
+  const svgPattern = /\[SVG\](.*?)(?:\[\/SVG\]|(?=<\/p>|<p>|\[))/gi;
+  processed = processed.replace(svgPattern, (match, content) => {
+    const filename = content.trim();
+    if (filename) {
+      // SVG files are in the same directory as the HTML file
+      return `<div class="svg-container">
+  <img src="${filename}" alt="SVG Diagram" class="responsive-svg" />
+</div>`;
+    }
+    return match;
+  });
+  
+  // Fix: Remove <p> tags wrapping SVG containers (invalid HTML)
+  processed = processed.replace(/<p>(\s*<div class="svg-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
+  
   // Process each box type
   for (const { marker, class: className } of boxPatterns) {
     processed = processed.replace(marker, (match, content) => {

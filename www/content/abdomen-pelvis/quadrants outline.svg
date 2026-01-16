@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 754.7 493.5" style="enable-background:new 0 0 754.7 493.5;" xml:space="preserve">
+<defs>
+	<style type="text/css">
+		.st0{fill:none;stroke:#000000;stroke-miterlimit:10;}
+		.st1{fill:none;stroke:#00A651;stroke-width:3;stroke-miterlimit:10;}
+		.st2{fill:none;stroke:#EC008C;stroke-width:3;stroke-miterlimit:10;}
+		.st3{font-family:'CenturyGothic';}
+		.st4{font-size:20px;}
+		.st5{font-size:12px;}
+		.st6{fill:url(#SVGID_1_);stroke:#000000;stroke-miterlimit:10;}
+		
+		/* Animations for dividing lines */
+		@keyframes drawLine {
+			from {
+				stroke-dasharray: 1000;
+				stroke-dashoffset: 1000;
+				opacity: 0;
+			}
+			to {
+				stroke-dasharray: 1000;
+				stroke-dashoffset: 0;
+				opacity: 1;
+			}
+		}
+		
+		@keyframes pulseGlow {
+			0%, 100% {
+				stroke-width: 3;
+				filter: drop-shadow(0 0 0px rgba(236, 0, 140, 0.3));
+			}
+			50% {
+				stroke-width: 4;
+				filter: drop-shadow(0 0 8px rgba(236, 0, 140, 0.6));
+			}
+		}
+		
+		.quadrant-line {
+			animation: drawLine 1.2s ease-in-out 5, pulseGlow 3s ease-in-out infinite;
+		}
+		
+		#h-line-1 {
+			animation-delay: 0s, 0s;
+		}
+		
+		#h-line-2 {
+			animation-delay: 0.3s, 0.3s;
+		}
+		
+		#v-line-1 {
+			animation-delay: 0.6s, 0.6s;
+		}
+		
+		#v-line-2 {
+			animation-delay: 0.9s, 0.9s;
+		}
+		
+		/* Hover effect */
+		.quadrant-line:hover {
+			stroke-width: 5 !important;
+			filter: drop-shadow(0 0 12px rgba(236, 0, 140, 0.9)) !important;
+			cursor: pointer;
+		}
+	</style>
+</defs>
+<g id="Layer_1">
+	<g id="Layer_1_1_">
+		<path class="st0" d="M86.1,69.4c-4.2-0.3-2.3-4.9-2-7.5c1.5-17.7,3.1-35.5,4.9-53.2c3-28.4,2.6-56.9,3.1-85.3
+			c0.4-18.8,4-37.1,13.7-53.7c13.6-23.2,33.9-37.6,59.6-44.6c9.6-2.6,19.3-5.1,29.4-5.4c12.8-0.4,24.3-5.2,35.8-10.3
+			c20.6-9.1,40.4-19.8,60.4-30.1c10.6-5.5,13.8-14.8,14.8-25.4c0.4-3.6,0.1-7.3,0.2-11"/>
+		<path class="st0" d="M457-257.1c0,0-7.4,23.4,0,31.4s67.4,35.3,82,39.3s42.7,5.3,47.3,5.3c4.7,0,68.7,22.7,74.7,64
+			S673.7,53,679.7,69.3"/>
+		<path class="st0" d="M583.4-66c0,0,10,80-5,125s-6.3,82-11.6,108s-9.6,73,0,105s13.6,68,13.6,83s32,22.8,34,107.9"/>
+		<path class="st0" d="M178.4-66c0,0-15,60,0,125s17.7,125,16.3,156s6.7,48-4.3,84s-9,58-14,78s-23,59-17,92"/>
+		<polyline class="st0" points="177.2,69.4 177.2,140 167.4,234 		"/>
+		<polyline class="st0" points="587.7,52 597.4,151.7 621.4,234 		"/>
+		<path class="st0" d="M189.1,105.3c0,0,15.3-93.3,78.3-84.3s90,31,126,23s100-6,116,3s55.6,36.9,57.4,71"/>
+		<path class="st0" d="M194.7,139c0,0,27,46.7,48.3,44.7S375,52,375,52h12c0,0,92.7,135.9,112.7,131.7c26.5-5.6,62.4-28.9,67-62.1"
+			/>
+		<polyline class="st0" points="375.1,52 380.7,63.7 387.1,52 		"/>
+		<path class="st0" d="M196.3,296.3c0,0,2.8,18.7,10.8,25.3c8,6.7,15.3,4,13.3,0s-11.9-16-11.9-16"/>
+		<path class="st0" d="M561,293.7c1.4,2,5.9,19.3,0,24s-15.9,2-15.9,0s4.7-10.7,4.7-10.7"/>
+		<path class="st0" d="M369.1,428.6c2.6-0.3,4.3-2.8,8.7,0c4.3,2.8,2,22.8,2,22.8"/>
+		<path class="st1" d="M220.7,325.7c0,0,108,107.4,148.3,102.8"/>
+		<path class="st0" d="M398.4,429.3c0,0-9.3-4.7-10.7,0c-1.3,4.7,0,22,0,22"/>
+		<path class="st1" d="M545.1,317.7c0,0-88.7,101.5-146.7,111.7"/>
+		<path class="st0" d="M285.7,129c8-1.3,16.6-6,20.3-5c3.7,1-6.3,9.7-10.2,11s-14.2,6.7-14.2,6.7"/>
+		<path class="st0" d="M462.3,129.4c-8-1.4-16.6-6.5-20.3-5.4c-3.7,1,6.3,10.5,10.2,11.9s14.1,7.2,14.1,7.2"/>
+		<path class="st0" d="M370.4,232c-2.5-0.4-4.7,2.4-4.6,4.9c0,1.3,0.4,2.5,1.1,3.6c1.6,2.5,4.7,3.7,7.7,3.6c1.6,0,3.2-0.4,4.5-1.3
+			c2-1.5,2.7-4.3,1.9-6.7s-2.9-4.1-5.3-4.7c-2.4-0.6-5-0.1-7.2,1.2c-0.4,0.2-0.8,0.6-0.8,1c0,0.3,0.3,0.6,0.6,0.8
+			c1,0.7,2.3,1.1,3.5,1"/>
+	</g>
+	<g id="Layer_2">
+		<g>
+			<line class="st2 quadrant-line" id="h-line-1" x1="189.9" y1="123.9" x2="568.8" y2="123.9"/>
+			<line class="st2 quadrant-line" id="h-line-2" x1="193.5" y1="287" x2="571" y2="287"/>
+			<line class="st2 quadrant-line" id="v-line-1" x1="288.4" y1="0" x2="288.4" y2="493.5"/>
+			<line class="st2 quadrant-line" id="v-line-2" x1="466.3" y1="0" x2="466.3" y2="493.5"/>
+		</g>
+	</g>
+</g>
+<g id="Layer_2_1_">
+	<line class="st0" x1="366.9" y1="240.5" x2="220.7" y2="325.7"/>
+	<line class="st0" x1="268.5" y1="291.9" x2="164.3" y2="257.9"/>
+	<text transform="matrix(1 0 0 1 46.5102 251.674)"><tspan x="0" y="0" class="st3 st4">McBurney’s</tspan><tspan x="63.8" y="24" class="st3 st4">Point</tspan></text>
+	<text transform="matrix(1 0 0 1 69.7914 320.3219)"><tspan x="0" y="0" class="st3 st4">Anterior</tspan><tspan x="-2" y="24" class="st3 st4">Superior</tspan><tspan x="-21.6" y="48" class="st3 st4">Iliac Spine</tspan><tspan x="21.9" y="72" class="st3 st4">(ASIS)</tspan></text>
+	<line class="st0" x1="213.5" y1="320.3" x2="145.7" y2="347.9"/>
+	<text transform="matrix(1 0 0 1 328.8188 222.674)" class="st3 st4">Umbilicus</text>
+	<text transform="matrix(1 0 0 1 314.2309 330.1144)" class="st3 st4">Spino-umbilical line</text>
+	<line class="st0" x1="323.6" y1="265.7" x2="345" y2="313.4"/>
+	<text transform="matrix(0.8585 -0.5129 0.5129 0.8585 297.8645 275.7532)"><tspan x="0" y="0" class="st3 st5">2/3</tspan><tspan x="18.5" y="-5" class="st3 st5">rd</tspan></text>
+	<text transform="matrix(0.8585 -0.5129 0.5129 0.8585 231.1145 316.4836)"><tspan x="0" y="0" class="st3 st5">1/3</tspan><tspan x="18.5" y="-5" class="st3 st5">rd</tspan></text>
+</g>
+<g id="burney">
+	<radialGradient id="SVGID_1_" cx="273.1493" cy="295.3144" r="5.25" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#967FF7"/>
+	</radialGradient>
+	<circle class="st6" cx="273.1" cy="295.3" r="5.3"/>
+</g>
+</svg>
