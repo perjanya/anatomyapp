@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Animation Test</title>
+  <link rel="stylesheet" href="css/anatomy-modern.css">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .test-svg { width: 300px; height: 200px; border: 1px solid #ccc; margin: 20px 0; }
+  </style>
+</head>
+<body>
+  <h1>SVG Animation Test - Infinite Loop</h1>
+  
+  <h2>Test 1: Animated SVG (Below Arcuate Line)</h2>
+  <div class="svg-container" data-animations="one:draw:infinite|two:draw:infinite|three:draw:infinite|four:draw:infinite|five:draw:infinite|six:draw:infinite">
+    <object data="content/abdomen-pelvis/rectus sheath below arcuate line-02.svg" type="image/svg+xml" class="responsive-svg"></object>
+  </div>
+
+  <h2>Console Output:</h2>
+  <pre id="debug"></pre>
+
+  <script src="js/svg-animator.js"></script>
+  <script>
+    // Capture console logs
+    const debugOutput = document.getElementById('debug');
+    const originalLog = console.log;
+    const originalWarn = console.warn;
+    const originalError = console.error;
+
+    console.log = function(...args) {
+      debugOutput.textContent += args.join(' ') + '\n';
+      originalLog.apply(console, args);
+    };
+    console.warn = function(...args) {
+      debugOutput.textContent += 'WARN: ' + args.join(' ') + '\n';
+      originalWarn.apply(console, args);
+    };
+    console.error = function(...args) {
+      debugOutput.textContent += 'ERROR: ' + args.join(' ') + '\n';
+      originalError.apply(console, args);
+    };
+
+    // Show when animations start
+    setTimeout(() => {
+      const svgContainer = document.querySelector('[data-animations]');
+      const paths = svgContainer.querySelectorAll('path, line, circle, polygon');
+      debugOutput.textContent += '\n\nSVG Elements found: ' + paths.length + '\n';
+      paths.forEach((path, idx) => {
+        const classes = Array.from(path.classList).join(', ');
+        const iterations = window.getComputedStyle(path).getPropertyValue('--iterations');
+        debugOutput.textContent += `  ${idx}: ${path.id} - classes: ${classes} - iterations CSS: ${iterations}\n`;
+      });
+    }, 500);
+  </script>
+</body>
+</html>

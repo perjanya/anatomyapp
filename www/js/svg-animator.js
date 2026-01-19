@@ -38,10 +38,20 @@ function parseAnimationDirective(animationString) {
 
     const [id, type, iterations] = parts;
     
+    // Handle iteration count: number, "infinite", or default
+    let iterationCount = null;
+    if (type.trim().toLowerCase() === 'draw') {
+      if (iterations && iterations.toLowerCase() === 'infinite') {
+        iterationCount = 'infinite';
+      } else {
+        iterationCount = parseInt(iterations) || 1;
+      }
+    }
+    
     return {
       id: id.trim(),
       type: type.trim().toLowerCase(),
-      iterations: type.trim().toLowerCase() === 'draw' ? parseInt(iterations) || 1 : null
+      iterations: iterationCount
     };
   }).filter(item => item !== null);
 }
@@ -57,7 +67,10 @@ function applySVGAnimations(svgContainer, animations) {
     return;
   }
 
-  animations.forEach(anim => {
+  // Use a consistent base duration to compute sequential delays
+  const baseDrawDurationSec = 1.2;
+
+  animations.forEach((anim, idx) => {
     // Try to find element by ID in SVG (if embedded) or in container
     let element = svgContainer.querySelector(`#${CSS.escape(anim.id)}`);
     
@@ -71,6 +84,34 @@ function applySVGAnimations(svgContainer, animations) {
       return;
     }
 
+    // For draw animations, pre-compute path length and prime stroke dash
+    if (anim.type === 'draw') {
+      try {
+        // Many SVG shapes implement getTotalLength (path, line, polyline, polygon)
+        if (typeof element.getTotalLength === 'function') {
+          const len = element.getTotalLength();
+          element.style.setProperty('--path-length', `${len}`);
+          element.style.strokeDasharray = `${len}`;
+          element.style.strokeDashoffset = `${len}`;
+        } else {
+          // Fallback to a sensible default
+          element.style.setProperty('--path-length', `1000`);
+          element.style.strokeDasharray = `1000`;
+          element.style.strokeDashoffset = `1000`;
+        }
+      } catch (e) {
+        console.warn('Could not compute path length for', anim.id, e);
+      }
+      
+      // For infinite animations, stagger them; for finite iterations, no stagger
+      let delay = 0;
+      if (anim.iterations === 'infinite') {
+        delay = idx * baseDrawDurationSec;
+      }
+      element.style.setProperty('--animation-delay', `${delay}s`);
+      element.style.setProperty('--draw-duration', `${baseDrawDurationSec}s`);
+    }
+
     // Apply animation class based on type
     const animationClass = `svg-animate-${anim.type}`;
     element.classList.add(animationClass);
@@ -78,14 +119,17 @@ function applySVGAnimations(svgContainer, animations) {
     // Add hover effect for interactivity
     element.classList.add('svg-animate-hover');
 
-    // Set CSS variable for iteration count if applicable
-    if (anim.iterations && anim.type === 'draw') {
-      element.style.setProperty('--iterations', `${anim.iterations}`);
-      element.style.setProperty('--animation-delay', '0s');
+    // Set animation iteration count directly on the element style
+    if (anim.type === 'draw' && anim.iterations !== null) {
+      // For infinite iterations, use 'infinite' keyword; otherwise use the number
+      const iterationValue = anim.iterations === 'infinite' ? 'infinite' : anim.iterations;
+      element.style.animationIterationCount = iterationValue;
+      element.style.setProperty('--iterations', iterationValue);
+      console.log(`Applied ${anim.type} animation to ${anim.id} (${iterationValue} iterations)`, 
+        `computed: ${window.getComputedStyle(element).animationIterationCount}`);
+    } else {
+      console.log(`Applied ${anim.type} animation to ${anim.id}`);
     }
-
-    console.log(`Applied ${anim.type} animation to ${anim.id}` + 
-      (anim.iterations ? ` (${anim.iterations} iterations)` : ' (infinite)'));
   });
 }
 
@@ -105,29 +149,139 @@ function initializeSVGAnimations() {
 
   svgContainers.forEach((container, index) => {
     const animationString = container.dataset.animations;
+    console.log(`Container ${index}: data-animations="${animationString}"`);
     
     if (!animationString) {
+      console.warn(`Container ${index}: No animation string found`);
+      return;
+    }
+
+    // Check for <object> tag first (preferred for animations)
+    // For object elements, fetch and embed the SVG inline for animation support
+    const objectElement = container.querySelector('object[data$=".svg"]');
+    if (objectElement) {
+      console.log(`Container ${index}: Found object element with SVG`);
+      const svgPath = objectElement.getAttribute('data');
+      console.log(`Container ${index}: Object SVG path = ${svgPath}`);
+      
+      // Fetch the SVG and embed it inline for animation support
+      fetch(svgPath)
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.text();
+        })
+        .then(svgData => {
+          console.log(`Container ${index}: SVG fetched from object, length: ${svgData.length}`);
+          // Parse SVG
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = svgData;
+          const svgElement = tempDiv.querySelector('svg');
+          
+          if (svgElement) {
+            console.log(`Container ${index}: Embedding SVG inline...`);
+            svgElement.classList.add('responsive-svg');
+            objectElement.replaceWith(svgElement);
+            
+            // Apply animations to embedded SVG
+            const animations = parseAnimationDirective(animationString);
+            console.log(`Container ${index}: Parsed animations:`, animations);
+            if (animations.length > 0) {
+              applySVGAnimations(container, animations);
+            } else {
+              console.warn(`Container ${index}: No animations parsed from: ${animationString}`);
+            }
+          } else {
+            console.warn(`Container ${index}: Could not parse SVG from object`);
+          }
+        })
+        .catch(err => {
+          console.error(`Container ${index}: Failed to fetch object SVG: ${svgPath}`, err);
+        });
       return;
     }
 
     // Wait for SVG to load if it's an img element
     const imgElement = container.querySelector('img[src$=".svg"]');
+    console.log(`Container ${index}: Found img element?`, !!imgElement, imgElement?.src);
     
     if (imgElement) {
-      imgElement.addEventListener('load', () => {
-        const animations = parseAnimationDirective(animationString);
-        if (animations.length > 0) {
-          applySVGAnimations(container, animations);
-        }
-      });
+      // For external SVG files, we need to fetch and embed them to access their elements
+      const svgPath = imgElement.src;
+      console.log(`Container ${index}: SVG path = ${svgPath}`);
+      
+      // Function to process the SVG
+      const processSVG = () => {
+        console.log(`Container ${index}: Processing SVG...`);
+        // After image loads, try to fetch and embed the SVG for proper animation
+        fetch(svgPath)
+          .then(response => {
+            console.log(`Container ${index}: Fetch response:`, response.status, response.ok);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return response.text();
+          })
+          .then(svgData => {
+            console.log(`Container ${index}: SVG fetched, length:`, svgData.length);
+            // Create a temporary div to parse the SVG
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = svgData;
+            const svgElement = tempDiv.querySelector('svg');
+            console.log(`Container ${index}: SVG parsed?`, !!svgElement);
+            
+            if (svgElement) {
+              console.log(`Container ${index}: Embedding SVG inline...`);
+              // Replace the img with the embedded SVG
+              svgElement.classList.add('responsive-svg');
+              imgElement.replaceWith(svgElement);
+              
+              // Now apply animations to the embedded SVG
+              const animations = parseAnimationDirective(animationString);
+              console.log(`Container ${index}: Parsed animations:`, animations);
+              if (animations.length > 0) {
+                applySVGAnimations(container, animations);
+              } else {
+                console.warn(`Container ${index}: No animations parsed from: ${animationString}`);
+              }
+            } else {
+              // Fallback if SVG parsing fails
+              console.warn(`Container ${index}: Could not parse SVG - trying without embedding`);
+              const animations = parseAnimationDirective(animationString);
+              if (animations.length > 0) {
+                applySVGAnimations(container, animations);
+              }
+            }
+          })
+          .catch(err => {
+            console.error(`Container ${index}: Failed to fetch SVG: ${svgPath}`, err);
+            // Continue with regular animation attempt
+            const animations = parseAnimationDirective(animationString);
+            if (animations.length > 0) {
+              applySVGAnimations(container, animations);
+            }
+          });
+      };
+      
+      // Check if image is already loaded (cached/already in DOM)
+      if (imgElement.complete) {
+        console.log(`Container ${index}: Image already loaded (complete=true), processing immediately`);
+        processSVG();
+      } else {
+        console.log(`Container ${index}: Waiting for image load event`);
+        // Otherwise wait for load event
+        imgElement.addEventListener('load', () => {
+          console.log(`Container ${index}: Image load event fired`);
+          processSVG();
+        });
+      }
 
       // Handle error case
-      imgElement.addEventListener('error', () => {
-        console.error(`Failed to load SVG: ${imgElement.src}`);
+      imgElement.addEventListener('error', (e) => {
+        console.error(`Container ${index}: Failed to load SVG image: ${imgElement.src}`, e);
       });
     } else {
+      console.log(`Container ${index}: No img element found, trying direct SVG/animation apply`);
       // SVG is already embedded or container has SVG elements
       const animations = parseAnimationDirective(animationString);
+      console.log(`Container ${index}: Animations:`, animations);
       if (animations.length > 0) {
         applySVGAnimations(container, animations);
       }

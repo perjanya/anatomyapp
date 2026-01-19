@@ -61,15 +61,23 @@ async function regenerateFile() {
 <title>${title}</title>
 <link rel="stylesheet" href="../../css/style.css">
 <link rel="stylesheet" href="../../css/anatomy-modern.css">
+<link rel="stylesheet" href="../../css/flashcards.css">
 </head>
 <body>
-<div class="content-wrapper">
-<main class="topic-content">
+<div class="container">
+  <main id="content">
+    <section class="flashcard-toolbar" style="margin: 12px 0;">
+      <button id="flashcard-parse" class="flashcard-btn">🧠 Flashcards</button>
+      <div id="flashcard-container" style="display: none;"></div>
+    </section>
 ${html}
-</main>
+  </main>
 </div>
+<script src="../../js/svg-animator.js"></script>
 <script src="../../js/interactive-features.js"></script>
 <script src="../../js/topic-tools.js"></script>
+<script src="../../data/flashcards-data.js"></script>
+<script src="../../js/flashcards.js"></script>
 </body>
 </html>`;
     

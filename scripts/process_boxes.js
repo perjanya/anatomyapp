@@ -62,30 +62,115 @@ function processBoxes(html) {
     // Parse SVG filename and animation directive
     // Format: "filename.svg" or "filename.svg|animations="directive""
     const [filenamePart, ...rest] = contentTrim.split('|');
-    const filename = filenamePart.trim();
+    let filename = filenamePart.trim();
     const animationPart = rest.join('|'); // Rejoin in case animation string contains pipes
     
     if (filename) {
+      // Fix: Remove duplicate .svg extensions (e.g., "file.svg.svg" -> "file.svg")
+      // Handle both plain and URL-encoded versions
+      filename = filename.replace(/\.svg\.svg$/i, '.svg');
+      filename = filename.replace(/\.svg%20\.svg$/i, '.svg');
+      filename = filename.replace(/\.svg\.svg(%20|%\.)/i, '.svg$1');
+      
       // Extract animation directive if present
       let dataAttr = '';
+      let hasAnimations = false;
       if (animationPart) {
         // Parse: animations="id1:draw:5|id2:pulse"
         const animMatch = animationPart.match(/animations="([^"]*)"/i);
         if (animMatch && animMatch[1]) {
           dataAttr = ` data-animations="${animMatch[1]}"`;
+          hasAnimations = true;
         }
       }
       
       // SVG files are in the same directory as the HTML file
-      return `<div class="svg-container"${dataAttr}>
+      // Use <object> tag for animated SVGs to allow DOM access to internal elements
+      // Use <img> tag for non-animated SVGs for better performance
+      if (hasAnimations) {
+        return `<div class="svg-container"${dataAttr}>
+  <object data="${filename}" type="image/svg+xml" class="responsive-svg"></object>
+</div>`;
+      } else {
+        return `<div class="svg-container"${dataAttr}>
   <img src="${filename}" alt="SVG Diagram" class="responsive-svg" />
 </div>`;
+      }
     }
     return match;
   });
   
-  // Fix: Remove <p> tags wrapping SVG containers (invalid HTML)
-  processed = processed.replace(/<p>(\s*<div class="svg-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
+  // Fix nested svg-container divs with data-animations - preserve outer div attributes
+  // Pattern: <div class="svg-container" data-animations="..."><div class="svg-container">...<img.../></div></div>
+  const nestedSvgWithData = /<div class="svg-container"(\s+data-animations="[^"]*")>\s*<div class="svg-container">([\s\S]*?)<\/div>\s*<\/div>/gi;
+  processed = processed.replace(nestedSvgWithData, '<div class="svg-container"$1>$2</div>');
+  
+  // Fix: Remove remaining nested svg-container divs (without data-animations) - multiple passes
+  let prevProcessed = '';
+  let iterations = 0;
+  const maxIterations = 20;
+  while (prevProcessed !== processed && iterations < maxIterations) {
+    prevProcessed = processed;
+    // Remove double-nested divs
+    processed = processed.replace(/<div class="svg-container">\s*<div class="svg-container">\s*([\s\S]*?)\s*<\/div>\s*<\/div>/gi, '<div class="svg-container">$1</div>');
+    // Remove triple-nested and deeper
+    processed = processed.replace(/<div class="svg-container">\s*<div class="svg-container">\s*<div class="svg-container">([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/gi, '<div class="svg-container">$1</div>');
+    iterations++;
+  }
+  
+  // Fix: Remove <p> tags wrapping SVG containers (invalid HTML) - preserve data-animations
+  processed = processed.replace(/<p>(\s*<div class="svg-container"[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
+  
+  // Process direct <img> tags that are SVG diagrams (from mammoth.js conversion)
+  // This handles cases where SVG filenames are already in img tags without markers
+  // Pattern: <img src="filename" ... class="responsive-svg" ... />
+  
+  // First, add .svg extension to img tags if missing (but already in svg-container)
+  const imgSvgAlreadyWrapped = /<div class="svg-container"([^>]*)>\s*<img\s+src="([^"]+)"\s+alt="SVG Diagram"\s+class="responsive-svg"\s*\/>\s*<\/div>/gi;
+  processed = processed.replace(imgSvgAlreadyWrapped, (match, attrs, src) => {
+    let filename = src.trim();
+    
+    // Add .svg extension if missing
+    if (!filename.toLowerCase().endsWith('.svg')) {
+      filename = filename + '.svg';
+    }
+    
+    // Return properly formatted container with preserved attributes
+    return `<div class="svg-container"${attrs}>
+  <img src="${filename}" alt="SVG Diagram" class="responsive-svg" />
+</div>`;
+  });
+  
+  // Then handle unwrapped img tags (wrap in svg-container and add extension)
+  const imgSvgPattern = /<img\s+src="([^"]+)"\s+alt="SVG Diagram"\s+class="responsive-svg"\s*\/>/gi;
+  processed = processed.replace(imgSvgPattern, (match, src) => {
+    let filename = src.trim();
+    
+    // Add .svg extension if missing
+    if (!filename.toLowerCase().endsWith('.svg')) {
+      filename = filename + '.svg';
+    }
+    
+    // Wrap in svg-container div
+    return `<div class="svg-container">
+  <img src="${filename}" alt="SVG Diagram" class="responsive-svg" />
+</div>`;
+  });
+  
+  // Also handle img tags wrapped in p tags (fix invalid HTML structure)
+  processed = processed.replace(/<p>(\s*<img\s+src="([^"]+)"\s+alt="SVG Diagram"\s+class="responsive-svg"\s*\/>\s*)<\/p>/gi, (match, imgTag, src) => {
+    let filename = src.trim();
+    
+    // Add .svg extension if missing
+    if (!filename.toLowerCase().endsWith('.svg')) {
+      filename = filename + '.svg';
+    }
+    
+    // Wrap in svg-container div
+    return `<div class="svg-container">
+  <img src="${filename}" alt="SVG Diagram" class="responsive-svg" />
+</div>`;
+  });
   
   // Process each box type
   for (const { marker, class: className } of boxPatterns) {

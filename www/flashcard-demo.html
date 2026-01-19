@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcard System Demo - Anatomy App</title>
+  
+  <!-- Base Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Flashcard Styles -->
+  <link rel="stylesheet" href="css/flashcards.css">
+  
+  <style>
+    /* Demo page specific styles */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #f9fafb;
+    }
+
+    .demo-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .demo-header h1 {
+      color: #1f2937;
+      margin-bottom: 10px;
+    }
+
+    .demo-header p {
+      color: #6b7280;
+      font-size: 1.1rem;
+    }
+
+    .topic-section {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .topic-section h2 {
+      color: #1f2937;
+      margin-top: 0;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 10px;
+    }
+
+    .topic-content {
+      margin: 20px 0;
+      line-height: 1.8;
+    }
+
+    .flashcard-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .flashcard-trigger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .flashcard-trigger:active {
+      transform: translateY(0);
+    }
+
+    .demo-info {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      padding: 20px;
+      margin: 30px 0;
+      border-radius: 4px;
+    }
+
+    .demo-info h3 {
+      margin-top: 0;
+      color: #1e40af;
+    }
+
+    .demo-info ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .demo-info li {
+      margin: 8px 0;
+      color: #1f2937;
+    }
+
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      color: #dc2626;
+    }
+
+    .code-block {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    .code-block pre {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-header">
+    <h1>🧠 Anki-Style Flashcard System</h1>
+    <p>Interactive flashcards for anatomy learning</p>
+  </div>
+
+  <div class="demo-info">
+    <h3>📖 How to Use</h3>
+    <ul>
+      <li>Click the <strong>"Practice Flashcards"</strong> button below any topic</li>
+      <li><strong>Click/Tap the card</strong> or press <code>Space</code> to flip</li>
+      <li>Use <strong>← →</strong> arrow keys or buttons to navigate</li>
+      <li>Press <code>Esc</code> or click <strong>✕</strong> to close</li>
+      <li>SVG animations play automatically when answer is revealed</li>
+    </ul>
+  </div>
+
+  <!-- Example Topic 1: Cubital Fossa -->
+  <div class="topic-section">
+    <h2>Cubital Fossa</h2>
+    <div class="topic-content">
+      <p>
+        The <strong>cubital fossa</strong> is a triangular space on the anterior aspect of the elbow. 
+        It contains important neurovascular structures that are clinically relevant for venipuncture 
+        and nerve blocks.
+      </p>
+      <p>
+        The fossa is bounded by the brachioradialis laterally, pronator teres medially, and an imaginary 
+        line between the epicondyles superiorly. Its floor is formed by the brachialis and supinator muscles.
+      </p>
+      <p>
+        <strong>Clinical importance:</strong> The median cubital vein, commonly used for venipuncture, 
+        crosses superficially. Deep needle insertion risks damaging the underlying median nerve and 
+        brachial artery.
+      </p>
+    </div>
+    <button class="flashcard-trigger" onclick="loadFlashcards('cubital-fossa')">
+      🧠 Practice Flashcards (5 cards)
+    </button>
+  </div>
+
+  <!-- Example Topic 2: Shoulder Joint -->
+  <div class="topic-section">
+    <h2>Shoulder Joint</h2>
+    <div class="topic-content">
+      <p>
+        The <strong>glenohumeral joint</strong> is a ball-and-socket synovial joint between the head 
+        of the humerus and the glenoid fossa of the scapula. It is the most mobile joint in the human 
+        body but sacrifices stability for this range of motion.
+      </p>
+      <p>
+        Stability is provided primarily by the <strong>rotator cuff muscles</strong> (supraspinatus, 
+        infraspinatus, teres minor, subscapularis), which surround the joint capsule.
+      </p>
+      <p>
+        <strong>Common injuries:</strong> Rotator cuff tears (especially supraspinatus), anterior 
+        dislocations (most common type), and impingement syndrome.
+      </p>
+    </div>
+    <button class="flashcard-trigger" onclick="loadFlashcards('shoulder-joint')">
+      🧠 Practice Flashcards (6 cards)
+    </button>
+  </div>
+
+  <!-- Example Topic 3: Heart Anatomy -->
+  <div class="topic-section">
+    <h2>Heart Anatomy</h2>
+    <div class="topic-content">
+      <p>
+        The <strong>heart</strong> is a four-chambered muscular pump located in the middle mediastinum. 
+        It consists of two atria (receiving chambers) and two ventricles (pumping chambers).
+      </p>
+      <p>
+        Blood flow through the heart follows a specific pathway: right atrium → right ventricle → 
+        pulmonary circulation → left atrium → left ventricle → systemic circulation.
+      </p>
+      <p>
+        <strong>Coronary circulation:</strong> The heart receives its blood supply from the right 
+        and left coronary arteries, which arise from the aortic sinuses immediately above the aortic valve.
+      </p>
+    </div>
+    <button class="flashcard-trigger" onclick="loadFlashcards('heart-anatomy')">
+      🧠 Practice Flashcards (5 cards)
+    </button>
+  </div>
+
+  <!-- Example Topic 4: Brachial Plexus -->
+  <div class="topic-section">
+    <h2>Brachial Plexus</h2>
+    <div class="topic-content">
+      <p>
+        The <strong>brachial plexus</strong> is a network of nerves formed by the ventral rami of 
+        spinal nerves C5-T1. It provides motor and sensory innervation to the upper limb.
+      </p>
+      <p>
+        Organization: <strong>Roots → Trunks → Divisions → Cords → Branches</strong>
+      </p>
+      <p>
+        <strong>Clinical injuries:</strong> Erb's palsy (upper trunk injury causing "waiter's tip" 
+        position) and Klumpke's palsy (lower trunk injury causing "claw hand").
+      </p>
+    </div>
+    <button class="flashcard-trigger" onclick="loadFlashcards('brachial-plexus')">
+      🧠 Practice Flashcards (5 cards)
+    </button>
+  </div>
+
+  <!-- Implementation Guide -->
+  <div class="demo-info">
+    <h3>🔧 How to Embed in Your Topic Pages</h3>
+    
+    <p><strong>Step 1:</strong> Add required files to your HTML head:</p>
+    <div class="code-block">
+      <pre>&lt;link rel="stylesheet" href="../../css/flashcards.css"&gt;
+&lt;script src="../../data/flashcards-data.js"&gt;&lt;/script&gt;
+&lt;script src="../../js/flashcards.js"&gt;&lt;/script&gt;</pre>
+    </div>
+
+    <p><strong>Step 2:</strong> Add flashcard container (can be anywhere in body):</p>
+    <div class="code-block">
+      <pre>&lt;div id="flashcard-container" style="display: none;"&gt;&lt;/div&gt;</pre>
+    </div>
+
+    <p><strong>Step 3:</strong> Add trigger button in your content:</p>
+    <div class="code-block">
+      <pre>&lt;button onclick="loadFlashcards('your-topic-slug')"&gt;
+  🧠 Practice Flashcards
+&lt;/button&gt;</pre>
+    </div>
+
+    <p><strong>Step 4:</strong> Add your flashcard data to <code>www/data/flashcards-data.js</code></p>
+  </div>
+
+  <!-- Hidden container for flashcards -->
+  <div id="flashcard-container" style="display: none;"></div>
+
+  <!-- Load flashcard data and system -->
+  <script src="data/flashcards-data.js"></script>
+  <script src="js/flashcards.js"></script>
+</body>
+</html>

@@ -46,22 +46,71 @@ function processBoxes(html) {
   // Fix: Remove <p> tags wrapping video containers
   processed = processed.replace(/<p>(\s*<div class="video-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
   
-  // Process SVG files
-  // Pattern: [SVG]filename.svg[/SVG] or [SVG]filename.svg
+  // Process SVG files with optional animation directives
+  // Pattern: [SVG]filename.svg|animations="id:type:count|id:type"[/SVG] or simple: [SVG]filename.svg[/SVG]
   const svgPattern = /\[SVG\](.*?)(?:\[\/SVG\]|(?=<\/p>|<p>|\[))/gi;
   processed = processed.replace(svgPattern, (match, content) => {
-    const filename = content.trim();
+    const contentTrim = content.trim();
+
+    // Parse SVG filename and optional animations
+    const [filenamePart, ...rest] = contentTrim.split('|');
+    let filename = filenamePart.trim();
+    const animationPart = rest.join('|');
+
     if (filename) {
-      // SVG files are in the same directory as the HTML file
-      return `<div class="svg-container">
+      // Fix duplicate .svg extensions (e.g., "file.svg.svg" -> "file.svg")
+      filename = filename.replace(/\.svg\.svg$/i, '.svg');
+
+      // Extract animation directive
+      let dataAttr = '';
+      let hasAnimations = false;
+      if (animationPart) {
+        const animMatch = animationPart.match(/animations="([^"]*)"/i);
+        if (animMatch && animMatch[1]) {
+          dataAttr = ` data-animations="${animMatch[1]}"`;
+          hasAnimations = true;
+        }
+      }
+
+      // Ensure filename ends with .svg
+      if (!filename.toLowerCase().endsWith('.svg')) {
+        filename = filename + '.svg';
+      }
+
+      // Use <object> tag for animated SVGs to allow DOM access to internal elements
+      // Use <img> tag for non-animated SVGs for better performance
+      if (hasAnimations) {
+        return `<div class="svg-container"${dataAttr}>
+  <object data="${filename}" type="image/svg+xml" class="responsive-svg"></object>
+</div>`;
+      } else {
+        return `<div class="svg-container"${dataAttr}>
   <img src="${filename}" alt="SVG Diagram" class="responsive-svg" />
 </div>`;
+      }
     }
     return match;
   });
-  
+
+  // Fix nested svg-container divs preserving data-animations
+  const nestedSvgWithData = /<div class="svg-container"(\s+data-animations="[^"]*")>\s*<div class="svg-container">([\s\S]*?)<\/div>\s*<\/div>/gi;
+  processed = processed.replace(nestedSvgWithData, '<div class="svg-container"$1>$2</div>');
+
+  // Fix: Remove remaining nested svg-container divs - multiple passes
+  let prevProcessed = '';
+  let iterations = 0;
+  const maxIterations = 20;
+  while (prevProcessed !== processed && iterations < maxIterations) {
+    prevProcessed = processed;
+    // Remove double-nested divs
+    processed = processed.replace(/<div class="svg-container">\s*<div class="svg-container">\s*([\s\S]*?)\s*<\/div>\s*<\/div>/gi, '<div class="svg-container">$1</div>');
+    // Remove triple-nested and deeper
+    processed = processed.replace(/<div class="svg-container">\s*<div class="svg-container">\s*<div class="svg-container">([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/gi, '<div class="svg-container">$1</div>');
+    iterations++;
+  }
+
   // Fix: Remove <p> tags wrapping SVG containers (invalid HTML)
-  processed = processed.replace(/<p>(\s*<div class="svg-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
+  processed = processed.replace(/<p>(\s*<div class="svg-container"[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
   
   // Process each box type
   for (const { marker, class: className } of boxPatterns) {

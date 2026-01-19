@@ -17,6 +17,7 @@ This document describes the complete workflow for adding animated SVG diagrams t
 7. [JavaScript Components](#javascript-components)
 8. [Examples](#examples)
 9. [Troubleshooting](#troubleshooting)
+10. [Sequential & Infinite](#sequential--infinite)
 
 ---
 
@@ -182,12 +183,11 @@ npx http-server www -p 8080 -c-1
 - `type: "draw"`
 - `iterations: [1-∞]` → Number of times animation repeats
 
-**Duration:** 1.2 seconds per cycle
+**Duration:** 1.2 seconds per cycle (configurable via CSS var)
 
 **Effect:**
-- Lines appear to be drawn
-- Opacity fades in from 0 to 1
-- Repeats N times, then stays visible
+- Lines appear to be drawn progressively using stroke-dash
+- Repeats N times (or infinitely), then remains visible
 
 **CSS Class Applied:** `svg-animate-draw`
 
@@ -372,21 +372,14 @@ All animation keyframes are in `www/css/anatomy-modern.css`:
 
 ```css
 @keyframes drawLine {
-  0% {
-    stroke-dashoffset: 1000;
-    opacity: 0;
-  }
-  100% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
+  0% { stroke-dashoffset: var(--path-length, 1000); opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
 }
 ```
 
 **Timeline:**
-- `0% → 100%` in 1.2 seconds
-- Stroke-dash animates from 1000 to 0 (drawing effect)
-- Opacity animates from 0 to 1 (fade-in effect)
+- `0% → 100%` in 1.2 seconds (default)
+- Stroke-dash animates from var(--path-length) to 0 (drawing effect)
 
 #### pulseGlow Animation
 
@@ -414,14 +407,19 @@ All animation keyframes are in `www/css/anatomy-modern.css`:
 
 ```css
 .svg-animate-draw {
-  stroke-dasharray: 1000;
-  animation: drawLine 1.2s ease-in-out var(--iterations, 1);
+  /* stroke-dash primed in JS using computed --path-length */
+  animation-name: drawLine;
+  animation-duration: var(--draw-duration, 1.2s);
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-iteration-count: var(--iterations, 1);
+  animation-delay: var(--animation-delay, 0s);
 }
 ```
 
-- Applies drawLine keyframes
-- `--iterations` CSS variable controls repeat count
-- Default: 1 iteration (use variable to override)
+- JS computes each target’s path length and primes `stroke-dasharray/offset`
+- `--iterations` controls repeat count; supports numeric values or `infinite`
+- `--animation-delay` enables sequencing; default is no delay
 
 #### `.svg-animate-pulse`
 
@@ -492,9 +490,9 @@ All animation keyframes are in `www/css/anatomy-modern.css`:
 **Process:**
 1. Loops through each animation object
 2. Finds element by ID in SVG: `querySelector('#id')`
-3. Adds CSS class: `svg-animate-[type]`
-4. Adds hover class: `svg-animate-hover`
-5. Sets CSS variable: `--iterations` (if applicable)
+3. For `draw`, computes path length via `getTotalLength()` and primes stroke-dash
+4. Adds CSS class: `svg-animate-[type]` and `svg-animate-hover`
+5. Sets CSS vars: `--iterations`, `--draw-duration`, `--animation-delay`
 
 #### `initializeSVGAnimations()`
 
@@ -504,10 +502,11 @@ All animation keyframes are in `www/css/anatomy-modern.css`:
 
 **Process:**
 1. Finds all elements with `data-animations` attribute
-2. For each container:
-   - Waits for SVG img to load (onload event)
-   - Parses animation directive
-   - Calls `applySVGAnimations()`
+2. For each container with `<img src="*.svg">`:
+  - Fetches the external SVG and embeds it inline (so internal IDs are addressable)
+  - Parses animation directive
+  - Calls `applySVGAnimations()` on the embedded SVG
+3. For already inlined SVGs: parses and applies animations directly
 
 #### `applyStaggeredDelay(svgContainer, elementIds, delayMs)`
 
@@ -550,9 +549,8 @@ if (document.readyState === 'loading') {
 - Each repeats 5 times
 - Total animation: 4 lines × 1.2s × 5 repeats = 24 seconds total
 
-**Stagger (implicit):**
-- Without explicit stagger, all 4 lines start simultaneously
-- Each completes its 5 cycles before user interaction
+**Sequencing:**
+- By default all elements start together; you can add sequential delays with order in your directive or by relying on the engine’s per-item index-based delay when using `infinite` repeats on multiple `draw` items.
 
 ---
 
@@ -573,6 +571,21 @@ if (document.readyState === 'loading') {
 ---
 
 ### Example 3: Skeletal System with Highlights
+### Example 4: Rectus Sheath (Sequential, Continuous)
+
+**SVG Files:**
+- `rectus sheath above arcuate line-01.svg`
+- `rectus sheath below arcuate line-02.svg`
+
+**Word Marker:**
+```
+[SVG]rectus sheath above arcuate line-01.svg|animations="one:draw:infinite|two:draw:infinite|three:draw:infinite|four:draw:infinite|five:draw:infinite|six:draw:infinite"[/SVG]
+```
+
+**Result:**
+- Elements with IDs `one` through `six` draw in a loop
+- The engine applies a small stagger per item (index × 1.2s) for a sequential effect
+- Looping continues while the page is open
 
 **SVG File:** `arm-anatomy.svg`
 
@@ -660,15 +673,9 @@ if (document.readyState === 'loading') {
 
 **Checklist:**
 - [ ] Using `draw` type (not `pulse`)?
-- [ ] Iteration count is positive integer?
-- [ ] SVG element has `stroke-dasharray` property?
-
-**CSS Fix:** Add to SVG style:
-```xml
-<style>
-  line { stroke-dasharray: 1000; }
-</style>
-```
+- [ ] Iteration count is a positive integer or `infinite`?
+- [ ] Target is a `path`, `line`, `polyline` or `polygon` (so `getTotalLength()` works)? If not, convert to a `path`.
+- [ ] Target has a visible `stroke` set in the SVG (drawing effect requires a stroke)?
 
 ### Problem 5: Multiple Animations on Same Element
 
@@ -737,9 +744,25 @@ if (document.readyState === 'loading') {
 
 ---
 
-## Quick Reference Card
+## Sequential & Infinite
 
-### Marker Format Cheat Sheet
+You can chain multiple `draw` animations and have them run in a loop. The engine supports `iterations: infinite` for `draw`, and applies a small index-based delay to each item so they animate in sequence when looping.
+
+**Pattern:**
+```
+[SVG]file.svg|animations="a:draw:infinite|b:draw:infinite|c:draw:infinite"[/SVG]
+```
+
+**Notes:**
+- Default per-item delay is one draw duration (1.2s) times item index
+- Adjust durations globally by overriding `--draw-duration` on the element if needed
+- Combine with `pulse` to keep one element highlighted while others draw
+
+---
+
+**Last Updated:** January 18, 2026  
+**Version:** 1.1 - Inline embedding, sequential delays, `infinite` draw  
+**Status:** Production Ready
 
 ```
 Simple (no animation):

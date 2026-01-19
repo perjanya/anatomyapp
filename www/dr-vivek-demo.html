@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr. Vivek - Interactive Anatomy Tutor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      color: #1f2937;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      color: #6b7280;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    canvas {
+      border: 3px solid #e5e7eb;
+      border-radius: 12px;
+      display: block;
+      margin: 0 auto 30px;
+      background: #f9fafb;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      font-family: inherit;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button.secondary {
+      background: #6b7280;
+      box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
+    }
+
+    button.secondary:hover {
+      background: #4b5563;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 15px;
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 4px;
+      text-align: left;
+      color: #1e40af;
+      font-size: 0.9rem;
+    }
+
+    .demo-content {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f9fafb;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .demo-content h2 {
+      color: #1f2937;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    .demo-content p {
+      color: #374151;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .demo-content ul {
+      margin-left: 20px;
+      color: #374151;
+      line-height: 1.7;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .feature-item {
+      background: white;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      border: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      canvas {
+        width: 100%;
+        height: auto;
+      }
+
+      button {
+        flex: 1;
+        min-width: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dr. Anat</h1>
+    <p class="subtitle">Interactive Anatomy Teaching Avatar</p>
+
+    <!-- Canvas for avatar -->
+    <canvas id="avatarCanvas" width="400" height="500"></canvas>
+
+    <!-- Voice selector -->
+    <div style="margin: 20px 0; padding: 15px; background: #f0f4ff; border-radius: 8px;">
+      <label for="voiceSelect" style="display: block; margin-bottom: 10px; font-weight: 600; color: #1f2937;">
+        🎤 Select Voice
+      </label>
+      <select id="voiceSelect" style="width: 100%; padding: 10px; border: 2px solid #2563eb; border-radius: 6px; font-size: 0.95rem; cursor: pointer;">
+        <option value="">Loading voices...</option>
+      </select>
+      <small style="display: block; margin-top: 8px; color: #6b7280;">
+        Choose your preferred voice for Dr. Anat's teaching
+      </small>
+    </div>
+
+    <!-- Control buttons -->
+    <div class="controls">
+      <button id="teachBtn">🎓 Teach</button>
+      <button id="stopBtn" class="secondary">⏹️ Stop</button>
+      <button id="customTeachBtn" class="secondary">📖 Custom Text</button>
+    </div>
+
+    <!-- Status display -->
+    <div class="status" id="statusDisplay">
+      Ready to teach. Click "Teach" to hear Dr. Anat explain the content below.
+    </div>
+
+    <!-- Demo content for teaching -->
+    <div class="demo-content topic-content">
+      <h2>Peculiarities of Clavicle</h2>
+      <p>
+        The clavicle is the only long bone in the body that lies horizontally. 
+        It has several unique characteristics that distinguish it from other bones.
+      </p>
+      <ul>
+        <li>It is the first bone to ossify in the body, beginning in the 5th week of fetal development</li>
+        <li>It is the last bone to complete ossification, around age 25 years</li>
+        <li>It has no medullary cavity, unlike typical long bones</li>
+        <li>It is subcutaneous throughout its entire length, making it easily palpable</li>
+        <li>It is the most commonly fractured bone in the human body</li>
+      </ul>
+      <p>
+        The clavicle serves as a strut to keep the upper limb away from the thorax, 
+        allowing for maximum freedom of movement. It transmits forces from the upper 
+        limb to the axial skeleton.
+      </p>
+    </div>
+
+    <!-- Integration info -->
+    <div class="feature-list">
+      <div class="feature-item">✅ Pure Canvas</div>
+      <div class="feature-item">✅ Web Speech API</div>
+      <div class="feature-item">✅ No Libraries</div>
+      <div class="feature-item">✅ Mouth Sync</div>
+      <div class="feature-item">✅ Blink Animation</div>
+      <div class="feature-item">✅ Idle Movement</div>
+    </div>
+  </div>
+
+  <!-- Avatar JavaScript -->
+  <script src="js/dr-vivek-avatar.js"></script>
+
+  <script>
+    // Initialize Dr. Anat avatar
+    let drAnat;
+
+    // Debug logging
+    console.log('Page loaded, checking for DrAnatAvatar class...');
+    console.log('DrAnatAvatar exists?', typeof window.DrAnatAvatar);
+
+    // Wait for voices to load
+    function initializeAvatar() {
+      try {
+        if (typeof DrAnatAvatar === 'undefined') {
+          console.error('DrAnatAvatar class not found!');
+          document.getElementById('statusDisplay').textContent = '❌ Error: Avatar class not loaded. Check console.';
+          return;
+        }
+        drAnat = new DrAnatAvatar('avatarCanvas');
+        console.log('✅ Dr. Anat initialized successfully');
+        document.getElementById('statusDisplay').textContent = '✅ Dr. Anat is ready! Click "Teach" to begin.';
+      } catch (error) {
+        console.error('Error initializing avatar:', error);
+        document.getElementById('statusDisplay').textContent = '❌ Error initializing avatar: ' + error.message;
+      }
+    }
+
+    // Initialize when page loads
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeAvatar);
+    } else {
+      initializeAvatar();
+    }
+
+    // Load voices (Web Speech API requires this)
+    if ('speechSynthesis' in window) {
+      speechSynthesis.onvoiceschanged = () => {
+        console.log('✅ Voices loaded:', speechSynthesis.getVoices().length);
+      };
+      // Trigger voice loading
+      speechSynthesis.getVoices();
+    } else {
+      console.warn('Web Speech API not available in this browser');
+    }
+
+    // Button handlers
+    document.getElementById('teachBtn').addEventListener('click', () => {
+      if (!drAnat) {
+        alert('Avatar not initialized. Check console for errors.');
+        return;
+      }
+      const statusEl = document.getElementById('statusDisplay');
+      statusEl.textContent = '🎓 Dr. Anat is teaching...';
+      drAnat.speak();
+
+      // Update status when done (check periodically)
+      const checkInterval = setInterval(() => {
+        if (!drAnat.avatarState.speaking) {
+          statusEl.textContent = '✅ Teaching complete. Click "Teach" to hear it again.';
+          clearInterval(checkInterval);
+        }
+      }, 500);
+    });
+
+    document.getElementById('stopBtn').addEventListener('click', () => {
+      if (drAnat) drAnat.stop();
+      document.getElementById('statusDisplay').textContent = '⏹️ Stopped. Ready for next session.';
+    });
+
+    document.getElementById('customTeachBtn').addEventListener('click', () => {
+      if (!drAnat) {
+        alert('Avatar not initialized. Check console for errors.');
+        return;
+      }
+      const customText = prompt('Enter text for Dr. Anat to teach:', 
+        'The heart is a muscular organ that pumps blood throughout the body. It has four chambers: two atria and two ventricles.');
+      
+      if (customText && customText.trim()) {
+        const statusEl = document.getElementById('statusDisplay');
+        statusEl.textContent = '🎓 Dr. Anat is teaching your custom content...';
+        drAnat.speak(customText);
+
+        const checkInterval = setInterval(() => {
+          if (!drAnat.avatarState.speaking) {
+            statusEl.textContent = '✅ Custom teaching complete.';
+            clearInterval(checkInterval);
+          }
+        }, 500);
+      }
+    });
+
+    // Voice selector handler
+    document.getElementById('voiceSelect').addEventListener('change', (e) => {
+      const selectedIndex = e.target.selectedIndex;
+      if (selectedIndex > 0 && drAnat) {
+        const voiceOptions = drAnat.getVoiceOptions();
+        const selectedVoice = voiceOptions[selectedIndex - 1].voice;
+        drAnat.setVoice(selectedVoice);
+        console.log('Voice changed to:', selectedVoice.name);
+        document.getElementById('statusDisplay').textContent = `✅ Voice changed to: ${selectedVoice.name}`;
+      }
+    });
+
+    // Handle voices discovered event
+    document.addEventListener('voicesDiscovered', (e) => {
+      const voiceSelect = document.getElementById('voiceSelect');
+      voiceSelect.innerHTML = ''; // Clear loading message
+      
+      const voiceOptions = drAnat.getVoiceOptions();
+      
+      if (voiceOptions.length === 0) {
+        voiceSelect.innerHTML = '<option>No voices available</option>';
+        return;
+      }
+
+      // Add "Auto (Recommended)" option
+      const autoOption = document.createElement('option');
+      autoOption.value = '0';
+      autoOption.textContent = '🤖 Auto (Recommended)';
+      voiceSelect.appendChild(autoOption);
+
+      // Add voice options
+      voiceOptions.forEach((option, index) => {
+        const opt = document.createElement('option');
+        opt.value = index + 1;
+        opt.textContent = option.label;
+        voiceSelect.appendChild(opt);
+      });
+
+      voiceSelect.value = '0'; // Select auto by default
+      console.log(`✅ Voice selector populated with ${voiceOptions.length} voices`);
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 't' || e.key === 'T') {
+        document.getElementById('teachBtn').click();
+      } else if (e.key === 's' || e.key === 'S') {
+        document.getElementById('stopBtn').click();
+      } else if (e.key === 'Escape') {
+        if (drAnat) drAnat.stop();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -6,10 +6,15 @@
 <title>Cleavage</title>
 <link rel="stylesheet" href="../../css/style.css">
 <link rel="stylesheet" href="../../css/anatomy-modern.css">
+<link rel="stylesheet" href="../../css/flashcards.css">
 </head>
 <body>
 <div class="container">
   <main id="content">
+    <section class="flashcard-toolbar" style="margin: 12px 0;">
+      <button id="flashcard-parse" class="flashcard-btn">🧠 Flashcards</button>
+      <div id="flashcard-container" style="display: none;"></div>
+    </section>
 <h1><a id="_Toc392744134"></a><a id="_Toc469169045"></a><a id="_Toc218437397"></a>Cleavage</h1><h2>Definition</h2><p>Cleavage is a series of rapid, successive mitoses of zygote producing smaller blastomeres </p><p>(e.g., 2-cell day 1, 4-cell day 1.5, 8-cell day 2).</p><p>Divisions asynchronous initially, without cell growth. </p><p>Later the process becomes more synchronous by reaching morula stage. </p><p>After 8-cell stage (third division), compaction via E-cadherin junctions forms polarized cells: Inner (future ICM) vs. outer (future trophectoderm).</p><div class="tip-box"><p>Cleavage divisions lack G1, S, and G2 phases</p></div><div class="warning-box"><p>In humans cleavage is holoblastic (involves complete division of the entire zygote)</p></div><div class="note-box"><p>Stages: Zygote → 2-4-8 cells (cleavage) → compaction (8-cell) → morula (16-cell) → blastocyst (day 5)</p></div><h2>Differentiation </h2><ol><li>Inner cell mass <ol><li>E-cadherin-mediated adhesions polarize blastomeres, positioning inner cells (with apical-basal asymmetry) to form the inner cell mass (ICM). </li><li>ICM gives rise to the embryo proper and some extraembryonic tissues.</li><li>Inner cells have active Hippo (YAP cytoplasmic → ICM fate)</li></ol></li><li>Trophectoderm <ol><li>In contrast, outer cells adopt a free surface, excluding Hippo pathway effectors like YAP from the nucleus, directing them toward trophectoderm fate for placental development</li><li>Outer cells have inactive Hippo (YAP nuclear → trophectoderm fate)</li></ol></li></ol><h2>Blastocyst </h2><ul><li>Fluid accumulation between trophectoderm cells creates the blastocoel</li><li>Blastocoel= a fluid-filled cavity that defines the blastocyst stage by day 4-5 post-fertilization. </li><li>"Blastocyst" = trophectoderm + ICM + blastocoel</li><li>The fluid of blastocoel originates from maternal sources in the uterine cavity, diffusing through tight junctions in the trophectoderm, and is actively pumped into the intercellular space by Na<sup>+</sup>/K<sup>+</sup>-ATPase pumps on the apical surfaces of trophectoderm cells. </li><li>Aquaporin-8 channels facilitate water influx following this osmotic gradient.</li></ul><div class="tip-box"><p>Asynchronous divisions allow variable cell fates, enhancing totipotency</p></div><h2>Regulation </h2><p>Oct4/Nanog maintain totipotency</p><p>Hippo pathway polarizes outer cells (YAP/TAZ nuclear exclusion)</p><h2>Clinical relevance</h2><ol><li><strong>IVF Embryo Grading</strong>: Day 3 cleavage stage (6-8 symmetric cells) predicts blastocyst potential; poor compaction/asynchrony flags aneuploidy, guiding PGT-A biopsy.</li><li><strong>Recurrent Implantation Failure</strong>: Trophectoderm defects (e.g., Hippo pathway mutations) prevent attachment</li><li><strong>Assisted Hatching</strong>: Laser thinning of zona pellucida aids day 5 hatching in older patients, boosting implantation.</li><li><strong>Early Miscarriage Risk</strong>: Blastomere fragmentation (&gt;20%) from oxidative stress → biochemical pregnancy</li><li><strong>Time-Lapse Monitoring</strong>: AI algorithms track cleavage kinetics; predicts euploidy, cutting multiple births in single-embryo transfer.</li></ol><div class="video-container">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Zjr3KUqaCaY" 
     title="YouTube video player" frameborder="0" 
@@ -19,6 +24,11 @@
   </main>
 </div>
 
+<script src="../../js/svg-animator.js"></script>
 <script src="../../js/interactive-features.js"></script>
+<script src="../../js/quadrant-interactive.js"></script>
+<script src="../../js/topic-tools.js"></script>
+<script src="../../data/flashcards-data.js"></script>
+<script src="../../js/flashcards.js"></script>
 </body>
 </html>
