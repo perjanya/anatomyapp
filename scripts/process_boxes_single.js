@@ -15,7 +15,8 @@ const boxPatterns = [
 function extractYouTubeId(url) {
   const patterns = [
     /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
-    /^([a-zA-Z0-9_-]{11})$/
+    /youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/,  // YouTube Shorts
+    /^([a-zA-Z0-9_-]{11})$/  // Direct video ID
   ];
   
   for (const pattern of patterns) {
