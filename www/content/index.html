@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Anatomy Documents - Master Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 15px;
+        }
+        
+        .stat-item h3 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .section-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-header {
+            padding: 20px;
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        .section-body {
+            padding: 20px;
+        }
+        
+        .dr-vivek .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .abdomen-pelvis .section-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .section-info {
+            margin-bottom: 20px;
+        }
+        
+        .section-info p {
+            margin: 8px 0;
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .section-info strong {
+            color: #333;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin-top: 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        
+        .dr-vivek .btn {
+            background: #667eea;
+        }
+        
+        .dr-vivek .btn:hover {
+            background: #764ba2;
+        }
+        
+        .abdomen-pelvis .btn {
+            background: #f5576c;
+        }
+        
+        .abdomen-pelvis .btn:hover {
+            background: #f093fb;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer p {
+            margin: 8px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Anatomy Documents</h1>
+            <p>Complete Medical Reference Library</p>
+        </div>
+        
+        <div class="content">
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>27</h3>
+                    <p>Total Documents</p>
+                </div>
+                <div class="stat-item">
+                    <h3>65</h3>
+                    <p>Styled Boxes</p>
+                </div>
+                <div class="stat-item">
+                    <h3>2</h3>
+                    <p>Collections</p>
+                </div>
+            </div>
+            
+            <div class="sections">
+                <!-- Dr. Vivek Section -->
+                <div class="section-card dr-vivek">
+                    <div class="section-header">Dr. Vivek - Abdominal Anatomy</div>
+                    <div class="section-body">
+                        <div class="section-info">
+                            <p><strong>Documents:</strong> 11</p>
+                            <p><strong>Styled Boxes:</strong> 18</p>
+                            <p><strong>Categories:</strong> 3 (Liver, Small Intestine, Stomach)</p>
+                            <p style="margin-top: 15px; color: #999; font-size: 0.85em;">Comprehensive reference collection including biliary system, portal circulation, and digestive anatomy.</p>
+                        </div>
+                        <a href="/content/dr-vivek-converted/index.html" class="btn">View Collection →</a>
+                    </div>
+                </div>
+                
+                <!-- Abdomen & Pelvis Section -->
+                <div class="section-card abdomen-pelvis">
+                    <div class="section-header">Abdomen & Pelvis Anatomy</div>
+                    <div class="section-body">
+                        <div class="section-info">
+                            <p><strong>Documents:</strong> 16</p>
+                            <p><strong>Styled Boxes:</strong> 47</p>
+                            <p><strong>Topics:</strong> Abdominal wall, Peritoneum, Inguinal canal, and more</p>
+                            <p style="margin-top: 15px; color: #999; font-size: 0.85em;">Detailed coverage of abdominal anatomy including surgical approaches and clinical landmarks.</p>
+                        </div>
+                        <a href="/content/abdomen-pelvis/index.html" class="btn">View Collection →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Status:</strong> ✓ All documents converted, formatted, and ready for use</p>
+            <p>Last Updated: February 3, 2026 | Location: www/content/</p>
+        </div>
+    </div>
+</body>
+</html>
