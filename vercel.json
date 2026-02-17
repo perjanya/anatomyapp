@@ -30,4 +30,9 @@
       ]
     }
   ]
+  ,
+  "rewrites": [
+    { "source": "/", "destination": "/content/index.html" },
+    { "source": "/index.html", "destination": "/content/index.html" }
+  ]
 }

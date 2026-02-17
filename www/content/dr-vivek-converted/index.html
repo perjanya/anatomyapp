@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Vivek Files - Table of Contents</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .document-list {
+            list-style: none;
+        }
+        
+        .document-item {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .document-item:hover {
+            background: #e8eaf6;
+            border-left-color: #764ba2;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .document-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05em;
+        }
+        
+        .document-item a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .document-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 10px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        
+        .stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dr. Vivek - Anatomy Documents</h1>
+            <p>Comprehensive Table of Contents with Links</p>
+        </div>
+        
+        <div class="content">
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>11</h3>
+                    <p>Documents</p>
+                </div>
+                <div class="stat-item">
+                    <h3>3</h3>
+                    <p>Categories</p>
+                </div>
+                <div class="stat-item">
+                    <h3>18</h3>
+                    <p>Styled Boxes</p>
+                </div>
+            </div>
+            
+            <!-- Liver Section -->
+            <div class="section">
+                <h2>🔴 Liver</h2>
+                <ul class="document-list">
+                    <li class="document-item">
+                        <span class="document-number">1</span>
+                        <a href="Liver/Common bile duct.html" target="_blank">Common Bile Duct</a>
+                    </li>
+                    <li class="document-item">
+                        <span class="document-number">2</span>
+                        <a href="Liver/Gall bladder and cystic duct.html" target="_blank">Gall Bladder and Cystic Duct</a>
+                    </li>
+                    <li class="document-item">
+                        <span class="document-number">3</span>
+                        <a href="Liver/Liver - Functional anatomy.html" target="_blank">Liver - Functional Anatomy</a>
+                    </li>
+                    <li class="document-item">
+                        <span class="document-number">4</span>
+                        <a href="Liver/Portal system.html" target="_blank">Portal System</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Small Intestine Section -->
+            <div class="section">
+                <h2>🟠 Small Intestine</h2>
+                <ul class="document-list">
+                    <li class="document-item">
+                        <span class="document-number">5</span>
+                        <a href="Small Intestine/Jejunum and ileum.html" target="_blank">Jejunum and Ileum</a>
+                    </li>
+                    <li class="document-item">
+                        <span class="document-number">6</span>
+                        <a href="Small Intestine/Second part of duodenum.html" target="_blank">Second Part of Duodenum</a>
+                    </li>
+                    <li class="document-item">
+                        <span class="document-number">7</span>
+                        <a href="Small Intestine/Surgical anatomy of duodenum.html" target="_blank">Surgical Anatomy of Duodenum</a>
+                    </li>
+                    <li class="document-item">
+                        <span class="document-number">8</span>
+                        <a href="Small Intestine/Vermiform appendix.html" target="_blank">Vermiform Appendix</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Stomach Section -->
+            <div class="section">
+                <h2>🟡 Stomach</h2>
+                <ul class="document-list">
+                    <li class="document-item">
+                        <span class="document-number">9</span>
+                        <a href="Stomach/Celiac trunk.html" target="_blank">Celiac Trunk</a>
+                    </li>
+                    <li class="document-item">
+                        <span class="document-number">10</span>
+                        <a href="Stomach/Lymphatic drainage of stomach.html" target="_blank">Lymphatic Drainage of Stomach</a>
+                    </li>
+                    <li class="document-item">
+                        <span class="document-number">11</span>
+                        <a href="Stomach/Surgical anatomy of stomach.html" target="_blank">Surgical Anatomy of Stomach</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Status:</strong> ✓ All documents converted and formatted</p>
+            <p>Generated: February 3, 2026 | Location: www/content/dr-vivek-converted/</p>
+            <p style="margin-top: 15px; color: #999; font-size: 0.85em;">Click any document to open it in a new tab</p>
+        </div>
+    </div>
+</body>
+</html>
