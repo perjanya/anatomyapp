@@ -575,6 +575,22 @@ html {
   border-radius: 12px;
 }
 
+/* ==================== HTML EMBED ==================== */
+.html-container {
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+.html-container .responsive-html {
+  width: 100%;
+  height: auto;
+  border: none;
+  display: block;
+}
+
 /* ==================== SVG EMBED ==================== */
 .svg-container {
   display: flex;

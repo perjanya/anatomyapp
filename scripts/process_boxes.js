@@ -52,6 +52,25 @@ function processBoxes(html) {
   
   // Fix: Remove <p> tags wrapping video containers (invalid HTML)
   processed = processed.replace(/<p>(\s*<div class="video-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
+
+  // Process embedded local HTML files
+  // Pattern: [HTML]filename.html[/HTML] or [HTML]filename.html
+  const htmlEmbedPattern = /\[HTML\](.*?)(?:\[\/HTML\]|(?=<\/p>|<p>|\[))/gi;
+  processed = processed.replace(htmlEmbedPattern, (match, content) => {
+    let filename = content.trim();
+    if (!filename) return match;
+
+    if (!filename.toLowerCase().endsWith('.html')) {
+      filename = filename + '.html';
+    }
+
+    return `<div class="html-container">
+  <iframe src="${filename}" class="responsive-html" loading="lazy"></iframe>
+</div>`;
+  });
+
+  // Fix: Remove <p> tags wrapping HTML containers (invalid HTML)
+  processed = processed.replace(/<p>(\s*<div class="html-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
   
   // Process SVG files with optional animation directives
   // Pattern: [SVG]filename.svg|animations="id:type:count|id:type"[/SVG]
@@ -70,6 +89,8 @@ function processBoxes(html) {
       // Fix: Remove duplicate .svg extensions (e.g., "file.svg.svg" -> "file.svg")
       // Handle both plain and URL-encoded versions
       filename = filename.replace(/\.svg\.svg$/i, '.svg');
+      // Fix: Handle accidental ".html.svg" suffixes from source names
+      filename = filename.replace(/\.html\.svg$/i, '.svg');
       filename = filename.replace(/\.svg%20\.svg$/i, '.svg');
       filename = filename.replace(/\.svg\.svg(%20|%\.)/i, '.svg$1');
       
@@ -130,6 +151,8 @@ function processBoxes(html) {
   const imgSvgAlreadyWrapped = /<div class="svg-container"([^>]*)>\s*<img\s+src="([^"]+)"\s+alt="SVG Diagram"\s+class="responsive-svg"\s*\/>\s*<\/div>/gi;
   processed = processed.replace(imgSvgAlreadyWrapped, (match, attrs, src) => {
     let filename = src.trim();
+    filename = filename.replace(/\.html\.svg$/i, '.svg');
+    filename = filename.replace(/\.html$/i, '');
     
     // Add .svg extension if missing
     if (!filename.toLowerCase().endsWith('.svg')) {
@@ -146,6 +169,8 @@ function processBoxes(html) {
   const imgSvgPattern = /<img\s+src="([^"]+)"\s+alt="SVG Diagram"\s+class="responsive-svg"\s*\/>/gi;
   processed = processed.replace(imgSvgPattern, (match, src) => {
     let filename = src.trim();
+    filename = filename.replace(/\.html\.svg$/i, '.svg');
+    filename = filename.replace(/\.html$/i, '');
     
     // Add .svg extension if missing
     if (!filename.toLowerCase().endsWith('.svg')) {
@@ -161,6 +186,8 @@ function processBoxes(html) {
   // Also handle img tags wrapped in p tags (fix invalid HTML structure)
   processed = processed.replace(/<p>(\s*<img\s+src="([^"]+)"\s+alt="SVG Diagram"\s+class="responsive-svg"\s*\/>\s*)<\/p>/gi, (match, imgTag, src) => {
     let filename = src.trim();
+    filename = filename.replace(/\.html\.svg$/i, '.svg');
+    filename = filename.replace(/\.html$/i, '');
     
     // Add .svg extension if missing
     if (!filename.toLowerCase().endsWith('.svg')) {

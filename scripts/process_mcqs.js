@@ -72,10 +72,16 @@ function parseMCQs(text) {
     
     // Find question line (starts with Q1., Q2., etc.)
     const questionLine = lines.find(l => /^Q\d+\./.test(l));
-    if (!questionLine) continue;
-    
-    // Extract question text
-    const questionText = questionLine.replace(/^Q\d+\.\s*/, '').trim();
+    let questionText = '';
+    if (questionLine) {
+      questionText = questionLine.replace(/^Q\d+\.\s*/, '').trim();
+    } else {
+      // Fallback: treat text before first option as the question
+      const firstOptionIndex = lines.findIndex(l => /^([A-Z])\.\s+/.test(l));
+      if (firstOptionIndex > 0) {
+        questionText = lines.slice(0, firstOptionIndex).join(' ').trim();
+      }
+    }
     if (!questionText) continue;
     
     // Find options (lines starting with A., B., C., D., etc.)

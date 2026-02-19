@@ -319,7 +319,37 @@
     const s = document.createElement('style'); s.textContent = css; document.head.appendChild(s);
   }
 
+  // Auto-resize local HTML embeds so inner scrollbars are avoided.
+  function initHtmlEmbedAutoHeight(){
+    const frames = Array.from(document.querySelectorAll('iframe.responsive-html'));
+    if (!frames.length) return;
+
+    const setHeight = (iframe) => {
+      try {
+        const doc = iframe.contentDocument || (iframe.contentWindow && iframe.contentWindow.document);
+        if (!doc) return;
+        const bodyH = doc.body ? doc.body.scrollHeight : 0;
+        const docH = doc.documentElement ? doc.documentElement.scrollHeight : 0;
+        const next = Math.max(bodyH, docH, 200);
+        iframe.style.height = next + 'px';
+      } catch (e) {
+        // Ignore cross-origin or transient load errors.
+      }
+    };
+
+    frames.forEach((iframe) => {
+      iframe.setAttribute('scrolling', 'no');
+      iframe.style.overflow = 'hidden';
+      iframe.addEventListener('load', () => setHeight(iframe));
+      // First attempt for already-loaded frames.
+      setHeight(iframe);
+    });
+
+    window.addEventListener('resize', () => frames.forEach(setHeight));
+  }
+
   // Start
   injectStyles();
+  initHtmlEmbedAutoHeight();
   createUI();
 })();

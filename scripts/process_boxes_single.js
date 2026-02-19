@@ -46,6 +46,25 @@ function processBoxes(html) {
   
   // Fix: Remove <p> tags wrapping video containers
   processed = processed.replace(/<p>(\s*<div class="video-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
+
+  // Process embedded local HTML files
+  // Pattern: [HTML]filename.html[/HTML] or [HTML]filename.html
+  const htmlEmbedPattern = /\[HTML\](.*?)(?:\[\/HTML\]|(?=<\/p>|<p>|\[))/gi;
+  processed = processed.replace(htmlEmbedPattern, (match, content) => {
+    let filename = content.trim();
+    if (!filename) return match;
+
+    if (!filename.toLowerCase().endsWith('.html')) {
+      filename = filename + '.html';
+    }
+
+    return `<div class="html-container">
+  <iframe src="${filename}" class="responsive-html" loading="lazy"></iframe>
+</div>`;
+  });
+
+  // Fix: Remove <p> tags wrapping HTML containers
+  processed = processed.replace(/<p>(\s*<div class="html-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
   
   // Process SVG files with optional animation directives
   // Pattern: [SVG]filename.svg|animations="id:type:count|id:type"[/SVG] or simple: [SVG]filename.svg[/SVG]
@@ -61,6 +80,10 @@ function processBoxes(html) {
     if (filename) {
       // Fix duplicate .svg extensions (e.g., "file.svg.svg" -> "file.svg")
       filename = filename.replace(/\.svg\.svg$/i, '.svg');
+      // Fix accidental ".html.svg" suffixes from source names
+      filename = filename.replace(/\.html\.svg$/i, '.svg');
+      // Fix accidental ".html" source names before extension enforcement
+      filename = filename.replace(/\.html$/i, '');
 
       // Extract animation directive
       let dataAttr = '';
