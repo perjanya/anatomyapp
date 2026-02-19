@@ -113,6 +113,78 @@ function parseMCQs(text) {
     }
   }
   
+  // Fallback: support MCQs authored as HTML paragraphs + ordered lists.
+  if (questions.length === 0) {
+    return parseMCQsFromHtml(text);
+  }
+
+  return questions;
+}
+
+function decodeEntities(text) {
+  return text
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+function stripTags(text) {
+  return decodeEntities(text.replace(/<[^>]+>/g, '').trim());
+}
+
+function parseMCQsFromHtml(html) {
+  const questions = [];
+  const chunks = html
+    .split(/<p>\s*_{3,}\s*<\/p>/i)
+    .map(c => c.trim())
+    .filter(Boolean);
+
+  for (const chunk of chunks) {
+    const qMatch = chunk.match(/<p>\s*([\s\S]*?)\s*<\/p>/i);
+    const olMatch = chunk.match(/<ol[^>]*>([\s\S]*?)<\/ol>/i);
+    if (!qMatch || !olMatch) continue;
+
+    const questionText = stripTags(qMatch[1]);
+    if (!questionText) continue;
+
+    const options = [];
+    let correctAnswer = null;
+    const liRegex = /<li[^>]*>([\s\S]*?)<\/li>/gi;
+    let liMatch;
+    let optionIndex = 0;
+    while ((liMatch = liRegex.exec(olMatch[1])) !== null) {
+      const raw = liMatch[1];
+      const isCorrect = /\[CORRECT\]|\[✓\]|\[RIGHT\]|\[ANSWER\]/i.test(raw);
+      const cleanOptionText = stripTags(
+        raw.replace(/\[CORRECT\]|\[✓\]|\[RIGHT\]|\[ANSWER\]/gi, '')
+      );
+      if (!cleanOptionText) continue;
+
+      const letter = String.fromCharCode(65 + optionIndex); // A, B, C...
+      optionIndex++;
+      options.push({
+        letter,
+        text: cleanOptionText,
+        correct: isCorrect
+      });
+
+      if (isCorrect) {
+        correctAnswer = cleanOptionText;
+      }
+    }
+
+    if (options.length >= 2 && correctAnswer) {
+      questions.push({
+        question: questionText,
+        options,
+        correct: correctAnswer
+      });
+    }
+  }
+
   return questions;
 }
 
