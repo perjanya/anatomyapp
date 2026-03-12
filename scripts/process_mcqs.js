@@ -8,16 +8,21 @@ const path = require('path');
 function processMCQsInHTML(htmlPath) {
   let html = fs.readFileSync(htmlPath, 'utf8');
   
-  // Check if file contains MCQ markers (with or without <p> tags)
-  if (!html.includes('___MCQ_START___')) {
+  // Check if file contains MCQ markers in any supported form.
+  // Supported:
+  // - ___MCQ_START___ / ___MCQ_END___
+  // - MCQ_START / MCQ_END (with or without formatting tags in <p>)
+  if (!/(?:___+)?MCQ_START(?:___+)?/i.test(html)) {
     return; // No MCQs to process
   }
   
-  // Extract MCQ section - handle <p> wrapped markers
-  // Pattern 1: <p>___MCQ_START___</p>...<p>___MCQ_END___</p> or with more underscores
-  // Pattern 2: ___MCQ_START___ ... ___MCQ_END___ (or more underscores)
-  const mcqMatch = html.match(/<p>___+MCQ_START___+<\/p>([\s\S]*?)<p>___+MCQ_END___+<\/p>/);
-  const mcqMatch2 = html.match(/___+MCQ_START___+([\s\S]*?)___+MCQ_END___+/);
+  // Extract MCQ section - handle plain markers, underscored markers,
+  // and markers wrapped by formatting tags inside paragraph tags.
+  const paragraphMarkerPattern =
+    /<p>\s*(?:<[^>]+>\s*)*_{0,}MCQ_START_{0,}(?:\s*<\/[^>]+>)*\s*<\/p>([\s\S]*?)<p>\s*(?:<[^>]+>\s*)*_{0,}MCQ_END_{0,}(?:\s*<\/[^>]+>)*\s*<\/p>/i;
+  const inlineMarkerPattern = /_{0,}MCQ_START_{0,}([\s\S]*?)_{0,}MCQ_END_{0,}/i;
+  const mcqMatch = html.match(paragraphMarkerPattern);
+  const mcqMatch2 = html.match(inlineMarkerPattern);
   
   if (!mcqMatch && !mcqMatch2) {
     console.warn(`  ⚠ MCQ markers found but malformed in: ${path.basename(htmlPath)}`);
@@ -36,9 +41,9 @@ function processMCQsInHTML(htmlPath) {
   // Generate interactive HTML
   const mcqHTML = generateMCQHTML(questions);
   
-  // Replace the MCQ section with interactive HTML (handle both patterns, with variable underscores)
-  html = html.replace(/<p>___+MCQ_START___+<\/p>[\s\S]*?<p>___+MCQ_END___+<\/p>/, mcqHTML);
-  html = html.replace(/___+MCQ_START___+[\s\S]*?___+MCQ_END___+/, mcqHTML);
+  // Replace the MCQ section with interactive HTML for all supported marker styles.
+  html = html.replace(paragraphMarkerPattern, mcqHTML);
+  html = html.replace(inlineMarkerPattern, mcqHTML);
   
   // Clean up any <p> tags wrapping the MCQ container (invalid HTML)
   html = html.replace(/<p>(\s*<div class="mcq-container">[\s\S]*?<\/div>\s*)<\/p>/gi, '$1');
