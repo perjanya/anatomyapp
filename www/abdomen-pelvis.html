@@ -18,7 +18,7 @@
       background: white;
       border-radius: 20px;
       padding: 3rem;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
 
     .back-link {
@@ -44,10 +44,32 @@
     .toc-list {
       list-style: none;
       padding: 0;
+      margin: 0;
     }
 
-    .toc-item {
-      margin: 1rem 0;
+    .toc-section {
+      margin: 2rem 0 2.5rem;
+    }
+
+    .toc-section-title {
+      color: #2563eb;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      padding: 1.2rem;
+      margin: 0 0 1rem;
+      border-left: 4px solid #2563eb;
+      background: rgba(37, 99, 235, 0.08);
+      border-radius: 12px;
+      font-weight: 700;
+    }
+
+    .toc-sublist {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-subitem {
+      margin: 0.8rem 0;
     }
 
     .toc-link {
@@ -69,6 +91,19 @@
       box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
     }
 
+    .toc-link-static {
+      cursor: default;
+    }
+
+    .toc-link-static:hover {
+      background: #f8fafc;
+      border-left-color: transparent;
+      transform: none;
+      box-shadow: none;
+      text-decoration: none;
+      color: #1e293b;
+    }
+
     @media (max-width: 768px) {
       body {
         padding: 1rem;
@@ -83,17 +118,176 @@
 <body>
 
 <div class="toc-container">
-  <a href="index.html" class="back-link">← Back to Home</a>
-  
-  <h1>🫘 Abdomen & Pelvis</h1>
-  
-  <ul class="toc-list" id="toc-list">
-    <!-- Topics will be loaded dynamically from toc.json -->
-  </ul>
+  <a href="index.html" class="back-link">&larr; Back to Home</a>
+
+  <h1>Abdomen & Pelvis</h1>
+
+  <ul class="toc-list" id="toc-list"></ul>
 </div>
 
 <script type="module" src="https://unpkg.com/@capacitor/core@latest/dist/capacitor.js"></script>
-<script src="js/toc.js"></script>
+<script>
+  const abdomenPelvisSections = [
+    {
+      heading: "Anterior abdominal wall",
+      topics: [
+        ["Regions of abdomen", "content/abdomen-pelvis/Quadrants of abdomen.html"],
+        ["Muscles of anterior abdominal wall", "content/abdomen-pelvis/Anterior abdominal wall.html"],
+        ["Rectus sheath", "content/abdomen-pelvis/Rectus sheath.html"]
+      ]
+    },
+    {
+      heading: "Peritoneum",
+      topics: [
+        ["Peritoneum", "content/abdomen-pelvis/Peritoneum.html"],
+        ["Lesser omentum", "content/abdomen-pelvis/Lesser omentum.html"],
+        ["Greater omentum", "content/abdomen-pelvis/Greater omentum.html"],
+        ["Mesentery", "content/abdomen-pelvis/Mesentery.html"]
+      ]
+    },
+    {
+      heading: "Inguinal region",
+      topics: [
+        ["Inguinal canal", "content/abdomen-pelvis/Inguinal canal.html"]
+      ]
+    },
+    {
+      heading: "Stomach",
+      topics: [
+        ["Celiac trunk", "content/abdomen-pelvis/Celiac trunk.html"],
+        ["Surgical anatomy of stomach", "content/abdomen-pelvis/Surgical anatomy of stomach.html"],
+        ["Lymphatic drainage of stomach", "content/abdomen-pelvis/Lymphatic drainage of stomach.html"]
+      ]
+    },
+    {
+      heading: "Small intestine",
+      topics: [
+        ["Surgical anatomy of duodenum", "content/abdomen-pelvis/Surgical anatomy of duodenum.html"],
+        ["Second part of duodenum", "content/abdomen-pelvis/Second part of duodenum.html"],
+        ["Jejunum and ileum", "content/abdomen-pelvis/Jejunum and ileum.html"],
+        ["Vermiform appendix", "content/abdomen-pelvis/Vermiform appendix.html"]
+      ]
+    },
+    {
+      heading: "Pancreas",
+      topics: [
+        ["Gross anatomy of pancreas", null]
+      ]
+    },
+    {
+      heading: "Liver, biliary apparatus and spleen",
+      topics: [
+        ["Portal system", "content/abdomen-pelvis/Portal system.html"],
+        ["Portocaval anastomoses", "content/abdomen-pelvis/Portocaval anastomoses.html"],
+        ["Liver- functional anatomy", "content/abdomen-pelvis/Liver - Functional anatomy.html"],
+        ["Gall bladder and cystic duct", "content/abdomen-pelvis/Gall bladder and cystic duct.html"],
+        ["Common bile duct", "content/abdomen-pelvis/Common bile duct.html"]
+      ]
+    },
+    {
+      heading: "Kidneys, suprarenal glands and ureters",
+      topics: [
+        ["Gross anatomy of kidney", "content/abdomen-pelvis/Gross anatomy of kidney.html"],
+        ["Coverings of kidney", "content/abdomen-pelvis/Coverings of kidney.html"],
+        ["Relations of kidney", null],
+        ["Suprarenal glands - gross anatomy", "content/abdomen-pelvis/Suprarenal glands.html"],
+        ["Ureter", "content/abdomen-pelvis/Ureter.html"]
+      ]
+    },
+    {
+      heading: "Urinary bladder and urethra",
+      topics: [
+        ["Urinary bladder", "content/abdomen-pelvis/Urinary bladder.html"],
+        ["Male urethra", "content/abdomen-pelvis/Male urethra.html"],
+        ["Female urethra", "content/abdomen-pelvis/Female urethra.html"]
+      ]
+    },
+    {
+      heading: "Rectum, anal canal and ischioanal fossa",
+      topics: [
+        ["Anorectum", "content/abdomen-pelvis/Anorectum.html"],
+        ["Ischioanal fossa", "content/abdomen-pelvis/Ischioanal fossa.html"]
+      ]
+    },
+    {
+      heading: "Pelvis",
+      topics: [
+        ["Pelvic anatomy", "content/abdomen-pelvis/Pelvic anatomy.html"],
+        ["Pelvic diaphragm", "content/abdomen-pelvis/Pelvic diaphragm.html"],
+        ["Pudendal nerve", "content/abdomen-pelvis/Pudendal nerve.html"],
+        ["Internal iliac artery", "content/abdomen-pelvis/Internal iliac artery.html"],
+        ["Sacral plexus", "content/abdomen-pelvis/Sacral plexus.html"],
+        ["Sagittal section of male pelvis", null],
+        ["Sagittal section of female pelvis", null]
+      ]
+    },
+    {
+      heading: "Male reproductive organs",
+      topics: [
+        ["Scrotum", "content/abdomen-pelvis/Scrotum.html"],
+        ["Testis", "content/abdomen-pelvis/Testis.html"],
+        ["Epididymis", "content/abdomen-pelvis/Epididymis.html"],
+        ["Spermatic cord and ductus deferens", "content/abdomen-pelvis/Spermatic cord and ductus deferens.html"],
+        ["Seminal vesicles and ejaculatory ducts", "content/abdomen-pelvis/Seminal vesicles and ejaculatory ducts.html"],
+        ["Prostate gland and bulbourethral glands", "content/abdomen-pelvis/Prostate gland and Bulbourethral Glands.html"],
+        ["Penis", "content/abdomen-pelvis/Penis.html"]
+      ]
+    },
+    {
+      heading: "Female reproductive organs",
+      topics: [
+        ["Ovary", "content/abdomen-pelvis/Ovary.html"],
+        ["Uterine tube", "content/abdomen-pelvis/Uterine tube.html"],
+        ["Uterus", "content/abdomen-pelvis/Uterus.html"],
+        ["Supports of uterus", "content/abdomen-pelvis/Supports of uterus.html"],
+        ["Female external genitalia", null],
+        ["Vagina", "content/abdomen-pelvis/Vagina.html"]
+      ]
+    },
+    {
+      heading: "Perineum in male and female",
+      topics: [
+        ["Perineum", "content/abdomen-pelvis/Perineum.html"],
+        ["Superficial perineal pouch", "content/abdomen-pelvis/Superficial perineal pouch.html"],
+        ["Deep perineal pouch and urogenital diaphragm", "content/abdomen-pelvis/Deep perineal pouch and urogenital diaphragm.html"]
+      ]
+    }
+  ];
+
+  const tocList = document.getElementById("toc-list");
+  const versionParam = `v=${new Date().toISOString().slice(0, 10).replace(/-/g, "")}`;
+
+  abdomenPelvisSections.forEach((section) => {
+    const sectionItem = document.createElement("li");
+    sectionItem.className = "toc-section";
+
+    const title = document.createElement("div");
+    title.className = "toc-section-title";
+    title.textContent = section.heading;
+    sectionItem.appendChild(title);
+
+    const subList = document.createElement("ul");
+    subList.className = "toc-sublist";
+
+    section.topics.forEach(([label, url]) => {
+      const subItem = document.createElement("li");
+      subItem.className = "toc-subitem";
+
+      const link = url ? document.createElement("a") : document.createElement("span");
+      link.className = url ? "toc-link" : "toc-link toc-link-static";
+      if (url) {
+        link.href = `${url}?${versionParam}`;
+      }
+      link.textContent = label;
+
+      subItem.appendChild(link);
+      subList.appendChild(subItem);
+    });
+
+    sectionItem.appendChild(subList);
+    tocList.appendChild(sectionItem);
+  });
+</script>
 <script src="js/app-init.js"></script>
 
 </body>
