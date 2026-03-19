@@ -180,6 +180,27 @@
   display: block;
 }
 
+.flashcard-media {
+  width: 100%;
+  max-width: 320px;
+  margin: 20px auto 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.flashcard-media-image,
+.flashcard-media-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: white;
+}
+
+.flashcard-media-frame {
+  min-height: 220px;
+}
+
 /* SVG Animation Classes */
 .svg-animate-draw {
   stroke-dasharray: 1000;

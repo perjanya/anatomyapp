@@ -67,7 +67,7 @@ async function regenerateFile() {
 <div class="container">
   <main id="content">
     <section class="flashcard-toolbar" style="margin: 12px 0;">
-      <button id="flashcard-parse" class="flashcard-btn">🧠 Flashcards</button>
+      <button id="flashcard-parse" class="flashcard-btn">Flashcards</button>
       <div id="flashcard-container" style="display: none;"></div>
     </section>
 ${html}
@@ -101,4 +101,7 @@ ${html}
   }
 }
 
-regenerateFile();
+regenerateFile().catch(err => {
+  console.error('Fatal error:', err);
+  process.exit(1);
+});

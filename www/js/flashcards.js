@@ -4,6 +4,17 @@
  * No external dependencies required
  */
 
+function normalizeTopicSlug(value) {
+  return decodeURIComponent(String(value || ''))
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/['’]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
 class FlashcardSystem {
   constructor() {
     this.currentTopic = null;
@@ -90,8 +101,8 @@ class FlashcardSystem {
     this.container.innerHTML = `
       <div class="flashcard-system">
         <div class="flashcard-header">
-          <h3>🧠 Flashcards: ${this.formatTopicName(this.currentTopic)}</h3>
-          <button class="flashcard-close" id="flashcard-close">✕</button>
+          <h3>Flashcards: ${this.formatTopicName(this.currentTopic)}</h3>
+          <button class="flashcard-close" id="flashcard-close" aria-label="Close flashcards">x</button>
         </div>
         
         <div class="flashcard-counter">
@@ -117,13 +128,13 @@ class FlashcardSystem {
 
         <div class="flashcard-controls">
           <button class="flashcard-btn" id="prev-card" ${this.currentCardIndex === 0 ? 'disabled' : ''}>
-            ← Previous
+            Previous
           </button>
           <button class="flashcard-btn primary" id="flip-card">
             ${this.isFlipped ? 'Hide Answer' : 'Show Answer'}
           </button>
           <button class="flashcard-btn" id="next-card" ${this.currentCardIndex === this.cards.length - 1 ? 'disabled' : ''}>
-            Next →
+            Next
           </button>
         </div>
 
@@ -158,7 +169,32 @@ class FlashcardSystem {
       'heart': this.generateHeartSVG(),
     };
 
-    return svgMap[svgType] || '';
+    if (svgMap[svgType]) {
+      return svgMap[svgType];
+    }
+
+    if (/\.(svg)$/i.test(svgType)) {
+      return `
+        <div class="flashcard-media">
+          <img src="${this.escapeAttribute(svgType)}" alt="Flashcard diagram" class="flashcard-media-image" />
+        </div>
+      `;
+    }
+
+    if (/\.(html)$/i.test(svgType)) {
+      return `
+        <div class="flashcard-media">
+          <iframe
+            src="${this.escapeAttribute(svgType)}"
+            class="flashcard-media-frame"
+            loading="lazy"
+            title="Flashcard reference"
+          ></iframe>
+        </div>
+      `;
+    }
+
+    return '';
   }
 
   /**
@@ -260,6 +296,14 @@ class FlashcardSystem {
     `;
   }
 
+  escapeAttribute(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
   /**
    * Attach event listeners
    */
@@ -352,14 +396,14 @@ const flashcardSystem = new FlashcardSystem();
 
 /**
  * Convenience function for embedding in topic pages
- * Usage: <button onclick="loadFlashcards('cubital-fossa')">🧠 Practice Flashcards</button>
+ * Usage: <button onclick="loadFlashcards('cubital-fossa')">Practice Flashcards</button>
  */
 function loadFlashcards(topicSlug) {
   const container = document.getElementById('flashcard-container');
   if (container) {
     container.style.display = 'block';
   }
-  flashcardSystem.loadFlashcards(topicSlug);
+  flashcardSystem.loadFlashcards(normalizeTopicSlug(topicSlug));
 }
 
 // Auto-init: on content pages, derive slug from URL and load flashcards if data exists
@@ -370,9 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Match /content/{region}/{file}.html
     const m = path.match(/\/content\/[^/]+\/([^/]+)\.html$/i);
     if (!m) return;
-    // Decode and normalize filename to slug (spaces -> dashes)
-    const rawName = decodeURIComponent(m[1]);
-    const slug = rawName.trim().toLowerCase().replace(/\s+/g, '-');
+    const slug = normalizeTopicSlug(m[1]);
     
     // Wire parse button to load on demand
     const parseBtn = document.getElementById('flashcard-parse');
@@ -388,6 +430,10 @@ document.addEventListener('DOMContentLoaded', () => {
         parseBtn.disabled = false;
         
         parseBtn.addEventListener('click', async () => {
+          const container = document.getElementById('flashcard-container');
+          if (container) {
+            container.style.display = 'block';
+          }
           const system = new FlashcardSystem();
           await system.loadFlashcards(slug);
         });
@@ -403,3 +449,5 @@ document.addEventListener('DOMContentLoaded', () => {
     console.warn('Flashcards auto-init skipped:', e);
   }
 });
+
+window.normalizeTopicSlug = normalizeTopicSlug;

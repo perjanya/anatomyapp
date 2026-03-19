@@ -5,6 +5,22 @@
  * Auto-generation disabled - waiting for manually formatted flashcards
  * Approximately 50% of auto-generated cards were incorrect - removed all 164
  * 
+ * Standard slug rules:
+ * 1. Start from the topic HTML filename without ".html"
+ * 2. Convert to lowercase
+ * 3. Replace "&" with "and"
+ * 4. Remove apostrophes
+ * 5. Replace every run of spaces/punctuation with a single hyphen
+ * 6. Remove leading/trailing hyphens
+ *
+ * Examples:
+ * - "Inguinal canal.html" -> "inguinal-canal"
+ * - "Surgical anatomy of stomach.html" -> "surgical-anatomy-of-stomach"
+ * - "Gall bladder and cystic duct.html" -> "gall-bladder-and-cystic-duct"
+ *
+ * Single-file location:
+ * - Keep all topic flashcards in this file: www/data/flashcards-data.js
+ *
  * Format for user-provided data:
  * flashcardsData['topic-slug'] = [
  *   { q: 'Question?', a: 'Answer', svg: null|'artery'|'nerve'|'bone'|'muscle'|'heart' },
@@ -45,6 +61,229 @@ var flashcardsData = {
     {
       "q": "List the mechanisms that maintain the integrity of the inguinal canal.",
       "a": "<ul><li><strong>Obliquity of the canal</strong> (flap-valve mechanism)</li><li><strong>Guarding of inguinal rings</strong></li><li><strong>Shutter mechanism</strong> by internal oblique and transversus abdominis</li><li><strong>Ball-valve mechanism</strong> by cremaster muscle</li></ul>",
+      "svg": null
+    }
+  ],
+
+  "mesentery": [
+    {
+      "q": "What is the mesentery?",
+      "a": "The mesentery is a <strong>double layer of peritoneum</strong> that suspends the <strong>jejunum and ileum</strong> from the posterior abdominal wall.",
+      "svg": null
+    },
+    {
+      "q": "What is meant by the free margin of the mesentery?",
+      "a": "The free margin is the intestinal border of the mesentery. It encloses the jejunum and ileum and supports about <strong>6 meters</strong> of small intestine.",
+      "svg": null
+    },
+    {
+      "q": "What is the posterior attachment of the mesentery?",
+      "a": "The posterior attachment, or root of the mesentery, is attached to the posterior abdominal wall and is about <strong>6 inches (15 cm)</strong> long.",
+      "svg": null
+    },
+    {
+      "q": "State the extent of the root of the mesentery.",
+      "a": "It extends obliquely from the <strong>duodenojejunal flexure on the left side of L2</strong> to the <strong>ileocecal junction near the right sacroiliac region</strong>.",
+      "svg": null
+    },
+    {
+      "q": "Why is the mesentery clinically important?",
+      "a": "It conveys <strong>blood vessels, lymphatics, nerves, and fat</strong> to the jejunum and ileum and provides mobility while maintaining intestinal attachment.",
+      "svg": null
+    }
+  ],
+
+"portocaval-anastomoses": [
+  {
+    "q": "What is a portocaval anastomosis?",
+    "a": "A portocaval anastomosis is a communication between the <strong>portal venous system and systemic (somatic) veins</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the physiological significance of portocaval anastomoses?",
+    "a": "They provide <strong>alternative pathways for venous return from the gastrointestinal tract</strong> in conditions like <strong>portal vein obstruction or cirrhosis</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is portal hypertension?",
+    "a": "Portal hypertension is defined as an increase in portal venous pressure above <strong>6 mmHg</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the normal portal venous pressure values?",
+    "a": "Normal portal venous pressure ranges from <strong>1–4 mmHg</strong>, and is typically <strong>below 6 mmHg</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the common causes of portal hypertension?",
+    "a": "Common causes include <strong>liver cirrhosis (intrahepatic)</strong> and <strong>portal vein obstruction or structural changes (extrahepatic)</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is wedged hepatic venous pressure (WHVP)?",
+    "a": "WHVP is measured by <strong>wedging a catheter in a hepatic vein, occluding it, and recording the pressure of proximal static blood</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is hepatic venous pressure gradient (HVPG)?",
+    "a": "HVPG is the <strong>difference between wedged hepatic venous pressure and free hepatic venous pressure</strong>, estimating the gradient between the <strong>portal vein and inferior vena cava</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What HVPG value defines portal hypertension?",
+    "a": "An HVPG of <strong>≥5 mmHg</strong> defines portal hypertension.",
+    "svg": null
+  },
+  {
+    "q": "When is portal hypertension considered clinically significant?",
+    "a": "Portal hypertension is considered clinically significant when HVPG exceeds <strong>10 mmHg</strong>.",
+    "svg": null
+  },
+  {
+    "q": "At what pressure does variceal hemorrhage typically occur?",
+    "a": "Variceal hemorrhage is likely when portal pressure exceeds <strong>12 mmHg</strong>.",
+    "svg": null
+  }
+],
+
+  "celiac-trunk": [
+    {
+      "q": "What is the celiac trunk?",
+      "a": "The celiac trunk is the <strong>artery of the foregut</strong> and is the first major anterior branch of the abdominal aorta.",
+      "svg": "artery"
+    },
+    {
+      "q": "At what vertebral level is the celiac trunk usually found?",
+      "a": "It usually arises at the level of the <strong>lower third of the first lumbar vertebra (L1)</strong>.",
+      "svg": null
+    },
+    {
+      "q": "What is the relation of the celiac trunk to the median arcuate ligament?",
+      "a": "The median arcuate ligament passes in front of the aorta near the origin of the celiac trunk and may lie just above it.",
+      "svg": null
+    },
+    {
+      "q": "What is the relation of the celiac trunk to the celiac ganglia?",
+      "a": "The right and left <strong>celiac ganglia</strong> lie on either side of the base of the celiac trunk and may partly conceal its origin.",
+      "svg": null
+    },
+    {
+      "q": "Name the three classic branches of the celiac trunk.",
+      "a": "<ul><li><strong>Left gastric artery</strong></li><li><strong>Common hepatic artery</strong></li><li><strong>Splenic artery</strong></li></ul>",
+      "svg": "artery"
+    }
+  ],
+
+  "surgical-anatomy-of-stomach": [
+    {
+      "q": "Name the two curvatures of the stomach.",
+      "a": "The stomach has a <strong>lesser curvature</strong> on the right side and a <strong>greater curvature</strong> on the left side.",
+      "svg": null
+    },
+    {
+      "q": "What forms the stomach bed?",
+      "a": "The stomach bed is formed by structures lying posterior to the stomach, including the <strong>diaphragm, spleen, left kidney, left suprarenal gland, pancreas, transverse mesocolon, and colon</strong>.",
+      "svg": null
+    },
+    {
+      "q": "What is the arterial supply of the stomach?",
+      "a": "The stomach is supplied by branches of the celiac trunk, chiefly the <strong>left and right gastric</strong>, <strong>left and right gastro-omental</strong>, and <strong>short gastric arteries</strong>.",
+      "svg": "artery"
+    },
+    {
+      "q": "What is the lymphatic drainage relevance of the stomach in surgery?",
+      "a": "Lymph from the stomach follows the arteries to nodes along the <strong>lesser curvature, greater curvature, splenic artery, and celiac nodes</strong>, which is important in gastric carcinoma spread.",
+      "svg": null
+    },
+    {
+      "q": "Why is the posterior relation of the stomach important surgically?",
+      "a": "Because ulcers or posterior gastric perforations may involve the <strong>lesser sac, pancreas, or nearby vessels</strong> in the stomach bed.",
+      "svg": null
+    }
+  ],
+
+"gross-anatomy-of-pancreas": [
+  {
+    "q": "What are the endocrine and exocrine functions of the pancreas?",
+    "a": "The pancreas has both endocrine and exocrine functions. The endocrine part secretes <strong>insulin, glucagon, somatostatin, and pancreatic polypeptide</strong>, while the exocrine part produces <strong>bicarbonate-rich digestive juice and enzymes such as proteases, amylase, lipase, and phospholipase</strong>.",
+    "svg": null
+  },
+  {
+    "q": "Name the parts of the pancreas.",
+    "a": "The pancreas is divided into <strong>head, neck, body, tail, and uncinate process</strong>.",
+    "svg": "partspancreas.html"
+  },
+  {
+    "q": "What is the anatomical relation of the head and uncinate process of the pancreas?",
+    "a": "The head of the pancreas lies within the <strong>C-shaped concavity of the duodenum</strong>, and the uncinate process is a hook-like projection that lies <strong>posterior to the superior mesenteric vessels</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What important vascular structure lies posterior to the neck of the pancreas?",
+    "a": "The <strong>portal vein is formed posterior to the neck of the pancreas</strong> by the union of the superior mesenteric vein and splenic vein.",
+    "svg": null
+  },
+  {
+    "q": "What is the course and significance of the splenic artery in relation to the pancreas?",
+    "a": "The splenic artery runs along the <strong>upper border of the pancreas</strong> and supplies the <strong>body, neck, and tail</strong>. It is often tortuous, possibly to accommodate movements of the spleen and stomach.",
+    "svg": null
+  },
+  {
+    "q": "What are the relations of the anterior and posterior surfaces of the pancreas?",
+    "a": "The anterior surface is related to the <strong>lesser sac and stomach</strong>, while the posterior surface is non-peritoneal and related to the <strong>aorta, superior mesenteric artery, splenic vein, left kidney, left suprarenal gland, and renal vessels</strong>.",
+    "svg": null
+  },
+  {
+    "q": "Describe the duct system of the pancreas.",
+    "a": "The <strong>main pancreatic duct (duct of Wirsung)</strong> joins the common bile duct and opens into the duodenum at the major papilla. The <strong>accessory duct (duct of Santorini)</strong> may open separately into the duodenum or drain into the main duct.",
+    "svg": "duct system of pancreas.svg"
+  },
+  {
+    "q": "What is the embryological origin of the pancreas?",
+    "a": "The pancreas develops from two buds: the <strong>dorsal pancreatic bud</strong> (forming head, neck, body, and tail) and the <strong>ventral pancreatic bud</strong> (forming the posterior head and uncinate process).",
+    "svg": null
+  },
+  {
+    "q": "What is the lymphatic drainage of the pancreas?",
+    "a": "Lymph from the pancreas drains into <strong>pancreaticosplenic, celiac, superior mesenteric, and pyloric lymph nodes</strong>.",
+    "svg": null
+  },
+  {
+    "q": "Why is carcinoma of the head of pancreas clinically important?",
+    "a": "Carcinoma of the head of pancreas may compress the <strong>common bile duct</strong>, leading to <strong>obstructive jaundice</strong>.",
+    "svg": null
+  }
+], 
+
+  "salient-features-of-structures-forming-inguinal-canal": [
+    {
+      "q": "What is the inguinal ligament?",
+      "a": "The inguinal ligament is the <strong>thickened rolled inferior border of the external oblique aponeurosis</strong>, extending from the <strong>ASIS to the pubic tubercle</strong> and forming the floor of the inguinal canal.",
+      "svg": null
+    },
+    {
+      "q": "What is the lacunar ligament?",
+      "a": "The lacunar ligament, or <strong>Gimbernat ligament</strong>, is the reflected pectineal expansion from the medial end of the inguinal ligament.",
+      "svg": null
+    },
+    {
+      "q": "What is the pectineal ligament?",
+      "a": "The pectineal ligament of <strong>Astley Cooper</strong> extends laterally along the pecten pubis and is an important surgical landmark in groin repairs.",
+      "svg": null
+    },
+    {
+      "q": "What is the superficial inguinal ring?",
+      "a": "It is a <strong>triangular opening</strong> in the aponeurosis of the external oblique, situated above the pubic crest.",
+      "svg": null
+    },
+    {
+      "q": "What is the deep inguinal ring?",
+      "a": "The deep inguinal ring is a <strong>V-shaped defect in the transversalis fascia</strong> situated <strong>lateral to the inferior epigastric artery</strong>.",
+      "svg": null
+    },
+    {
+      "q": "What is the falx inguinalis?",
+      "a": "The falx inguinalis, or <strong>conjoint tendon</strong>, is formed by the fused lower fibers of the <strong>internal oblique and transversus abdominis</strong> and reinforces the posterior wall of the inguinal canal medially.",
       "svg": null
     }
   ],

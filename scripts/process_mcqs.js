@@ -68,8 +68,15 @@ function parseMCQs(text) {
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"');
   
-  // Split by question separator (___) or question numbers
-  const questionBlocks = cleanText.split(/___+/).filter(b => b.trim());
+  // Prefer explicit numbered-question splitting when available.
+  // This prevents multiple Q1/Q2/... prompts inside one MCQ section
+  // from collapsing into a single large question block.
+  let questionBlocks = cleanText.match(/Q\d+\.[\s\S]*?(?=(?:\n\s*Q\d+\.)|$)/g);
+
+  // Fallback to authored separators when numbered blocks are absent.
+  if (!questionBlocks || questionBlocks.length === 0) {
+    questionBlocks = cleanText.split(/___+/).filter(b => b.trim());
+  }
   
   for (const block of questionBlocks) {
     const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
@@ -202,7 +209,7 @@ function parseMCQsFromHtml(html) {
 function generateMCQHTML(questions) {
   let html = `
 <div class="mcq-container">
-  <h2>📝 Test Your Knowledge</h2>
+  <h2>Test Your Knowledge</h2>
   <p>Click on your answer to see if you're correct!</p>
   `;
   
