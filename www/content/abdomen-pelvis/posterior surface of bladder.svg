@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 559.79 355.9">
+  <defs>
+    <linearGradient id="linear-gradient" x1="351" y1="213.35" x2="397" y2="253.85" gradientUnits="userSpaceOnUse">
+      <stop offset="0.01" stop-color="#f0f" stop-opacity="0.2"/>
+      <stop offset="0.13" stop-color="#ff24ff" stop-opacity="0.2"/>
+      <stop offset="0.31" stop-color="#ff86ff" stop-opacity="0.2"/>
+      <stop offset="0.48" stop-color="#fff" stop-opacity="0.2"/>
+      <stop offset="0.62" stop-color="#ffe5ff" stop-opacity="0.2"/>
+      <stop offset="0.78" stop-color="#f9f" stop-opacity="0.2"/>
+      <stop offset="0.96" stop-color="#ff1dff" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#f0f" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="276.73" y1="210.23" x2="225.53" y2="255.31" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" x1="188.53" y1="183.3" x2="187.67" y2="184.06" xlink:href="#linear-gradient"/>
+  </defs>
+  <title>posterior surface of bladder</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <path d="M182.5,149s75-38,135-34,166,29,131,84-111,122-136,113S133.5,206,182.5,149Z" transform="translate(-43.67 -56.44)" fill="none" stroke="#c69c6d" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M144.5,129s34,27,41,24-1,14-6,12-42-22-44-31" transform="translate(-43.67 -56.44)" fill="#ccc" stroke="#c69c6d" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M472.5,127s-37,28-41,25,3,15,8,11,37-21,42-30" transform="translate(-43.67 -56.44)" fill="#ccc" stroke="#c69c6d" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M369,285.91S402.5,304,382.5,330s-44,52-68,51-62-30-68-48-16-52,19-47" transform="translate(-43.67 -56.44)" fill="none" stroke="#c69c6d" stroke-miterlimit="10" stroke-width="2"/>
+    <path d="M321.5,353a49.14,49.14,0,0,0,19.12-2.48,21.13,21.13,0,0,0,7.08-3.7,26.88,26.88,0,0,0,4.21-5l14.95-21" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M323,368.89A90.86,90.86,0,0,0,377.26,325" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M250.69,310a145.72,145.72,0,0,0,21.47,18.43c7,4.94,15.14,9.4,23.7,8.64" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M252.1,324.06c5.57,5.57,12.44,9.63,19.23,13.62l6.68,3.93c6.73,4,14,8.07,21.83,7.4" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M250.83,337.62a49.18,49.18,0,0,0,7.58,6l12.14,8.34c4.75,3.26,9.55,6.55,15,8.53s11.57,2.52,16.86.26l-.86-1.07" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M284,364.83c1.91,1.79,4.45,2.74,6.91,3.64,5.66,2.08,11.46,4.18,17.49,4.32,1.06,0,2.35-.15,2.78-1.13" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M318.86,376.19q4.53-.64,9-1.46a13.21,13.21,0,0,0,4.74-1.52c2.12-1.33,3.39-3.75,5.58-5,1.29-.71,2.84-1,4-1.91" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M260.57,292.34l5.81,6.1a40.31,40.31,0,0,0,6.17,5.64c7.34,5,17.11,4.74,25.2,8.47" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M319.27,334.4c7.73,1.52,15.85,3,23.38.69s13.47-8.28,18.91-14.09c3.23-3.45,6.6-7.32,6.92-12" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M302.5,381v29c0-2,16,5,18,0s2-29,2-29" transform="translate(-43.67 -56.44)" fill="none" stroke="#8c6239" stroke-miterlimit="10"/>
+    <path d="M251.26,298.72c5.77,6,11.59,12.13,18.37,17s14.64,8.6,23,9.26" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M320.49,323c3.21.31,6.38-.77,9.42-1.83a96.28,96.28,0,0,0,9.91-3.88c8.61-4.12,15.78-10.69,22.67-17.3" transform="translate(-43.67 -56.44)" fill="none" stroke="#c7b299" stroke-miterlimit="10"/>
+  </g>
+  <g id="Layer_3" data-name="Layer 3">
+    <path d="M512,152.5l-42-7-10,7s42,13,52,11" transform="translate(-43.67 -56.44)" fill="#ffc" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M453,139.5s-38-6-56,3-19,13-21,14-16,4-19,12-12,13-15,24-18,10-17,27-7,18-5,36,3,28,0,35-4,15-3,18,3,0,3,0l5-18s7-29,9-39,14-10,13-12,6-10,5-16,10-7,13-12,5-15,8-18,11-1,16-10,11-17,17-20,9-15,18-18,19,1,19,1" transform="translate(-43.67 -56.44)" fill="#ffc" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M111,152.5s14,0,22-2,14-3,14-3l11,8s-39,13-45,10" transform="translate(-43.67 -56.44)" fill="#ffc" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M165,141.5s25-3,32-4,41,8,48,14,5,1,12,5,12,16,12,16,15,9,14,17,20,16,18,31,7,15,3,25,4,26,1,35,7,25,6,27-6.35.95-6.35.95S303,292.5,300,285.5s-8-21-11-29-9-20-7-31-14-2-19-23-13,5-21-18-16-2-25-12-4-13-18-18-24.28-4.73-24.28-4.73" transform="translate(-43.67 -56.44)" fill="#ffc" stroke="#c7b299" stroke-miterlimit="10"/>
+    <path d="M118,126.5s83.82,3.35,102,11c19,8,79.74,35,97,35,19,0,61.26-22.51,71-29,15-10,51-16.15,72-6.08" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+  </g>
+  <g id="Layer_4" data-name="Layer 4">
+    <g>
+      <path d="M323,308.5a17.92,17.92,0,0,0,.3,3.47l-.13,0a1.33,1.33,0,0,1-.27.77,1.81,1.81,0,0,1-2.19-1,4,4,0,0,1-.09-2.62,12.34,12.34,0,0,0,.53-2.61c0-1.42-.66-2.87-.24-4.23.12-.36.3-.69.43-1a7.24,7.24,0,0,0,.35-1.9c.12-1.35.25-2.7.38-4.06a18.55,18.55,0,0,1,.3-2.24,17.2,17.2,0,0,1,1.22-3.25c.54-1.19,1.08-2.38,1.61-3.57h0c.81-2.58,13.83-13.12,15.76-22.74,2-10,5-17,11-17s-3-4,0-10,3-12,9-12c.67,0,1.34,0,2,.07v-.07s0-18,13-15a65.11,65.11,0,0,0,7,1.29l0-.29c-1-5-5-14,3-15,3.68-.46,7.14-.92,10.1-1.57l-.1-.43c1-4,7-15,20-16,0,0,3-12,13-11s23,5,16,10-9,8-9,8,13,6,4,9c-6.43,2.14-12.34,6.32-15.93,5.62l-.07.38s7,10,0,15c-6.29,4.49-2.08,15.45-15,8.91l0,.09s-1,13-9,15c-6,1.5-5.81.75-8.32-1l-.69,1c0-.12,4.72,9.93-2,13-6.5,3-10.5,3.9-13.45,1.49A9.55,9.55,0,0,1,374,258.5c-3.95,5.92-12.77,13.79-18.77,8.22A5.66,5.66,0,0,1,354,268.5c-5,5-14,13-19,16S323,305.5,323,308.5Z" transform="translate(-43.67 -56.44)" fill="url(#linear-gradient)"/>
+      <g>
+        <path d="M325.2,286.5a.61.61,0,0,1,0-.26c.81-2.58,13.83-13.12,15.76-22.74,2-10,5-17,11-17s-3-4,0-10,3-12,9-12c.67,0,1.34,0,2,.07,5.3.33,10.33,1.71,13-.07" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M363,224.5s0-18,13-15a65.11,65.11,0,0,0,7,1.29c6.61.79,7.9-.95,11-3.29" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M383,210.5c-1-5-5-14,3-15,3.68-.46,7.14-.92,10.1-1.57,3.49-.77,6.28-1.81,7.9-3.43" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M396,193.5c1-4,7-15,20-16s13-6,13-6" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M416,177.5s3-12,13-11,23,5,16,10-9,8-9,8,13,6,4,9c-6.43,2.14-12.34,6.32-15.93,5.62-1.44-.27-2.5-1.33-3.07-3.62" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M424,199.5s7,10,0,15c-6.29,4.49-2.08,15.45-15,8.91-1.45-.74-3.12-1.69-5-2.91" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M409,223.5s-1,13-9,15c-6,1.5-5.81.75-8.32-1a20.4,20.4,0,0,0-3.68-2" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M391,238.5a.1.1,0,0,1,0,0c0-.12,4.72,9.93-2,13-6.5,3-10.5,3.9-13.45,1.49a6.23,6.23,0,0,1-.55-.49" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M373,244.5a18.48,18.48,0,0,1,2.55,8.49A9.55,9.55,0,0,1,374,258.5c-3.95,5.92-12.77,13.79-18.77,8.22l-.23-.22" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M351,256.5s6.27,5.49,4.23,10.22A5.66,5.66,0,0,1,354,268.5c-5,5-14,13-19,16s-12,21-12,24a17.92,17.92,0,0,0,.3,3.47,6.87,6.87,0,0,0,.24.9" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M325.2,286.23c-.53,1.19-1.07,2.38-1.61,3.57a17.2,17.2,0,0,0-1.22,3.25,18.55,18.55,0,0,0-.3,2.24c-.13,1.36-.26,2.71-.38,4.06a7.24,7.24,0,0,1-.35,1.9c-.13.35-.31.68-.43,1-.42,1.36.27,2.81.24,4.23a12.34,12.34,0,0,1-.53,2.61,4,4,0,0,0,.09,2.62,1.81,1.81,0,0,0,2.19,1,1.33,1.33,0,0,0,.27-.77" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+      </g>
+    </g>
+    <g>
+      <g>
+        <path d="M248.88,252a9.61,9.61,0,0,0,1.55,5.48c4,5.92,12.77,13.79,18.77,8.22a5.66,5.66,0,0,0,1.23,1.78c5,5,14,13,19,16s12,21,12,24,2.57,1,2.57,1l-.19-.37a12.34,12.34,0,0,1-.53-2.61c0-1.42.66-2.87.24-4.23-.12-.36-.3-.69-.43-1a7.24,7.24,0,0,1-.35-1.9c-.12-1.35-.25-2.7-.38-4.06a18.55,18.55,0,0,0-.3-2.24,17.2,17.2,0,0,0-1.22-3.25c-.54-1.19-1.08-2.38-1.61-3.57l0,0c-1-2.54-17.8-13.14-15.75-22.75,2.57-12-5-17-11-17s3.57-7,.57-13-3.57-9-9.57-9c-.7,0-1.4,0-2.09.07a8.73,8.73,0,0,1-.62-3.25c.08-1.42.82-2.72,1.19-4.1.6-2.3-.05-5.09-2.1-6.31a8.19,8.19,0,0,0-4.05-.85c-3.13-.1-6.61-.59-9.66-.05-1.54.28-3.08.6-4.64.8l0-.31c1-5,5-14-3-15-1.54-.19-3-.38-4.49-.6l.06-.4c-1-4-11-19-24-10,0,0-4.57-19-14.57-18s-21.43,10-14.43,15c3.86,2.76,5.72,3.39,6.62,3.4.5-.26.81-.4.81-.4s-.09.4-.81.4c-2.69,1.39-10.79,6.07-3.19,8.6,6.43,2.14,12.34,6.32,15.93,5.62l.07.38s-10.43,13-3.43,18c6.31,4.51,4.84,13.07,18.4,5.94l0,.06s-2.43,16,5.57,18c7.77,1.94,8.4-2.72,14.85-5.74-1.18,2.25-8.09,16.84-1.85,19.74C240.5,257.51,245.78,254.85,248.88,252Z" transform="translate(-43.67 -56.44)" fill="url(#linear-gradient-2)"/>
+        <path d="M187.62,183.9c.72,0,.81-.4.81-.4S188.12,183.64,187.62,183.9Z" transform="translate(-43.67 -56.44)" fill="url(#linear-gradient-3)"/>
+      </g>
+      <g>
+        <path d="M299.23,285.5a.49.49,0,0,0,0-.25c-1-2.54-17.8-13.14-15.75-22.75,2.57-12-5-17-11-17s3.57-7,.57-13-3.57-9-9.57-9c-.7,0-1.4,0-2.09.07-5.27.34-10.26,1.7-12.91-.07" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M261.36,223.64a.19.19,0,0,1,0-.07,8.73,8.73,0,0,1-.62-3.25c.08-1.42.82-2.72,1.19-4.1.6-2.3-.05-5.09-2.1-6.31a8.19,8.19,0,0,0-4.05-.85c-3.13-.1-6.61-.59-9.66-.05-1.54.28-3.08.6-4.64.8a20.34,20.34,0,0,1-3.4.17c-3.18-.13-5.18-1.64-7.63-3.48" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M241.43,209.5c1-5,5-14-3-15-1.54-.19-3-.38-4.49-.6-6.06-.86-11.09-2-13.51-4.4" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M234,193.5c-1-4-11-19-24-10-10.73,7.42-14.57-13-14.57-13" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M187.62,183.9c-2.69,1.39-10.79,6.07-3.19,8.6,6.43,2.14,12.34,6.32,15.93,5.62,1.44-.27,2.5-1.33,3.07-3.62" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M187.62,183.9c.72,0,.81-.4.81-.4S188.12,183.64,187.62,183.9Z" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M210,183.5s-4.57-19-14.57-18-21.43,10-14.43,15c3.86,2.76,5.72,3.39,6.62,3.4" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M200.43,198.5s-10.43,13-3.43,18c6.31,4.51,4.84,13.07,18.4,5.94,1.49-.78,3.15-1.75,5-2.94" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M215.43,222.5s-2.43,16,5.57,18c7.77,1.94,8.4-2.72,14.85-5.74l.58-.26" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M236,234.47s0,0,0,0a1.63,1.63,0,0,0-.16.28c-1.18,2.25-8.09,16.84-1.85,19.74,6.5,3,11.78.35,14.88-2.48l.55-.52" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M236,234.5a0,0,0,0,0,0,0" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M251.43,243.5a18.49,18.49,0,0,0-2.55,8.52,9.61,9.61,0,0,0,1.55,5.48c4,5.92,12.77,13.79,18.77,8.22l.23-.22" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M273.43,255.5s-6.27,5.49-4.23,10.22a5.66,5.66,0,0,0,1.23,1.78c5,5,14,13,19,16s12,21,12,24,2.57,1,2.57,1" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+        <path d="M299.23,285.23c.53,1.19,1.07,2.38,1.61,3.57a17.2,17.2,0,0,1,1.22,3.25,18.55,18.55,0,0,1,.3,2.24c.13,1.36.26,2.71.38,4.06a7.24,7.24,0,0,0,.35,1.9c.13.35.31.68.43,1,.42,1.36-.27,2.81-.24,4.23a12.34,12.34,0,0,0,.53,2.61" transform="translate(-43.67 -56.44)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+      </g>
+    </g>
+  </g>
+  <g id="Layer_5" data-name="Layer 5">
+    <line x1="423.33" y1="81.06" x2="458.83" y2="58.06" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+    <line x1="437.33" y1="98.06" x2="459.33" y2="116.06" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+    <line x1="312.33" y1="137.06" x2="409.33" y2="183.06" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+    <line x1="349.33" y1="175.06" x2="387.33" y2="228.06" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+    <line x1="281.33" y1="243.06" x2="144.33" y2="215.06" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"/>
+    <text transform="translate(468.83 57.78)" font-size="20" font-family="CenturyGothic, Century Gothic">Ureter</text>
+    <text transform="translate(433.83 133.78)" font-size="20" font-family="CenturyGothic, Century Gothic">Vas deferens</text>
+    <text transform="translate(364.83 253.78)" font-size="20" font-family="CenturyGothic, Century Gothic">Seminal vesicle</text>
+    <text transform="translate(54.83 210.78)" font-size="20" font-family="CenturyGothic, Century Gothic">Ejaculatory <tspan x="0" y="24">duct</tspan></text>
+    <text transform="translate(48.83 276.78)" font-size="20" font-family="CenturyGothic, Century Gothic">Prostate gland</text>
+    <text transform="translate(181.83 341.78)" font-size="20" font-family="CenturyGothic, Century Gothic">Urethra</text>
+    <text transform="translate(408.83 182.78)" font-size="20" font-family="CenturyGothic, Century Gothic">Ampulla of <tspan x="0" y="24">vas deferens</tspan></text>
+  </g>
+  <g id="Layer_6" data-name="Layer 6">
+    <text transform="translate(0 20.62)" font-size="24" fill="#00e943" font-family="CenturyGothic, Century Gothic">Relations of posterior surface of urinary bladder</text>
+  </g>
+</svg>

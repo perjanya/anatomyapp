@@ -93,6 +93,170 @@ var flashcardsData = {
     }
   ],
 
+"pudendal-nerve": [
+  {
+    "q": "What is the origin and root value of the pudendal nerve?",
+    "a": "The pudendal nerve arises from the <strong>sacral plexus</strong> with root values <strong>S2, S3, and S4</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the course of the pudendal nerve?",
+    "a": "It has three parts: <strong>intrapelvic</strong> (to greater sciatic foramen), <strong>gluteal</strong> (around ischial spine and sacrotuberous ligament), and <strong>perineal</strong> (in pudendal canal).",
+    "svg": null
+  },
+  {
+    "q": "What structures accompany the pudendal nerve near the ischial spine?",
+    "a": "Three structures (PIN): <strong>Pudendal nerve, Internal pudendal vessels, and Nerve to obturator internus</strong>.",
+    "svg": null
+  },
+  {
+    "q": "Where does the pudendal nerve enter the perineum?",
+    "a": "It enters through the <strong>pudendal canal (Alcock’s canal)</strong> in the lateral wall of the ischioanal fossa.",
+    "svg": null
+  },
+  {
+    "q": "What are the branches of the pudendal nerve?",
+    "a": "Branches include <strong>inferior rectal nerve</strong>, <strong>perineal nerve</strong>, and <strong>dorsal nerve of penis/clitoris</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the function of the inferior rectal nerve?",
+    "a": "It supplies the <strong>external anal sphincter (motor)</strong> and provides <strong>sensory innervation to lower anal canal and perianal skin</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What does the perineal nerve supply?",
+    "a": "It gives <strong>posterior scrotal/labial nerves</strong> and muscular branches to <strong>perineal muscles including sphincter urethrae</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the function of the dorsal nerve of penis/clitoris?",
+    "a": "It provides <strong>sensory innervation to the penis or clitoris</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is a pudendal nerve block?",
+    "a": "A <strong>saddle nerve block</strong> performed near the <strong>ischial spine</strong> for perineal anesthesia or chronic pelvic pain management.",
+    "svg": null
+  }
+], 
+
+"pelvic-diaphragm": [
+  {
+    "q": "What is the pelvic diaphragm?",
+    "a": "The pelvic diaphragm is a <strong>funnel-shaped fibromuscular floor of the true pelvis</strong> formed by <strong>levator ani and coccygeus muscles</strong>.",
+    "svg": "levator ani"
+  },
+  {
+    "q": "What are the components of the pelvic diaphragm?",
+    "a": "It consists of <strong>levator ani, coccygeus muscles, and superior and inferior fascia</strong> enclosing them.",
+    "svg": null
+  },
+  {
+    "q": "What are the openings in the pelvic diaphragm?",
+    "a": "Two openings: <strong>urogenital hiatus</strong> (for urethra ± vagina) and <strong>anorectal hiatus</strong> (for anorectum).",
+    "svg": null
+  },
+  {
+    "q": "What are the parts of levator ani?",
+    "a": "Levator ani includes <strong>pubococcygeus, puborectalis, and iliococcygeus</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the function of puborectalis muscle?",
+    "a": "It forms a <strong>U-shaped sling around the rectum</strong> and maintains the <strong>anorectal angle</strong>, essential for continence.",
+    "svg": null
+  },
+  {
+    "q": "What are the specializations of pubococcygeus?",
+    "a": "In males it forms <strong>levator prostate</strong>, and in females <strong>pubovaginalis</strong> which acts as a vaginal sphincter.",
+    "svg": null
+  },
+  {
+    "q": "What is the nerve supply of the pelvic diaphragm?",
+    "a": "Supplied by <strong>S4 ventral rami</strong> (pelvic surface) and <strong>perineal and inferior rectal nerves</strong> (perineal surface).",
+    "svg": null
+  },
+  {
+    "q": "What is the role of pelvic diaphragm during labour?",
+    "a": "It <strong>guides descent and rotation of the fetal head</strong> during the second stage of labour.",
+    "svg": null
+  },
+  {
+    "q": "What are the functions of the pelvic diaphragm?",
+    "a": "It <strong>supports pelvic viscera, aids continence, assists defecation, micturition, and childbirth</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is levator ani syndrome?",
+    "a": "A condition due to <strong>spasm of levator ani muscle</strong> causing <strong>rectal or perineal pain and tenesmus</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the Hiatus of Schwalbe?",
+    "a": "A gap between <strong>levator ani and obturator fascia</strong> through which <strong>ischiorectal hernias</strong> may occur.",
+    "svg": null
+  },
+  {
+    "q": "What are Kegel exercises and their importance?",
+    "a": "Voluntary contractions of perineal muscles that <strong>strengthen pelvic floor</strong>, helping in <strong>urinary incontinence, erectile dysfunction, and premature ejaculation</strong>.",
+    "svg": null
+  }
+],
+
+"pelvic-anatomy": [
+  {
+    "q": "What is the difference between true pelvis and false pelvis?",
+    "a": "The <strong>false pelvis</strong> lies above the <strong>linea terminalis</strong>, while the <strong>true pelvis</strong> lies below it and forms the pelvic cavity.",
+    "svg": null
+  },
+  {
+    "q": "What structures form the linea terminalis?",
+    "a": "The linea terminalis consists of <strong>pectineal line, arcuate line, pubic crest, sacral ala, and sacral promontory</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the boundaries of the pelvic inlet?",
+    "a": "Posterior: <strong>sacral promontory</strong>; Lateral: <strong>linea terminalis</strong>; Anterior: <strong>pubic symphysis and pubic rami</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the obstetrical conjugate?",
+    "a": "It is the <strong>shortest anteroposterior diameter of the pelvic inlet</strong> through which the fetal head must pass.",
+    "svg": null
+  },
+  {
+    "q": "How is the obstetrical conjugate calculated clinically?",
+    "a": "It is estimated from the <strong>diagonal conjugate</strong> by subtracting <strong>1.5–2 cm</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the narrowest part of the pelvis?",
+    "a": "The <strong>midpelvis at the level of the ischial spines</strong> is the narrowest part, measured by the <strong>interspinous diameter</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is engagement in obstetrics?",
+    "a": "Engagement is the <strong>descent of the biparietal diameter of the fetal head below the pelvic inlet</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the main pelvic joints?",
+    "a": "The pelvis includes the <strong>symphysis pubis</strong> and <strong>sacroiliac joints</strong>, which are loosened during pregnancy by <strong>relaxin</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the function of the sacrospinous ligament?",
+    "a": "It extends from the <strong>ischial spine to sacrum</strong> and is used in <strong>vaginal suspension surgeries</strong>.",
+    "svg": null
+  },
+  {
+    "q": "Which structures pass through the greater sciatic foramen?",
+    "a": "Structures include <strong>piriformis, sciatic nerve, superior gluteal vessels and nerve, nerve to obturator internus, and pudendal vessels</strong>.",
+    "svg": null
+  }
+],
+
 "portocaval-anastomoses": [
   {
     "q": "What is a portocaval anastomosis?",
@@ -173,6 +337,246 @@ var flashcardsData = {
       "svg": "artery"
     }
   ],
+
+"ischioanal-fossa": [
+  {
+    "q": "Where is the ischioanal fossa located and what is its shape?",
+    "a": "The ischioanal fossa lies <strong>lateral to the anal canal</strong> and is <strong>pyramidal (wedge-shaped)</strong> with apex above and base below.",
+    "svg": "ischioanal canal"
+  },
+  {
+    "q": "What are the boundaries of the ischioanal fossa?",
+    "a": "Anterior: <strong>urogenital diaphragm</strong>; Posterior: <strong>gluteus maximus and sacrotuberous ligament</strong>; Medial: <strong>levator ani and external anal sphincter</strong>; Lateral: <strong>obturator internus and fascia</strong>; Inferior: <strong>perineal skin</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the contents of the ischioanal fossa?",
+    "a": "It contains <strong>ischiorectal fat pad, inferior rectal vessels and nerve, perineal branch of S4, and branches of posterior cutaneous nerve of thigh</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the pudendal canal (Alcock’s canal)?",
+    "a": "A fascial canal in the lateral wall of the ischioanal fossa containing the <strong>pudendal nerve and internal pudendal vessels</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the clinical significance of ischioanal abscess?",
+    "a": "Infection of the ischioanal fossa leads to a <strong>horseshoe-shaped abscess</strong> due to spread across the midline.",
+    "svg": null
+  },
+  {
+    "q": "What is Goodsall’s rule?",
+    "a": "Anterior external openings lead to <strong>straight fistulous tracts</strong>, while posterior openings follow a <strong>curved tract to the posterior midline</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the Hiatus of Schwalbe?",
+    "a": "A gap between <strong>levator ani and obturator fascia</strong> through which pelvic organs may herniate, causing <strong>ischiorectal hernia</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the function of the ischioanal fat pad?",
+    "a": "It allows <strong>expansion of the anal canal during defecation</strong> and acts as a <strong>cushion</strong>.",
+    "svg": null
+  }
+],
+
+"anorectum": [
+  {
+    "q": "Where is the anorectal junction located anatomically?",
+    "a": "The anorectal junction lies at the level of the <strong>S3 vertebra</strong> and opposite the <strong>left sacroiliac joint</strong>.",
+    "svg": "anorectum"
+  },
+  {
+    "q": "What is the difference between anatomical and surgical anal canal?",
+    "a": "The anatomical anal canal lies <strong>distal to the pectinate line</strong>, whereas the surgical anal canal includes the <strong>anatomical canal plus 2 cm of distal rectum above it</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the curvatures of the rectum?",
+    "a": "The rectum has <strong>sacral curvature (concave anteriorly)</strong> and <strong>perineal curvature (convex anteriorly due to puborectalis)</strong>, along with lateral curvatures.",
+    "svg": null
+  },
+  {
+    "q": "How is the rectum related to peritoneum?",
+    "a": "Upper third is <strong>covered on three sides</strong>, middle third <strong>anteriorly covered</strong>, and lower third has <strong>no peritoneal covering</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the key internal features of the anal canal?",
+    "a": "The anal canal contains <strong>anal columns of Morgagni, anal valves, anal sinuses (crypts), anal ducts, and anal papillae</strong>.",
+    "svg": "analinterior"
+  },
+  {
+    "q": "What is the pectinate (dentate) line?",
+    "a": "It is the line formed by the <strong>anal valves</strong>, marking the junction between <strong>endodermal and ectodermal regions</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the differences above and below the pectinate line?",
+    "a": "Above: <strong>columnar epithelium, autonomic innervation, portal venous drainage</strong>. Below: <strong>stratified squamous epithelium, somatic innervation, systemic venous drainage</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is Hilton’s line?",
+    "a": "Hilton’s line is the <strong>mucocutaneous junction</strong> between stratified squamous and columnar epithelium.",
+    "svg": null
+  },
+  {
+    "q": "Why is the pectinate line clinically important?",
+    "a": "It determines differences in <strong>blood supply, nerve supply, lymphatic drainage, and type of carcinoma</strong> (adenocarcinoma above, squamous cell carcinoma below).",
+    "svg": null
+  },
+  {
+    "q": "What is the clinical difference between internal and external hemorrhoids?",
+    "a": "Internal hemorrhoids occur <strong>above the pectinate line</strong> (visceral, less painful), while external hemorrhoids occur <strong>below it</strong> (somatic, painful).",
+    "svg": null
+  }
+],
+
+"urinary-bladder": [
+  {
+    "q": "Where is the urinary bladder located?",
+    "a": "The urinary bladder lies in the <strong>anterior part of the lesser pelvis</strong>, behind the <strong>pubic symphysis</strong>, in front of the <strong>rectum in males</strong> and <strong>uterus in females</strong>.",
+    "svg": "urinary bladder"
+  },
+  {
+    "q": "How does bladder position change with distension?",
+    "a": "An empty bladder is <strong>completely pelvic</strong>, but when distended it expands into the <strong>infraumbilical abdominal region</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the main external features of the urinary bladder?",
+    "a": "The bladder has <strong>one superior surface, two inferolateral surfaces, and one posterior (base) surface</strong>, along with <strong>apex, neck, and lateral angles</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the boundaries of the trigone of the bladder?",
+    "a": "The trigone is bounded by the <strong>interureteric ridge superiorly</strong> and <strong>ureterourethral ridges on either side</strong>.",
+    "svg": "interior of bladder trigone of bladder"
+  },
+  {
+    "q": "What is unique about the trigone mucosa?",
+    "a": "The trigone has <strong>smooth mucosa firmly adherent to the muscular layer</strong> and lacks a <strong>submucosa</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the embryological origin of the trigone of the bladder?",
+    "a": "The trigone develops from the <strong>mesonephric ducts (mesoderm)</strong>, whereas the rest of the bladder is derived from the <strong>urogenital sinus (endoderm)</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the arterial supply of the urinary bladder?",
+    "a": "The bladder is supplied mainly by the <strong>superior and inferior vesical arteries</strong>, with contributions from <strong>obturator, inferior gluteal, uterine, and vaginal arteries</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the parasympathetic and sympathetic innervation of the bladder?",
+    "a": "Parasympathetic supply arises from <strong>S2–S4 (pelvic splanchnic nerves)</strong> and stimulates detrusor contraction, while sympathetic supply from <strong>T11–L2</strong> promotes storage.",
+    "svg": null
+  },
+  {
+    "q": "How is vesicoureteral reflux prevented?",
+    "a": "Reflux is prevented by the <strong>oblique intramural course of the ureters</strong> and their blending with the <strong>detrusor muscle</strong>, forming a valve-like mechanism.",
+    "svg": null
+  },
+  {
+    "q": "What happens in vesicoureteral reflux?",
+    "a": "Reflux of urine into ureters can lead to <strong>hydroureter, hydronephrosis, and megaloureter</strong>.",
+    "svg": null
+  }
+],
+
+"suprarenal-glands-gross-anatomy": [
+  {
+    "q": "What are the synonyms and location of suprarenal glands?",
+    "a": "Suprarenal glands are also called <strong>adrenal glands</strong> and are located <strong>anterosuperior to the upper pole of the kidneys in the epigastrium</strong>.",
+    "svg": "suprarenal glands"
+  },
+  {
+    "q": "What are the shapes of right and left suprarenal glands?",
+    "a": "The <strong>right suprarenal gland is wedge-shaped</strong>, while the <strong>left suprarenal gland is semilunar</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the functions of adrenal cortex layers?",
+    "a": "The cortex has three layers: <strong>zona glomerulosa (mineralocorticoids - aldosterone)</strong>, <strong>zona fasciculata (cortisol)</strong>, and <strong>zona reticularis (sex steroids)</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the function of the adrenal medulla?",
+    "a": "The adrenal medulla acts like a <strong>sympathetic ganglion</strong> and secretes <strong>adrenaline and noradrenaline</strong>.",
+    "svg": null
+  },
+  {
+    "q": "Describe the arterial supply of suprarenal glands.",
+    "a": "They receive blood from three sources: <strong>superior suprarenal artery (inferior phrenic artery)</strong>, <strong>middle suprarenal artery (aorta)</strong>, and <strong>inferior suprarenal artery (renal artery)</strong>.",
+    "svg": null
+  },
+  {
+    "q": "How does venous drainage differ between right and left suprarenal glands?",
+    "a": "The <strong>right suprarenal vein drains directly into the inferior vena cava</strong>, while the <strong>left suprarenal vein drains into the left renal vein</strong>.",
+    "svg": null
+  },
+  {
+    "q": "Why is the right suprarenal vein clinically important?",
+    "a": "It is <strong>short and drains directly into the inferior vena cava</strong>, making it <strong>difficult to ligate during surgery</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the covering of the suprarenal gland?",
+    "a": "It is covered by <strong>perirenal fat (loose areolar tissue)</strong> and enclosed within the <strong>renal fascia</strong>, separated from the kidney by a septum.",
+    "svg": null
+  },
+  {
+    "q": "Why is the adrenal vein ligated first in pheochromocytoma surgery?",
+    "a": "To prevent <strong>systemic release of catecholamines</strong> from the tumor into circulation.",
+    "svg": null
+  },
+  {
+    "q": "What are common complications during adrenalectomy?",
+    "a": "Left side: <strong>injury to spleen, pancreas, inferior mesenteric vein</strong>. Right side: <strong>injury to liver, duodenum, inferior vena cava</strong>.",
+    "svg": null
+  }
+],
+
+"coverings-of-kidney": [
+  {
+    "q": "What are the three main coverings of the kidney?",
+    "a": "The kidney is surrounded by three layers: <strong>fibrous capsule, perinephric (perirenal) fat, and renal fascia</strong>.",
+    "svg": "coverings of kidney"
+  },
+  {
+    "q": "What is the fibrous capsule of the kidney?",
+    "a": "The fibrous capsule is a <strong>thin condensation of fibrous tissue</strong> that closely invests the kidney and is also called the <strong>true capsule</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is perinephric (perirenal) fat?",
+    "a": "Perinephric fat is an <strong>accumulation of extraperitoneal fat</strong> that lies <strong>immediately outside the fibrous capsule</strong> and completely surrounds the kidney.",
+    "svg": null
+  },
+  {
+    "q": "What is the renal fascia and what are its layers?",
+    "a": "Renal fascia (Gerota’s fascia) is a <strong>membranous condensation of extraperitoneal fascia</strong> with an <strong>anterior layer (fascia of Toldt)</strong> and a <strong>posterior layer (fascia of Zuckerkandl)</strong>.",
+    "svg": null
+  },
+  {
+    "q": "Which additional structure is enclosed within the renal fascia?",
+    "a": "The <strong>suprarenal (adrenal) gland</strong> is also enclosed within the renal fascial compartment.",
+    "svg": null
+  },
+  {
+    "q": "What is the surgical importance of the renal fascia?",
+    "a": "The <strong>renal fascia must be incised during surgical approaches to the kidney</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the role of pararenal fat?",
+    "a": "Pararenal fat fills the <strong>paravertebral gutter</strong> and acts as a <strong>posterior cushion for the kidneys</strong>.",
+    "svg": null
+  }
+],
 
   "surgical-anatomy-of-stomach": [
     {
