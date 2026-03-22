@@ -247,6 +247,189 @@ var flashcardsData = {
   }
 ],
 
+"testis": [
+  {
+    "q": "Where is the testis located and what is its anatomical peculiarity?",
+    "a": "The testis is located in the <strong>scrotum</strong>, with the <strong>left testis usually lying lower than the right</strong>. :contentReference[oaicite:0]{index=0}",
+    "svg": null
+  },
+  {
+    "q": "What are the coverings of the testis?",
+    "a": "The coverings include <strong>tunica vaginalis, tunica albuginea, and tunica vasculosa</strong>. :contentReference[oaicite:1]{index=1}",
+    "svg": null
+  },
+  {
+    "q": "What is the structure of tunica vaginalis?",
+    "a": "It has <strong>visceral and parietal layers</strong> with a cavity called <strong>cavum vaginale</strong> between them. :contentReference[oaicite:2]{index=2}",
+    "svg": null
+  },
+  {
+    "q": "What is the function of seminiferous tubules?",
+    "a": "They are the site of <strong>spermatogenesis</strong> and contain <strong>Sertoli cells and spermatogenic cells</strong>. :contentReference[oaicite:3]{index=3}",
+    "svg": null
+  },
+  {
+    "q": "What are the functions of Sertoli and Leydig cells?",
+    "a": "Sertoli cells support spermatogenesis and secrete <strong>inhibin and androgen-binding protein</strong>, while Leydig cells secrete <strong>testosterone</strong>. :contentReference[oaicite:4]{index=4}",
+    "svg": null
+  },
+  {
+    "q": "Describe the arterial supply of the testis.",
+    "a": "The testis is supplied by the <strong>testicular artery from the abdominal aorta</strong>, with additional supply from <strong>cremasteric and deferential arteries</strong>. :contentReference[oaicite:5]{index=5}",
+    "svg": null
+  },
+  {
+    "q": "What is the venous drainage of the testis?",
+    "a": "The pampiniform plexus drains into the <strong>right testicular vein → IVC</strong> and <strong>left testicular vein → left renal vein</strong>. :contentReference[oaicite:6]{index=6}",
+    "svg": null
+  },
+  {
+    "q": "What is the lymphatic drainage of the testis?",
+    "a": "Lymph drains to the <strong>lateral and preaortic lymph nodes</strong> via the spermatic cord. :contentReference[oaicite:7]{index=7}",
+    "svg": null
+  },
+  {
+    "q": "Why is varicocele more common on the left side?",
+    "a": "Due to <strong>left testicular vein draining into left renal vein at right angle</strong>, compression by sigmoid colon, and lower position of left testis. :contentReference[oaicite:8]{index=8}",
+    "svg": null
+  },
+  {
+    "q": "What is testicular torsion?",
+    "a": "Twisting of the spermatic cord causing <strong>ischemia of testis</strong>, presenting with severe pain and requiring <strong>emergency surgery</strong>. :contentReference[oaicite:9]{index=9}",
+    "svg": null
+  }
+],
+
+"ovary": [
+  {
+    "q": "What is the function of the ovary?",
+    "a": "The ovary produces <strong>oocytes (eggs)</strong> and secretes hormones such as <strong>estrogen and progesterone</strong>. :contentReference[oaicite:0]{index=0}",
+    "svg": null
+  },
+  {
+    "q": "Where is the ovary located?",
+    "a": "Ovaries lie on either side of the uterus in the <strong>pelvic cavity</strong>, attached by ligaments to the uterus and pelvic wall. :contentReference[oaicite:1]{index=1}",
+    "svg": null
+  },
+  {
+    "q": "What are the main ligaments of the ovary?",
+    "a": "The ovary is attached by <strong>ovarian ligament</strong> (to uterus), <strong>suspensory ligament</strong> (to pelvic wall carrying vessels), and part of the <strong>broad ligament</strong>. :contentReference[oaicite:2]{index=2}",
+    "svg": null
+  },
+  {
+    "q": "What are the structural parts of ovary?",
+    "a": "The ovary has an outer <strong>cortex</strong> containing follicles and an inner <strong>medulla</strong> with vessels and nerves. :contentReference[oaicite:3]{index=3}",
+    "svg": null
+  }
+],
+
+"uterine-tube": [
+  {
+    "q": "What is the function of the uterine (fallopian) tube?",
+    "a": "It transports the <strong>oocyte from ovary to uterus</strong> and is the usual <strong>site of fertilization</strong>. :contentReference[oaicite:4]{index=4}",
+    "svg": null
+  },
+  {
+    "q": "What are the parts of the uterine tube?",
+    "a": "The uterine tube consists of <strong>infundibulum (with fimbriae), ampulla, isthmus, and intramural part</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the role of fimbriae?",
+    "a": "Fimbriae are finger-like projections that <strong>capture the ovulated oocyte</strong> and guide it into the tube. :contentReference[oaicite:5]{index=5}",
+    "svg": null
+  },
+  {
+    "q": "Where does fertilization usually occur?",
+    "a": "Fertilization most commonly occurs in the <strong>ampulla of the uterine tube</strong>.",
+    "svg": null
+  }
+],
+
+"uterus": [
+  {
+    "q": "What is the function of the uterus?",
+    "a": "The uterus provides a site for <strong>implantation, growth, and development of the fetus</strong>. :contentReference[oaicite:6]{index=6}",
+    "svg": null
+  },
+  {
+    "q": "What are the parts of the uterus?",
+    "a": "The uterus has <strong>fundus, body, and cervix</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the normal position of the uterus?",
+    "a": "The uterus is normally <strong>anteverted and anteflexed</strong>, lying above the bladder and in front of the rectum. ",
+    "svg": null
+  },
+  {
+    "q": "What are the layers of the uterus?",
+    "a": "The uterus has three layers: <strong>perimetrium, myometrium, and endometrium</strong>.",
+    "svg": null
+  }
+],
+
+"supports-of-uterus": [
+   {
+    "q": "What is the role of uterosacral and cardinal ligaments?",
+    "a": "They provide <strong>primary apical support</strong> by suspending the cervix and upper vagina to the pelvic walls and sacrum.",
+    "svg": null
+  },
+  {
+    "q": "What is the role of the perineal body in uterine support?",
+    "a": "The perineal body acts as a <strong>central fibromuscular anchor</strong> maintaining the integrity of the pelvic floor.",
+    "svg": null
+  },
+  {
+    "q": "What is DeLancey’s concept of pelvic floor support?",
+    "a": "DeLancey described <strong>three levels of pelvic support</strong> based on the <strong>endopelvic fascia and ligamentous attachments</strong> that maintain pelvic organ position.",
+    "svg": null
+  },
+  {
+    "q": "What is Level I support in DeLancey classification?",
+    "a": "Level I (apical support) is formed by <strong>uterosacral and cardinal ligaments</strong>, which suspend the <strong>uterus and upper vagina</strong>. :contentReference[oaicite:1]{index=1}",
+    "svg": null
+  },
+  {
+    "q": "What is Level II support in DeLancey classification?",
+    "a": "Level II (mid-vaginal support) is provided by <strong>pubocervical and rectovaginal fascia</strong>, attaching the vagina to the <strong>pelvic sidewall (arcus tendineus fascia pelvis)</strong>. :contentReference[oaicite:2]{index=2}",
+    "svg": null
+  },
+  {
+    "q": "What is Level III support in DeLancey classification?",
+    "a": "Level III (distal support) is provided by <strong>perineal body, perineal membrane, and levator ani muscles</strong>, supporting the <strong>lower vagina and urethra</strong>. :contentReference[oaicite:3]{index=3}",
+    "svg": null
+  },
+  {
+    "q": "What is the clinical significance of DeLancey’s levels?",
+    "a": "Defects at different levels lead to specific prolapses: <strong>Level I → uterine/vault prolapse, Level II → cystocele/rectocele, Level III → urethral/perineal defects</strong>. :contentReference[oaicite:4]{index=4}",
+    "svg": null
+  }
+],
+
+"vagina": [
+  {
+    "q": "What is the vagina?",
+    "a": "The vagina is a <strong>muscular canal</strong> extending from the cervix to the exterior, serving as the <strong>birth canal</strong>. :contentReference[oaicite:13]{index=13}",
+    "svg": null
+  },
+  {
+    "q": "What are the functions of the vagina?",
+    "a": "It functions in <strong>sexual intercourse, passage of menstrual flow, and childbirth</strong>. :contentReference[oaicite:14]{index=14}",
+    "svg": null
+  },
+  {
+    "q": "What are the structural features of the vagina?",
+    "a": "It has <strong>mucosal folds (rugae)</strong>, smooth muscle layer, and fibrous outer layer allowing expansion. :contentReference[oaicite:15]{index=15}",
+    "svg": null
+  },
+  {
+    "q": "What is the fornix of vagina?",
+    "a": "The fornix is the <strong>upper part of vagina surrounding the cervix</strong>.",
+    "svg": null
+  }
+],
+
 "pelvic-diaphragm": [
   {
     "q": "What is the pelvic diaphragm?",
