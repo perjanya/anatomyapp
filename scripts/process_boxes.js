@@ -60,9 +60,8 @@ function processBoxes(html) {
     let filename = content.trim();
     if (!filename) return match;
 
-    if (!filename.toLowerCase().endsWith('.html')) {
-      filename = filename + '.html';
-    }
+    // Normalize filename: lowercase, ensure .html extension
+    filename = filename.replace(/\.html$/i, '').toLowerCase() + '.html';
 
     return `<div class="html-container">
   <iframe src="${filename}" class="responsive-html" loading="lazy"></iframe>
@@ -86,13 +85,8 @@ function processBoxes(html) {
     const animationPart = rest.join('|'); // Rejoin in case animation string contains pipes
     
     if (filename) {
-      // Fix: Remove duplicate .svg extensions (e.g., "file.svg.svg" -> "file.svg")
-      // Handle both plain and URL-encoded versions
-      filename = filename.replace(/\.svg\.svg$/i, '.svg');
-      // Fix: Handle accidental ".html.svg" suffixes from source names
-      filename = filename.replace(/\.html\.svg$/i, '.svg');
-      filename = filename.replace(/\.svg%20\.svg$/i, '.svg');
-      filename = filename.replace(/\.svg\.svg(%20|%\.)/i, '.svg$1');
+      // Normalize filename: lowercase, ensure .svg extension
+      filename = filename.replace(/\.svg$/i, '').toLowerCase() + '.svg';
       
       // Extract animation directive if present
       let dataAttr = '';
@@ -166,6 +160,8 @@ function processBoxes(html) {
   });
   
   // Then handle unwrapped img tags (wrap in svg-container and add extension)
+  // Note: This is now disabled since SVG replacement already wraps
+  /*
   const imgSvgPattern = /<img\s+src="([^"]+)"\s+alt="SVG Diagram"\s+class="responsive-svg"\s*\/>/gi;
   processed = processed.replace(imgSvgPattern, (match, src) => {
     let filename = src.trim();
@@ -199,6 +195,7 @@ function processBoxes(html) {
   <img src="${filename}" alt="SVG Diagram" class="responsive-svg" />
 </div>`;
   });
+  */
   
   // Process each box type
   for (const { marker, class: className } of boxPatterns) {

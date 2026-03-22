@@ -141,6 +141,112 @@ var flashcardsData = {
   }
 ], 
 
+"internal-iliac-artery": [
+  {
+    "q": "What is the origin and area of supply of the internal iliac artery?",
+    "a": "The internal iliac artery arises from the <strong>common iliac artery at L5</strong> and supplies the <strong>pelvic organs, gluteal region, perineum, and medial thigh</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the divisions of the internal iliac artery?",
+    "a": "It divides into <strong>anterior and posterior divisions</strong> near the greater sciatic notch.",
+    "svg": null
+  },
+  {
+    "q": "What are the branches of the posterior division?",
+    "a": "Branches include <strong>iliolumbar artery, superior gluteal artery, and lateral sacral arteries</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the branches of the anterior division?",
+    "a": "Visceral: <strong>umbilical, uterine, inferior vesical</strong>; Parietal: <strong>obturator, internal pudendal, inferior gluteal</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the course and significance of the uterine artery?",
+    "a": "It passes medially to the uterus and crosses the <strong>ureter (water under the bridge)</strong> near the cervix, and anastomoses with the <strong>ovarian artery</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the clinical importance of the obturator artery?",
+    "a": "An <strong>accessory obturator artery</strong> may form a dangerous anastomosis called the <strong>circle of death</strong> near the femoral ring, risking severe bleeding.",
+    "svg": null
+  },
+  {
+    "q": "Describe the course of the internal pudendal artery.",
+    "a": "It exits the pelvis via the <strong>greater sciatic foramen</strong>, crosses the <strong>sacrospinous ligament</strong>, enters the <strong>lesser sciatic foramen</strong>, and runs in <strong>Alcock’s canal</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the relationship of the superior gluteal artery?",
+    "a": "It passes between the <strong>lumbosacral trunk and S1 nerve</strong> and supplies <strong>gluteus medius, minimus, and upper gluteus maximus</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the significance of the umbilical artery in adults?",
+    "a": "Its proximal part remains patent and gives the <strong>superior vesical artery</strong>, while the distal part becomes fibrous.",
+    "svg": null
+  },
+  {
+    "q": "What is the function of the inferior gluteal artery?",
+    "a": "It supplies the <strong>lower part of gluteus maximus</strong> and exits through the greater sciatic foramen.",
+    "svg": null
+  }
+],
+
+"sacral-plexus": [
+  {
+    "q": "What is the root value of the sacral plexus?",
+    "a": "The sacral plexus is formed from <strong>L4 to S4</strong>, including the <strong>lumbosacral trunk</strong> and anterior divisions of sacral nerves.",
+    "svg": null
+  },
+  {
+    "q": "What is the area of distribution of the sacral plexus?",
+    "a": "It supplies the <strong>posterior thigh, most of the leg and foot, and part of the pelvis</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the main components forming the sacral plexus?",
+    "a": "It is formed by the <strong>lumbosacral trunk, anterior division of S1, and parts of S2 and S3</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the important relations of the sacral plexus?",
+    "a": "Posterior: <strong>piriformis muscle</strong>; Anterior: <strong>internal iliac vessels, ureter, sigmoid colon</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the course relation of the superior and inferior gluteal arteries?",
+    "a": "Superior gluteal artery passes between <strong>lumbosacral trunk and S1</strong>, while inferior gluteal artery passes between <strong>S2 and S3</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the major nerves arising from the sacral plexus?",
+    "a": "Includes <strong>superior gluteal, inferior gluteal, posterior cutaneous nerve of thigh, pudendal nerve, and sciatic nerve</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What are the direct muscular branches of the sacral plexus?",
+    "a": "They include <strong>nerve to piriformis, nerve to obturator internus, and nerve to quadratus femoris</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the function of the superior gluteal nerve?",
+    "a": "It supplies <strong>gluteus medius, gluteus minimus, and tensor fascia lata</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the function of the inferior gluteal nerve?",
+    "a": "It supplies the <strong>gluteus maximus</strong>.",
+    "svg": null
+  },
+  {
+    "q": "What is the clinical importance of sacral plexus injury?",
+    "a": "Most commonly occurs in <strong>road traffic accidents</strong>, leading to deficits depending on the nerve involved.",
+    "svg": null
+  }
+],
+
 "pelvic-diaphragm": [
   {
     "q": "What is the pelvic diaphragm?",

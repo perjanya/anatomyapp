@@ -45,6 +45,10 @@
       "url": "content/abdomen-pelvis/Gross anatomy of kidney.html"
     },
     {
+      "title": "Surfaces",
+      "url": "content/abdomen-pelvis/Gross anatomy of pancreas.html"
+    },
+    {
       "title": "Inguinal canal",
       "url": "content/abdomen-pelvis/Inguinal canal.html"
     },
@@ -129,8 +133,24 @@
       "url": "content/abdomen-pelvis/Rectus sheath.html"
     },
     {
+      "title": "Relations of kidney",
+      "url": "content/abdomen-pelvis/Relations of kidney.html"
+    },
+    {
       "title": "Sacral plexus",
       "url": "content/abdomen-pelvis/Sacral plexus.html"
+    },
+    {
+      "title": "Sagittal section of female pelvis",
+      "url": "content/abdomen-pelvis/Sagittal section of female pelvis.html"
+    },
+    {
+      "title": "Sagittal section of male pelvis",
+      "url": "content/abdomen-pelvis/Sagittal section of male pelvis.html"
+    },
+    {
+      "title": "Salient features of structures forming inguinal canal",
+      "url": "content/abdomen-pelvis/Salient features of structures forming inguinal canal.html"
     },
     {
       "title": "Scrotum",
@@ -213,6 +233,10 @@
     {
       "title": "Development of GIT",
       "url": "content/embryology/Development of GIT.html"
+    },
+    {
+      "title": "Embryology TOC",
+      "url": "content/embryology/Embryology TOC.html"
     },
     {
       "title": "Fertilization",
