@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const mammoth = require('mammoth');
 const marked = require('marked');
+const { bookFile, generateGeneralAnatomy } = require('./generate_general_anatomy');
 
 // Configuration - Process all regions
 const contentDir = path.join(__dirname, '..', 'www', 'content');
@@ -27,6 +28,10 @@ async function processRegion(regionName) {
   const items = [];
 
   for (const file of files){
+    if (regionName === 'general-anatomy' && file === bookFile) {
+      items.push(...await generateGeneralAnatomy(sourceDir));
+      continue;
+    }
     const ext = path.extname(file).toLowerCase();
     const basename = path.basename(file, ext);
     const full = path.join(sourceDir, file);

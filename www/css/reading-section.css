@@ -1,0 +1,78 @@
+body.reading-section {
+  background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+  min-height: 100vh;
+  padding: clamp(0.75rem, 3vw, 2.5rem);
+}
+
+.reading-panel {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  background: #fff;
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 36px #1e293b1a;
+  overflow-wrap: anywhere;
+}
+
+.reading-panel h1 {
+  cursor: auto;
+  user-select: text;
+  padding-inline: 0;
+}
+
+.reading-panel h1::after {
+  content: none;
+}
+
+.reading-panel h1:hover {
+  background: none;
+}
+
+.reading-panel nav a,
+.reading-panel .reading-index a {
+  color: #3730a3;
+  font-weight: 600;
+}
+
+.reading-index {
+  display: grid;
+  gap: 0.65rem;
+  padding-left: 2rem;
+}
+
+.reading-index a {
+  display: block;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #e0e7ff;
+  border-radius: 0.75rem;
+  background: #f5f7ff;
+}
+
+.reading-panel a:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 3px;
+}
+
+.reading-panel img {
+  max-width: 100%;
+  height: auto;
+}
+
+.reading-table {
+  overflow-x: auto;
+}
+
+.reading-table table th {
+  background: #3730a3;
+  color: #fff;
+}
+
+.reading-neighbors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e7ff;
+}

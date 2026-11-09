@@ -460,5 +460,63 @@
       "title": "Ulnar nerve",
       "url": "content/upper-limb/Ulnar nerve.html"
     }
+  ],
+  "general-anatomy": [
+    {
+      "title": "About this book",
+      "url": "content/general-anatomy/about-the-book.html"
+    },
+    {
+      "title": "Anatomical Terminology",
+      "url": "content/general-anatomy/anatomical-terminology.html"
+    },
+    {
+      "title": "Basic Tissues",
+      "url": "content/general-anatomy/basic-tissues.html"
+    },
+    {
+      "title": "Skeletal system",
+      "url": "content/general-anatomy/skeletal-system.html"
+    },
+    {
+      "title": "Cartilage",
+      "url": "content/general-anatomy/cartilage.html"
+    },
+    {
+      "title": "Fascia and modifications of deep fascia",
+      "url": "content/general-anatomy/fascia-and-modifications-of-deep-fascia.html"
+    },
+    {
+      "title": "General Considerations of skin",
+      "url": "content/general-anatomy/general-considerations-of-skin.html"
+    },
+    {
+      "title": "Joints",
+      "url": "content/general-anatomy/joints.html"
+    },
+    {
+      "title": "Vascular system",
+      "url": "content/general-anatomy/vascular-system.html"
+    },
+    {
+      "title": "Muscles",
+      "url": "content/general-anatomy/muscles.html"
+    },
+    {
+      "title": "Nervous system",
+      "url": "content/general-anatomy/nervous-system.html"
+    },
+    {
+      "title": "Lymphatic System",
+      "url": "content/general-anatomy/lymphatic-system.html"
+    },
+    {
+      "title": "Review questions",
+      "url": "content/general-anatomy/review-questions.html"
+    },
+    {
+      "title": "Glossary",
+      "url": "content/general-anatomy/glossary.html"
+    }
   ]
 }

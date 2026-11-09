@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brachial Plexus — Progressive Learning Activity</title>
+  <style>
+    :root {
+      --navy: #17345b;
+      --blue: #2868a9;
+      --teal: #07858f;
+      --violet: #6d55b5;
+      --amber: #d98912;
+      --green: #21835a;
+      --rose: #cb4b68;
+      --ink: #182433;
+      --muted: #5d6a78;
+      --canvas: #f3f8fa;
+      --panel: #ffffff;
+      --line: #d5e2e8;
+      --focus: #ffbf47;
+      color-scheme: light;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background: linear-gradient(145deg, #e8f4f6 0%, #eef0fa 55%, #fff4e5 100%);
+      font-family: Inter, Aptos, "Segoe UI", Arial, sans-serif;
+    }
+
+    button, input { font: inherit; }
+
+    .app-shell {
+      width: min(1440px, 100%);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: clamp(16px, 2.5vw, 34px);
+    }
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow {
+      margin: 0 0 6px;
+      color: var(--teal);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(1.65rem, 3vw, 2.75rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .score-chip {
+      flex: 0 0 auto;
+      min-width: 116px;
+      padding: 11px 14px;
+      border: 1px solid #bcd9dd;
+      border-radius: 14px;
+      color: var(--navy);
+      background: rgba(255,255,255,.78);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.65fr) minmax(300px, .75fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .viewer-card, .learning-card {
+      border: 1px solid rgba(23,52,91,.12);
+      border-radius: 22px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 18px 55px rgba(23,52,91,.10);
+    }
+
+    .viewer-card { padding: clamp(12px, 2vw, 22px); }
+
+    .stage-nav {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(105px, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .stage-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 44px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--navy);
+      background: #f8fbfc;
+      font-weight: 750;
+      cursor: pointer;
+      transition: transform .18s ease, color .18s ease, background .18s ease, border-color .18s ease;
+      white-space: nowrap;
+    }
+
+    .stage-button:hover { transform: translateY(-1px); border-color: var(--teal); }
+    .stage-button.active { color: #fff; background: var(--navy); border-color: var(--navy); }
+    .stage-button:focus-visible, .control:focus-visible, .answer:focus-visible {
+      outline: 4px solid color-mix(in srgb, var(--focus) 70%, transparent);
+      outline-offset: 2px;
+    }
+
+    .step-number {
+      display: inline-grid;
+      width: 24px;
+      height: 24px;
+      place-items: center;
+      border-radius: 50%;
+      color: inherit;
+      background: rgba(40,104,169,.12);
+      font-size: .78rem;
+    }
+    .active .step-number { background: rgba(255,255,255,.2); }
+
+    .svg-wrap {
+      position: relative;
+      min-height: 420px;
+      overflow: hidden;
+      border: 1px solid #cfdee5;
+      border-radius: 18px;
+      background: radial-gradient(circle at 62% 42%, #fff 0%, #f6fbfc 48%, #eaf4f6 100%);
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 420px;
+      touch-action: manipulation;
+    }
+
+    #plexus-base path {
+      stroke: #17345b !important;
+      stroke-width: 2.35 !important;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .label-stage {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s ease;
+    }
+    .label-stage.visible { opacity: 1; }
+
+    .leader {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .label-box {
+      stroke: currentColor;
+      stroke-width: 1.15;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .label-text {
+      fill: var(--navy);
+      font-size: 13px;
+      font-weight: 760;
+      paint-order: stroke;
+      stroke: rgba(255,255,255,.75);
+      stroke-width: 2px;
+      stroke-linejoin: round;
+    }
+
+    .roots-stage { color: var(--blue); }
+    .trunks-stage { color: var(--teal); }
+    .divisions-stage { color: var(--violet); }
+    .cords-stage { color: var(--amber); }
+    .branches-stage { color: var(--rose); }
+    .roots-stage .label-box { fill: #e7f1fb; }
+    .trunks-stage .label-box { fill: #e4f5f5; }
+    .divisions-stage .label-box { fill: #eeeafb; }
+    .cords-stage .label-box { fill: #fff1d7; }
+    .branches-stage .label-box { fill: #fde8ed; }
+
+    .hit-region {
+      fill: transparent;
+      stroke: transparent;
+      stroke-width: 2;
+      cursor: crosshair;
+      pointer-events: none;
+    }
+    .challenge-active .hit-region { pointer-events: auto; }
+    .challenge-active .hit-region:hover { fill: rgba(7,133,143,.07); stroke: rgba(7,133,143,.34); }
+    .hit-region.correct-flash { animation: correctPulse .7s ease; }
+    .hit-region.wrong-flash { animation: wrongPulse .55s ease; }
+
+    @keyframes correctPulse {
+      0%,100% { fill: transparent; stroke: transparent; }
+      50% { fill: rgba(33,131,90,.22); stroke: #21835a; }
+    }
+    @keyframes wrongPulse {
+      0%,100% { fill: transparent; stroke: transparent; }
+      50% { fill: rgba(203,75,104,.20); stroke: #cb4b68; }
+    }
+
+    .viewer-tools {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .controls { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .control {
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      color: var(--navy);
+      background: #fff;
+      font-weight: 750;
+      cursor: pointer;
+    }
+    .control.primary { color: #fff; background: var(--teal); border-color: var(--teal); }
+    .control.challenge { color: #fff; background: var(--violet); border-color: var(--violet); }
+    .control:disabled { opacity: .42; cursor: not-allowed; }
+
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 650;
+    }
+    .toggle input { width: 18px; height: 18px; accent-color: var(--teal); }
+
+    .learning-card {
+      position: sticky;
+      top: 18px;
+      overflow: hidden;
+    }
+
+    .stage-banner {
+      padding: 18px 20px;
+      color: #fff;
+      background: var(--navy);
+    }
+    .stage-banner small { display: block; opacity: .78; font-weight: 700; }
+    .stage-banner h2 { margin: 4px 0 0; font-size: 1.45rem; }
+
+    .learning-body { padding: 20px; }
+    .instruction { margin: 0 0 14px; color: var(--muted); line-height: 1.5; }
+
+    .fact-box {
+      margin-bottom: 18px;
+      padding: 14px 15px;
+      border-left: 5px solid var(--teal);
+      border-radius: 10px;
+      background: #edf7f8;
+      line-height: 1.45;
+    }
+    .fact-box strong { color: var(--navy); }
+
+    .quiz {
+      padding-top: 17px;
+      border-top: 1px solid var(--line);
+    }
+    .quiz h3 { margin: 0 0 6px; color: var(--navy); font-size: 1.02rem; }
+    .quiz p { margin: 0 0 12px; line-height: 1.42; }
+
+    .answers { display: grid; gap: 8px; }
+    .answer {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--ink);
+      background: #fff;
+      text-align: left;
+      cursor: pointer;
+    }
+    .answer:hover { border-color: var(--teal); background: #f1f9fa; }
+    .answer.correct { color: #14583c; border-color: #57a982; background: #eaf7f0; }
+    .answer.incorrect { color: #8b2841; border-color: #d78aa0; background: #fff0f3; }
+    .answer:disabled { cursor: default; }
+
+    .feedback {
+      min-height: 46px;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      background: #f5f7f9;
+      line-height: 1.4;
+    }
+    .feedback.good { color: #14583c; background: #eaf7f0; }
+    .feedback.try { color: #7c4b08; background: #fff4de; }
+
+    .progress-track {
+      height: 8px;
+      margin-top: 18px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #e5ecef;
+    }
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--teal), var(--violet), var(--amber), var(--green));
+      transition: width .28s ease;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 960px) {
+      header { align-items: stretch; }
+      .layout { grid-template-columns: 1fr; }
+      .learning-card { position: static; }
+      .svg-wrap, svg { min-height: 350px; }
+    }
+
+    @media (max-width: 620px) {
+      .app-shell { padding: 12px; }
+      header { flex-direction: column; }
+      .score-chip { align-self: flex-start; }
+      .stage-nav { grid-template-columns: repeat(5, 124px); }
+      .svg-wrap, svg { min-height: 300px; }
+      .viewer-tools { align-items: stretch; }
+      .controls { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+      .control.challenge { grid-column: 1 / -1; }
+      .toggle { justify-content: center; width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <header>
+      <div>
+        <p class="eyebrow">Interactive anatomy · guided reconstruction</p>
+        <h1>Build the brachial plexus</h1>
+        <p class="subtitle">Begin with the unlabelled plexus. Reveal each organisational level in sequence, answer the checkpoint question, and then test whether you can locate each region without labels.</p>
+      </div>
+      <div class="score-chip" aria-live="polite">Score <span id="score">0</span>/5</div>
+    </header>
+
+    <div class="layout">
+      <section class="viewer-card" aria-label="Interactive brachial plexus diagram">
+        <nav class="stage-nav" aria-label="Progressive label stages">
+          <button class="stage-button" data-stage="1"><span class="step-number">1</span>Roots</button>
+          <button class="stage-button" data-stage="2"><span class="step-number">2</span>Trunks</button>
+          <button class="stage-button" data-stage="3"><span class="step-number">3</span>Divisions</button>
+          <button class="stage-button" data-stage="4"><span class="step-number">4</span>Cords</button>
+          <button class="stage-button" data-stage="5"><span class="step-number">5</span>Branches</button>
+        </nav>
+
+        <div class="svg-wrap" id="svg-wrap">
+          <svg id="plexus-svg" viewBox="0 0 820.39 560.18" role="img" aria-labelledby="svg-title svg-desc">
+            <title id="svg-title">Interactive unlabelled brachial plexus</title>
+            <desc id="svg-desc">The user's original brachial plexus structure with optional progressive labels for roots, trunks, divisions, cords and terminal branches.</desc>
+            <g id="plexus-base">
+              <path d="M555.73,116.5l-13.41,3.77s-10.06,3.35-14.67,6.7-28.49,17.6-38.55,23.88-13.48,8.88-28.49,11.73" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="2.1"/>
+<path d="M555.73,129.91s-19.9,5.45-30.17,12.57c-9.63,6.68-18,11.06-30.17,20.11" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="2.1"/>
+<path d="M555,116.6c-1.69.36-2.18,4.27-2.34,5.69a11,11,0,0,0,.92,6.25c.9,1.64,2.61,2.52,3.94.89,1.82-2.22,2-7.11,1.22-9.77-.33-1.07-2.06-3.66-3.33-3.06" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="2.51"/>
+<path d="M496.65,163a7.81,7.81,0,0,1,.73-.42c2-.89,4.4-.27,6.49-.37,2.69-.13,5.37-.47,8.07-.47h7.79c8,0,16,.43,24,.42,3.48,0,7.42-.27,10.62,1.1,1.46.62,1,1.77.67,3.13a23.23,23.23,0,0,0-.56,2.71c-.35,2.32-1,9.17,3.2,8,2.39-.64,2-3.72,2-5.64,0-2.45.35-6.11-1.94-7.43a1.44,1.44,0,0,0-2,1.15" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M557.19,177c-9.77,0-19.52-.61-29.27-1-8.56-.38-17.71-1.28-26.25-.42-5.7.57-11.5,1.65-17.16,2.1-5.11.4-7.78,2.9-13,4.61" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M557.4,215.39c-1.16,1.9-4.69,9.89-1,11.27,2.72,1,2.31-3.41,2.47-5,.14-1.45,1.2-6.1-1.26-5.6" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M556.15,215.6c-3.45,1-7.08-.13-10.43.75-3.06.8-6,1-9.18,1.61-3.92.73-7.87,1.69-11.73,2.69-6.3,1.62-12.28,4.21-18.58,5.84-3.85,1-7.1,2.74-11.21,3.14-6.24.61-11.52,4.31-18,4.65a132.93,132.93,0,0,1-19.54-.52c-4.66-.44-9.65-.4-14.38-.41" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M557.19,227.75c-1.43.62-4.15.21-5.88.21a74.61,74.61,0,0,0-16.94,1.71c-5.92,1.41-11.63,3.62-17.56,5a144.47,144.47,0,0,0-23.94,7.74c-3.13,1.31-5.93,3.09-9.13,4.24-3.69,1.32-7.21,2.93-10.9,4.33-2.31.88-4.61,1.91-6.84,3a78,78,0,0,0-7.29,4c-1.84,1.16-3.63,3.47-5.64,4.16" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M557.4,268.18c2.33,1.59,3.68,2.13,3.35,5.45a15.55,15.55,0,0,1-1.92,6.46c-4.1,1-2.65-9.2-1.64-11.28l-14.67,2.93a48.21,48.21,0,0,0-12.32,2.37c-5.88,1.88-11.81,3.05-17.58,5.23-10.42,3.92-21.06,9.94-32.29,11-6.53.61-12.93-1.59-19.18-3.16" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M557.54,279.35c-3.46-.14-7.11,1.38-10.61,1.68-3.7.32-6.4,1.35-9.78,2.24a97.14,97.14,0,0,0-13.69,5c-3,1.28-6.24,1.86-8.94,4" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M558.94,326c-3.41.12-11,10.91-5,10.63,3.83-.18,11.29-10.32,5-10.07" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M558.94,325.72c-1.69-5-7.75-9-11.12-12.86a43.28,43.28,0,0,0-6.54-5.85c-2.36-1.76-5.83-3.23-7.53-5.26-3.15-1-5.85-4-9-5.56-3.79-1.93-8-1.79-11.9-3.2a5.66,5.66,0,0,1,0-.79" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M553.07,337.45c-3.08-2.66-5.3-5.49-8.65-7.92-4.36-3.16-7.33-7.92-11.26-11.56-4.53-4.19-9.3-8.67-15-11.14a52.23,52.23,0,0,0-12-3.72,73.34,73.34,0,0,0-11.44-.95,89,89,0,0,0-21.76,3.46c-4.1,1.11-7.47,1.93-11.17,4.18" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M514.25,134.52c.54-3.46,3.2-6.84,4.65-10.05s1.81-7,2.68-10.27c1.13-4.25,1.8-8.59,2.72-12.83.85-3.93,2.29-7.39,2.52-11.47" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M513,133.68c-5.11.25-9.87-4.23-14.5-5.41a33.69,33.69,0,0,0-8.11-.87c-1.19,0-2.94-.15-3.87.77s-1.23,3.46-.27,4.27,4.36.06,5.55.26a34.13,34.13,0,0,1,7.8,2.5c1.67.72,6.63,2.72,7.33,4.35" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M515.71,149.6c.08,1.62,1.31,3.06,1.71,4.57l.35.07c.23,1.34,4.4.56,5.62.14-1.08-2.65-3.86-3-4.12-6.46" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M541.27,136.61c.37,2,2.12,3.85,3.14,5.64.85,1.51,1.44,3.22,2.32,4.67.75,1.24,1.6,2.55,3.36,2.27,1.22-.19,2.65-1.61,2.26-2.91-1.94-.68-5.13.18-4.79,2.69" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M546.3,134.73c-.48,4.89,3.48,8,6.08,11.52" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M521.37,130.54c3.11-5.51,2.33-12.16,3.84-18.14.89-3.53,2.12-5.84,2.92-8.88,1-3.93,3.05-7.7,2.66-11.94" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M541.27,176.63c.16,3.57,1.66,8.72,4.2,11.42a57.2,57.2,0,0,0,5.23,4.29" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M544,177.26c1.43,5.19,4.32,7.74,7.33,11.73" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M547.77,229a18.7,18.7,0,0,0,1.87,8.23c1.17,2.28,3.69,3.61,4.83,5.81" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M543.79,230.26c0,5,4,10.14,6.7,14" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M543.16,283.06c2,2.74,4.76,5,6.7,8a41.71,41.71,0,0,1,3.57,6.66" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M548.19,281.59c2.11,1.18,4,5.42,5.4,7.53a48.71,48.71,0,0,1,3.19,6.92" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M520.74,176.42c0,14.88-.13,29.91-1,44.62" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M536,177.88c-.05,2.56-3.41,5.44-4.3,7.75a111.2,111.2,0,0,0-4.35,12.31,74.74,74.74,0,0,0-2.47,11.57c-.34,3.46-.2,6.94-.2,10.47" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M527.65,143.11c-1.85,2.12-2.63,6.34-3.14,9s-.28,7.4-1.68,9.86" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M533.73,139.34A32.89,32.89,0,0,0,532,149c-.16,3.81-.5,8.55-1.84,11.9" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M527.24,177.68c-.19,2-.41,3.92-.42,6,.8-2.51,3.24-4,4.4-6.22" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M519.27,235.5v10.27c0,3.6.88,6.86,1,10.28s.52,6.74.52,10.21c0,1.55,0,3.11.05,4.66,0,1.35.68,3,.44,4.19" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M540.12,229.95c-1.77,3.53-4.56,6.48-6.29,9.95-1.46,2.9-1.61,6.7-2.54,9.89s-3,5.31-4.19,8.34S526,265.33,526,269V274" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M526,233c-1.29.92-1.18,5-1.27,6.7a68.9,68.9,0,0,0,.05,8.31c1.53-2.41,2-5.48,3.46-8.1s4.52-5.7,4.46-8.8" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M523.26,289.76c.2,1.46-.24,2.87-.18,4.37,1.63.08,3.34.08,5,0a47.31,47.31,0,0,0,.24-7.09" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M524.51,312.18c.39,2.52,2.28,4.3,3.4,6.44,1.33,2.54,1.51,5.8,1.83,8.64.85,7.68,2.38,15.24,8.59,20.53" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M532.26,318c-.31,8.88,2.64,19.22,8.38,25.77" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M518.65,309.66c-9.39,0-14,6.16-18,13.83a48.72,48.72,0,0,0-3.81,11.12,30.83,30.83,0,0,0-1.26,4.18c-.18,1.76.33,3.31.42,5s0,3.65,0,5.46" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M513.41,305.47c-2.45.1-5.18,2.69-7.35,4a23.76,23.76,0,0,0-6.5,6.24c-1.84,2.47-2.94,6-4.45,8.95-2.36,4.7-2.93,9.15-3.13,14.46-.17,4.32-.29,8.76-.37,13" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M483.38,168.32A37.07,37.07,0,0,0,486.06,183a29.62,29.62,0,0,1,1.94,8.21,28.12,28.12,0,0,1,.13,4.22c-.05,1.12-.54,2.32-.28,3.49,0,.19.1.17.14.28" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="0.84"/>
+<path d="M487.85,166.36a27.18,27.18,0,0,0-.84,5.14c0,1.42.31,2.78.39,4.14.17,3,1.16,5.62,1.71,8.46,1,5,2.34,9.76,2.37,14.94" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="0.84"/>
+<path d="M489.53,197.93c-1.18-.31-1.24.6-1.09,1.51.6.29,2,.84,2.6.27.93-.88-.72-1.82-1.5-1.92" transform="translate(-11.93 -15.15)" fill="none" stroke="#d9e026" stroke-miterlimit="10" stroke-width="0.84"/>
+<path d="M460.33,162.87a300.93,300.93,0,0,0-39.19,22.07c-6.37,4.2-12.53,7.06-18.21,12.43-7.36,7-15.28,13.22-23,19.69" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="2.1"/>
+<path d="M467.32,173.49c-4.69,1.23-8.89,2.76-13.47,4.41a61.27,61.27,0,0,0-13.67,7c-4.9,3.21-9.61,6.16-14.28,9.79-7.09,5.51-14.63,10.06-21.57,15.91-2.45,2.07-5.48,4-7.68,6.32-1.76,1.85-2.79,4-4.77,5.77" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M472.21,181.87c-1.47.72-3.22.67-4.75,1.26s-3.06,1.13-4.49,1.84a64.23,64.23,0,0,0-6.73,4.48c-4.44,3-8.51,6.55-11.11,11.31a29.44,29.44,0,0,1-4.07,5.17,49.72,49.72,0,0,0-8.55,12.64,58.46,58.46,0,0,1-4.29,7.16" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M427.41,227a2.88,2.88,0,0,1,.94-1.89" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M429.4,224c.11-.78.85-1.48,1.18-2.2a24.83,24.83,0,0,1,1.44-2.83" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M465.64,174.32c-6.31,1-11.3,4.89-16.14,8.76a53.15,53.15,0,0,0-7.41,7.14c-2.84,3.29-6.29,5.84-8.92,9.31-1.27,1.68-2.62,3.29-4,4.91a65.55,65.55,0,0,0-7.36,10.31c-1.17,2.18-2.4,4.37-3.47,6.6-.67,1.4-.93,3.37-2,4.5" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M443.85,232.67c-1.82-1.41-3.26-1.54-5.45-2.07a44.93,44.93,0,0,1-5.16-2.06c-1.56-.59-3.33-.78-4.83-1.52-1.66-.82-3.79-.9-5.63-1.27a97.34,97.34,0,0,0-11.86-1.33c-4.23-.32-8.5-.56-12.74-.56-2.13,0-4.11.21-6.19.39-1.56.13-3.8-.13-4.8,1.41a11.33,11.33,0,0,1,5.65-4.43" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M459.36,244.09c-2.81-.52-5.73-.07-8.53-.62a76.75,76.75,0,0,1-8.55-2.6c-2.53-.81-5.23-1.45-7.86-2.1-4.19-1-8.37-2.43-12.65-3.28a113.23,113.23,0,0,0-18.88-2,27.19,27.19,0,0,0-6.73.21c-2.35.51-4.78.12-7.08,1a35.6,35.6,0,0,0-8.06,4.77,21.13,21.13,0,0,1-2.36,1.26c-1.14.62-2.25,1.66-3.52,2" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M458.73,244.93c-6.83,3.43-13.84,7.08-20.7,10.48A143,143,0,0,0,423.78,264c-4.55,2.94-9.53,5-13.87,8.22-1.51,1.12-4.5,2.94-5.24,4.51" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M420.81,237.17c0,3-2.53,5.15-3.56,7.73a88,88,0,0,1-4,9.45c-2.25,4.16-4.18,8.58-6.35,12.84-1.49,2.91-2.93,6.58-2.61,10" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M411.59,235.5c.09,2.69-3.53,6.8-4.62,9.22a196.22,196.22,0,0,0-8.11,22.42c-1,3.35-1.94,6.88-3.77,9.9-2.07,3.41-5.24,6.14-7.6,9.36-2.15,2.93-3.3,6.43-6.13,8.83-5.18,4.4-10.54,8.57-15.75,12.93a46.91,46.91,0,0,0-6.38,6c-3.94,4.77-8.22,8.95-12.11,13.75-1.82,2.24-4.25,3.64-6.1,5.87A83.33,83.33,0,0,1,334,342c-2.7,2.54-8.78,5.88-6.42,10.21,1.74,3.2,6.37,5.22,9.88,5.24" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M453.28,262.11c-4.91,2.81-9.81,5.66-14.92,8.1a23.51,23.51,0,0,0-3.86,1.75c-.62.47-.79,1.23-1.43,1.75-1.47,1.2-3.49,1.45-5.16,2.27s-4.52,2.3-5.64,3.72" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M461,287.46c-7,.11-13.63-2.92-19.91-5.7-3.53-1.56-6.48-1.84-10.42-1.84-2.79,0-7.68-.79-10.1.63" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M398.39,310.71c1-1.86.94-4.24,1.62-6.24a29.42,29.42,0,0,1,2.83-5.86,62.18,62.18,0,0,1,5.24-7.77c1.73-2.08,2.82-4,5.61-5.23,2.41-1,5.17-.88,7.74-.88,5.23,0,10.41-.44,15.25,1.25,4.39,1.53,8.46,2.87,12.68,4.78a28.73,28.73,0,0,0,13.15,2.56" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M389.8,321.6c0-2.73.14-5.49,0-8.22-.1-2.13-1.06-4.11-.85-6.24.37-3.71,5-9.17,8.59-10.06" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M383.73,308.82c0,4.41-.21,8.78-.21,13.2,0,4.79-.82,9.45-.84,14.24" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M389.17,320.14c0,5,.53,10.4-.21,15.29" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M382.68,334.38c0,1.66-.16,4.3.42,5.66" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M383.73,309.24c-2.63,2.9-6.63,6-8.62,9.34s-1.07,8.84-1.43,12.65" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M372.62,330.82c-.35.24-.28.54-.8.45-2.67,5.37-4.24-4.5-4.43-6.11" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M397.55,298.35c-.74,2.18-1.3,4.43-1.93,6.7s-1.85,4.31-1.84,6.7" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M368,323.91c-.27,1.61-2.86,2.65-4,3.72-1.57,1.5-3.19,3.11-4.65,4.7-2.44,2.66-4.34,5.62-6.83,8.16a92.85,92.85,0,0,1-8.89,7.87c-3.68,2.91-3.88,6-5.4,9.91" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M461.87,295A99.76,99.76,0,0,1,449,301.91c-9,3.82-17.5,8.07-26.16,12.63a62.66,62.66,0,0,0-7.95,4.88c-3.21,2.32-6.75,4.14-10,6.37a324,324,0,0,1-36,21.37c-4.75,2.41-9.77,4.26-14.45,6.82-4.47,2.44-8.64,4.77-13.67,5.92-4.4,1-9.26,1.2-13.74,1.85-5.63.82-9.94,2.91-15,5.48-4.11,2.09-8.21,4.39-12.26,6.6-2.27,1.24-5,2.15-7,3.93" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M299.71,362c-1.85,4.81-5.69,8.94-6.7,14" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M303.9,354.92a17.27,17.27,0,0,1,2.1-9c1.86-3.13,6.42-6.17,7.12-9.7" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M376.39,243.46c-3.88.46-7.69,7.05-10.17,10.07-1.93,2.35-3.69,4.76-5.64,7.11-2.23,2.7-4.18,5.61-6.35,8.36s-5,5-7.33,7.66c-1.56,1.76-2.1,4-3.44,5.95-2.08,2.94-4.56,5.3-6.51,8.34s-4,5.91-5.69,9c-3.68,6.7-7.27,13.45-10.56,20.35-1.25,2.61-3.26,4.84-4.09,7.64s-3,5.7-3.07,8.8" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M379.88,216.51a75.72,75.72,0,0,1-8.38,7.89c-2.93,2.5-5.39,5.33-8.08,8a110.92,110.92,0,0,0-11.71,13.87,20.93,20.93,0,0,1-4.24,5c-1.56,1.25-2.52,3.14-3.72,4.81-2.49,3.48-5.13,6.75-7,10.64-2.22,4.73-5.93,8.22-8.43,12.75-1.88,3.42-4.91,6.06-6.94,9.38-1.76,2.88-4.17,5.17-6,8-1.66,2.67-2.68,5.61-4.8,8-2.64,3-5,6.52-8.23,9-3.44,2.63-7.53,4.21-11.15,6.53a30.63,30.63,0,0,0-6.65,5.2c-.81.89-2.23,2.74-3.36,3.19" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M285.19,332.15c7.09-2.61,14.39-8.67,20.11-13.41" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M306.84,317.48a5.68,5.68,0,0,0,.53-.54c-.35,1.2-1.37,2.17-1.9,3.34-1.9,4.22-3.31,8.72-5.44,12.82-3.21,6.17-7.51,11.22-10,17.79-2.52,6.74-5.07,13.07-7.1,19.94-1,3.48-3,6.27-4.84,9.31s-3.22,6-5.76,8.6-5.51,4-8.54,6c-3.25,2.13-6.4,3.74-4.27,7.83,1.37,2.63,4.4,6.19,7.47,6.84" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M329.25,349.89c4.27,0,3.8,3.43,6.7,5.66" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M269.34,409.6c.28-1.37,2.08-2.66,3.2-3.58,1.46-1.2,2.87-2.53,4.3-3.91,3.72-3.61,7.13-6.92,11.55-9.68,2.94-1.84,6.08-3.4,9-5.22,3.71-2.3,7.86-5.23,12-6.7,3.11-1.11,6.28-1.09,9.2-2.9-3.58,3.2-8.14,5.09-11.53,8.53a63.14,63.14,0,0,1-5.87,5.83c-1.71,1.35-3.48,2.56-5.13,4-1.8,1.52-3.12,3.46-4.77,5.14-1.15,1.17-2.31,2.32-3.43,3.52s-2.49,1.94-3.7,3c-2,1.78-5.09,5.36-3.3,8.2,1.4,2.22,5.52,3.27,8,3.23" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M260.89,399.06c2.07.16,2.91,2.1,3.63,3.63,1,2,2.49,3.84,2.24,6.28" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M290.64,419.31a32.91,32.91,0,0,1,7.84-10.36c3.16-3,5-7.39,8-10.62,4.11-4.44,9.4-8.17,14.29-11.7,2-1.41,3.85-2.89,5.8-4.28a57.46,57.46,0,0,1,6.52-3.74,56.36,56.36,0,0,0,7.06-4,64.5,64.5,0,0,1,6-3.58,24.07,24.07,0,0,1,4.21-2.36c1.84-.64,3.8-.73,5.66-1.25,2.06-.58,2.5-1.74,4.07-3a66.79,66.79,0,0,0-4.94,7.66c-3.21,5.67-7.53,10.81-11.45,16a78.2,78.2,0,0,0-6.53,9.77,87.5,87.5,0,0,0-4.93,9.86,52.7,52.7,0,0,1-3,7.13c-.86,1.51-2.16,3-2.37,4.71,2.39,0,5.86.11,7.86-1.5,2.68-2.16,2.5-6.09,3.36-9.11a68.82,68.82,0,0,1,4-9.76,40.43,40.43,0,0,1,4.59-7.31c2.83-3.75,4.88-8,7.82-11.71,3.15-3.93,6.55-7.6,9.31-11.84" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M363.93,368.22c2.4-.79,3.81-4.11,5.85-5.55,2.78-2,5.62-4.32,8.76-5.71a5.54,5.54,0,0,1-1.72,1.62,22.09,22.09,0,0,0-2.5,2.36,31.39,31.39,0,0,0-3.61,4.24c-.64,1-1.1,2-1.83,2.93-2,2.51-4.46,4.5-6.32,7.16s-3.83,5.31-5.81,7.94a178.62,178.62,0,0,0-9.87,15c-1.46,2.42-1.56,5.07-2.73,7.52a17.09,17.09,0,0,0-1.41,4.35,19.12,19.12,0,0,0-.26,2.27c-.06,1,0,.9-.63,1.47,1.41-.29,3.79.57,4.93-.47.62-.57.91-2.19,1.19-3,3-8.65,6-17.95,11.5-25.39,5-6.8,11-13.11,16.73-19.36A103.11,103.11,0,0,1,391.62,352" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M462.29,309.8c-10.13,4.16-19.38,9.55-29.27,14.81-6.84,3.64-13.58,8-20.24,11.94a156.65,156.65,0,0,0-18.13,12.29c-2.23,1.78-3.43,2.87-3.4,5.76,0,3.4-1,6.8-.48,10.2a50.1,50.1,0,0,0,2.78,9.77,83.25,83.25,0,0,1,3.66,12.09c.42,2.12,1.37,4.06,1.93,6.08.25.91,2,3.74,1.59,4.51a.29.29,0,0,1,.09.25c-1.66-.09-5.75,1.68-6.83.3" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M386.17,357.71c0,5.36,1.66,10.19,3.33,15.22.57,1.72.48,3.47.89,5.22.54,2.3,1.25,4.48,1.74,6.77.6,2.8,1.64,5.53,2.45,8.26.35,1.19,1.23,2.81,1.09,4" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M456,163.43c-13.31,0-25.54.23-37.71-2.93" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M447.1,168.46c-.71.38-2.32.1-3.19.1-1.74,0-3.37.19-5.09.31a50.39,50.39,0,0,1-10.69-.2,48.18,48.18,0,0,1-7.31-1.55c-1-.32-2.77-.52-3.58-1.18" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M471.48,306.92c.55,2.2.3,5.43.11,7.7a10.55,10.55,0,0,1-2.39,5.44c-1.22,1.49-2.39,3-3.61,4.55-1.07,1.34-1.86,3-2.89,4.26" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M465.7,333.57a3.17,3.17,0,0,1,.75-1.61" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M475.54,306.6c0,4.55.1,8.6-2.14,12.66-.67,1.22-1.27,2.51-2,3.71-.89,1.51-2.18,2.74-3.08,4.26s-2.07,3-2.12,4.63" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M462.48,329.4c-1.08,2-.26,3.21,1.93,3.21" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M377.23,228.69c-.3-1.26-2.67-2.81-3.51-3.9a33.16,33.16,0,0,1-2.38-4.06c-1-1.84-2.36-3.27-3.43-5a19.78,19.78,0,0,1-2.62-6.59,29.63,29.63,0,0,1-.31-6.18c0-1.15,0-2.28-.1-3.44a16.3,16.3,0,0,1-.3-3c1.22-.06,2.13-.32,3.34-.33" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M383.73,218.74c-1.83.1-3.75.74-5.55.16a13,13,0,0,1-4.62-2.44c-1.45-1.34-1.62-2.46-2.48-4.18-.64-1.27-1-2.59-1.61-3.89a16.46,16.46,0,0,1-1.47-5.21,18.29,18.29,0,0,0-.2-3.07,14.94,14.94,0,0,1-.51-3.8" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M379.33,226c-.12-1.39-2.89-3.31-3.76-4.48,1.37-.19,2.52.73,3.83.93.94.14,3.16.14,3.91-.42" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="0.42"/>
+<path d="M349.86,323.35a16.91,16.91,0,0,1-5.3,2.52c-2.12.57-4.08,1.58-6.3,1.68-4.59.2-8.93.55-12.84-1.82" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M341.61,332.29c-3.32,0-6.58.41-9.81.57-3.54.17-6.63-.19-8.91-2.94" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M325.13,325.73c-.49.27-3.12,2.33-2.94,3.08.21.9,1.56.34,1.93,0a4.32,4.32,0,0,0,.88-2.23" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M299.09,362.77a30,30,0,0,0,1.55,5.22,34.12,34.12,0,0,1,.75,4.1" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+<path d="M303.28,354.08a15.14,15.14,0,0,0-.21,4.74,24.77,24.77,0,0,0,1,4.69c.29,1.19.31,2.35.65,3.54a21.77,21.77,0,0,1,.6,2.22" transform="translate(-11.93 -15.15)" fill="none" stroke="#faed24" stroke-miterlimit="10" stroke-width="1.68"/>
+            </g>
+
+            <g class="label-stage roots-stage" data-label-stage="1">
+              <g><line class="leader" x1="542" y1="103" x2="579" y2="103"/><rect class="label-box" x="579" y="91" width="42" height="24" rx="8"/><text class="label-text" x="590" y="108">C5</text></g>
+              <g><line class="leader" x1="542" y1="155" x2="579" y2="155"/><rect class="label-box" x="579" y="143" width="42" height="24" rx="8"/><text class="label-text" x="590" y="160">C6</text></g>
+              <g><line class="leader" x1="542" y1="207" x2="579" y2="207"/><rect class="label-box" x="579" y="195" width="42" height="24" rx="8"/><text class="label-text" x="590" y="212">C7</text></g>
+              <g><line class="leader" x1="542" y1="262" x2="579" y2="262"/><rect class="label-box" x="579" y="250" width="42" height="24" rx="8"/><text class="label-text" x="590" y="267">C8</text></g>
+              <g><line class="leader" x1="542" y1="315" x2="579" y2="315"/><rect class="label-box" x="579" y="303" width="42" height="24" rx="8"/><text class="label-text" x="590" y="320">T1</text></g>
+            </g>
+
+            <g class="label-stage trunks-stage" data-label-stage="2">
+              <g><line class="leader" x1="461" y1="163" x2="475" y2="126"/><rect class="label-box" x="424" y="101" width="112" height="25" rx="8"/><text class="label-text" x="435" y="118">Superior trunk</text></g>
+              <g><line class="leader" x1="458" y1="244" x2="492" y2="232"/><rect class="label-box" x="486" y="219" width="105" height="25" rx="8"/><text class="label-text" x="497" y="236">Middle trunk</text></g>
+              <g><line class="leader" x1="459" y1="303" x2="485" y2="346"/><rect class="label-box" x="435" y="346" width="110" height="25" rx="8"/><text class="label-text" x="446" y="363">Inferior trunk</text></g>
+            </g>
+
+            <g class="label-stage divisions-stage" data-label-stage="3">
+              <g><line class="leader" x1="392" y1="213" x2="375" y2="155"/><rect class="label-box" x="304" y="129" width="129" height="26" rx="8"/><text class="label-text" x="315" y="147">Anterior divisions</text></g>
+              <g><line class="leader" x1="386" y1="276" x2="432" y2="329"/><rect class="label-box" x="365" y="329" width="132" height="26" rx="8"/><text class="label-text" x="376" y="347">Posterior divisions</text></g>
+            </g>
+
+            <g class="label-stage cords-stage" data-label-stage="4">
+              <g><line class="leader" x1="326" y1="248" x2="255" y2="221"/><rect class="label-box" x="139" y="205" width="116" height="27" rx="9"/><text class="label-text" x="151" y="223">Lateral cord</text></g>
+              <g><line class="leader" x1="363" y1="287" x2="250" y2="266"/><rect class="label-box" x="124" y="249" width="126" height="27" rx="9"/><text class="label-text" x="136" y="267">Posterior cord</text></g>
+              <g><line class="leader" x1="419" y1="299" x2="534" y2="379"/><rect class="label-box" x="534" y="365" width="112" height="27" rx="9"/><text class="label-text" x="546" y="383">Medial cord</text></g>
+            </g>
+
+            <g class="label-stage branches-stage" data-label-stage="5">
+              <g><line class="leader" x1="280" y1="310" x2="207" y2="298"/><rect class="label-box" x="18" y="282" width="190" height="27" rx="9"/><text class="label-text" x="29" y="300">Musculocutaneous nerve</text></g>
+              <g><line class="leader" x1="313" y1="316" x2="235" y2="329"/><rect class="label-box" x="116" y="314" width="119" height="27" rx="9"/><text class="label-text" x="127" y="332">Axillary nerve</text></g>
+              <g><line class="leader" x1="325" y1="332" x2="232" y2="349"/><rect class="label-box" x="119" y="342" width="113" height="27" rx="9"/><text class="label-text" x="130" y="360">Radial nerve</text></g>
+              <g><line class="leader" x1="256" y1="387" x2="218" y2="387"/><rect class="label-box" x="99" y="374" width="119" height="27" rx="9"/><text class="label-text" x="110" y="392">Median nerve</text></g>
+              <g><line class="leader" x1="276" y1="402" x2="252" y2="432"/><rect class="label-box" x="145" y="420" width="107" height="27" rx="9"/><text class="label-text" x="156" y="438">Ulnar nerve</text></g>
+            </g>
+
+            <g aria-hidden="true">
+              <rect class="hit-region" data-region="1" x="455" y="70" width="125" height="285" rx="20"/>
+              <rect class="hit-region" data-region="2" x="404" y="135" width="75" height="210" rx="20"/>
+              <rect class="hit-region" data-region="3" x="337" y="145" width="82" height="225" rx="20"/>
+              <rect class="hit-region" data-region="4" x="286" y="205" width="75" height="190" rx="20"/>
+              <rect class="hit-region" data-region="5" x="220" y="285" width="85" height="150" rx="20"/>
+            </g>
+          </svg>
+          <div id="live-region" class="sr-only" aria-live="polite"></div>
+        </div>
+
+        <div class="viewer-tools">
+          <div class="controls">
+            <button class="control" id="reset">Reset</button>
+            <button class="control primary" id="next">Reveal roots</button>
+            <button class="control challenge" id="challenge">Locate-the-region challenge</button>
+          </div>
+          <label class="toggle"><input id="cumulative" type="checkbox" checked> Keep earlier labels visible</label>
+        </div>
+      </section>
+
+      <aside class="learning-card" aria-label="Learning activity panel">
+        <div class="stage-banner" id="stage-banner">
+          <small>Start</small>
+          <h2>Observe before revealing</h2>
+        </div>
+        <div class="learning-body">
+          <p class="instruction" id="instruction">Trace the unlabelled network from the spinal nerve roots towards the terminal branches. Notice where fibres unite, divide and reorganise.</p>
+          <div class="fact-box" id="fact"><strong>Learning strategy:</strong> Predict the next organisational level before selecting it.</div>
+          <div class="quiz" id="quiz">
+            <h3>Readiness question</h3>
+            <p>Which sequence correctly describes the organisation of the brachial plexus?</p>
+            <div class="answers" id="answers"></div>
+            <div class="feedback" id="feedback" aria-live="polite">Choose an answer, then begin the progressive reveal.</div>
+          </div>
+          <div class="progress-track" aria-label="Activity progress"><div class="progress-bar" id="progress"></div></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const stages = [
+      {
+        name: 'Roots',
+        instruction: 'Identify the five ventral rami contributing to the typical brachial plexus.',
+        fact: '<strong>Key pattern:</strong> C5, C6, C7, C8 and T1 form the roots. C5 and C6 unite above; C8 and T1 unite below.',
+        question: 'Which roots unite to form the superior trunk?',
+        answers: ['C5 and C6', 'C6 and C7', 'C7 and C8'],
+        correct: 0,
+        feedback: 'C5 and C6 unite to form the superior trunk.'
+      },
+      {
+        name: 'Trunks',
+        instruction: 'Follow the roots into the superior, middle and inferior trunks.',
+        fact: '<strong>Key pattern:</strong> C5–C6 form the superior trunk, C7 continues as the middle trunk, and C8–T1 form the inferior trunk.',
+        question: 'What happens to each trunk next?',
+        answers: ['It divides into anterior and posterior divisions', 'It becomes one cord directly', 'It forms a terminal nerve'],
+        correct: 0,
+        feedback: 'Every trunk divides into an anterior and a posterior division.'
+      },
+      {
+        name: 'Divisions',
+        instruction: 'Trace the six divisions and observe how they reorganise rather than continuing independently.',
+        fact: '<strong>Key pattern:</strong> Three anterior and three posterior divisions redistribute fibres into the cords.',
+        question: 'All three posterior divisions unite to form which cord?',
+        answers: ['Lateral cord', 'Posterior cord', 'Medial cord'],
+        correct: 1,
+        feedback: 'All three posterior divisions unite to form the posterior cord.'
+      },
+      {
+        name: 'Cords',
+        instruction: 'Locate the lateral, posterior and medial cords. Their names describe their relationship to the second part of the axillary artery.',
+        fact: '<strong>Key pattern:</strong> The cords are named lateral, posterior and medial according to their relationship to the axillary artery.',
+        question: 'Which terminal nerve receives contributions from both lateral and medial cords?',
+        answers: ['Median nerve', 'Radial nerve', 'Ulnar nerve'],
+        correct: 0,
+        feedback: 'The median nerve is formed by lateral and medial roots.'
+      },
+      {
+        name: 'Terminal branches',
+        instruction: 'Identify the five principal terminal branches and trace each branch back to its cord of origin.',
+        fact: '<strong>Key pattern:</strong> Musculocutaneous, axillary, radial, median and ulnar nerves are the five principal terminal branches.',
+        question: 'Which pair arises from the posterior cord?',
+        answers: ['Axillary and radial nerves', 'Median and ulnar nerves', 'Musculocutaneous and median nerves'],
+        correct: 0,
+        feedback: 'The axillary and radial nerves are the principal terminal branches of the posterior cord.'
+      }
+    ];
+
+    const introQuestion = {
+      question: 'Which sequence correctly describes the organisation of the brachial plexus?',
+      answers: [
+        'Roots → trunks → divisions → cords → branches',
+        'Roots → divisions → trunks → branches → cords',
+        'Trunks → roots → cords → divisions → branches'
+      ],
+      correct: 0,
+      feedback: 'Correct: roots → trunks → divisions → cords → terminal branches.'
+    };
+
+    const stageButtons = [...document.querySelectorAll('.stage-button')];
+    const labelStages = [...document.querySelectorAll('.label-stage')];
+    const hitRegions = [...document.querySelectorAll('.hit-region')];
+    const svgWrap = document.getElementById('svg-wrap');
+    const banner = document.getElementById('stage-banner');
+    const instruction = document.getElementById('instruction');
+    const fact = document.getElementById('fact');
+    const answers = document.getElementById('answers');
+    const feedback = document.getElementById('feedback');
+    const next = document.getElementById('next');
+    const reset = document.getElementById('reset');
+    const challenge = document.getElementById('challenge');
+    const cumulative = document.getElementById('cumulative');
+    const progress = document.getElementById('progress');
+    const scoreText = document.getElementById('score');
+    const liveRegion = document.getElementById('live-region');
+
+    let currentStage = 0;
+    let score = 0;
+    let answered = new Set();
+    let challengeMode = false;
+    let challengeTarget = 1;
+
+    function renderQuestion(item, stageNumber) {
+      document.querySelector('#quiz h3').textContent = stageNumber ? 'Checkpoint question' : 'Readiness question';
+      document.querySelector('#quiz p').textContent = item.question;
+      answers.replaceChildren();
+      item.answers.forEach((answerText, index) => {
+        const button = document.createElement('button');
+        button.className = 'answer';
+        button.type = 'button';
+        button.textContent = answerText;
+        button.addEventListener('click', () => handleAnswer(button, index, item, stageNumber));
+        answers.appendChild(button);
+      });
+      feedback.className = 'feedback';
+      feedback.textContent = stageNumber ? 'Choose one answer.' : 'Choose an answer, then begin the progressive reveal.';
+    }
+
+    function handleAnswer(button, index, item, stageNumber) {
+      const buttons = [...answers.querySelectorAll('.answer')];
+      buttons.forEach((itemButton) => { itemButton.disabled = true; });
+      buttons[item.correct].classList.add('correct');
+      if (index === item.correct) {
+        feedback.className = 'feedback good';
+        feedback.textContent = item.feedback;
+        if (stageNumber && !answered.has(stageNumber)) {
+          answered.add(stageNumber);
+          score += 1;
+          scoreText.textContent = score;
+        }
+      } else {
+        button.classList.add('incorrect');
+        feedback.className = 'feedback try';
+        feedback.textContent = 'Review the revealed pattern. ' + item.feedback;
+      }
+    }
+
+    function showStage(stageNumber) {
+      currentStage = Math.max(0, Math.min(5, stageNumber));
+      challengeMode = false;
+      svgWrap.classList.remove('challenge-active');
+      challenge.textContent = 'Locate-the-region challenge';
+
+      labelStages.forEach((group) => {
+        const stage = Number(group.dataset.labelStage);
+        group.classList.toggle('visible', currentStage > 0 && (cumulative.checked ? stage <= currentStage : stage === currentStage));
+      });
+      stageButtons.forEach((button) => button.classList.toggle('active', Number(button.dataset.stage) === currentStage));
+
+      if (currentStage === 0) {
+        banner.innerHTML = '<small>Start</small><h2>Observe before revealing</h2>';
+        banner.style.background = 'var(--navy)';
+        instruction.textContent = 'Trace the unlabelled network from the spinal nerve roots towards the terminal branches. Notice where fibres unite, divide and reorganise.';
+        fact.innerHTML = '<strong>Learning strategy:</strong> Predict the next organisational level before selecting it.';
+        renderQuestion(introQuestion, 0);
+      } else {
+        const item = stages[currentStage - 1];
+        const colors = ['var(--blue)', 'var(--teal)', 'var(--violet)', 'var(--amber)', 'var(--green)'];
+        banner.innerHTML = '<small>Stage ' + currentStage + ' of 5</small><h2>' + item.name + '</h2>';
+        banner.style.background = colors[currentStage - 1];
+        instruction.textContent = item.instruction;
+        fact.innerHTML = item.fact;
+        renderQuestion(item, currentStage);
+      }
+
+      progress.style.width = (currentStage * 20) + '%';
+      next.disabled = currentStage === 5;
+      next.textContent = currentStage === 5 ? 'Sequence complete' : 'Reveal ' + stages[currentStage].name.toLowerCase();
+      liveRegion.textContent = currentStage ? stages[currentStage - 1].name + ' labels revealed.' : 'All labels hidden.';
+    }
+
+    function startChallenge() {
+      challengeMode = !challengeMode;
+      if (!challengeMode) {
+        showStage(currentStage);
+        return;
+      }
+      labelStages.forEach((group) => group.classList.remove('visible'));
+      stageButtons.forEach((button) => button.classList.remove('active'));
+      svgWrap.classList.add('challenge-active');
+      challengeTarget = 1;
+      challenge.textContent = 'Exit challenge';
+      banner.innerHTML = '<small>Locate-the-region challenge</small><h2>Find the roots</h2>';
+      banner.style.background = 'var(--violet)';
+      instruction.textContent = 'Select the region of the diagram that contains the roots. Continue through all five organisational levels.';
+      fact.innerHTML = '<strong>No labels:</strong> Use position and branching pattern rather than memorised text.';
+      document.querySelector('#quiz h3').textContent = 'Challenge progress';
+      document.querySelector('#quiz p').textContent = 'Target 1 of 5: Roots';
+      answers.replaceChildren();
+      feedback.className = 'feedback';
+      feedback.textContent = 'Click the appropriate region on the plexus.';
+      liveRegion.textContent = 'Challenge started. Locate the roots.';
+    }
+
+    function handleRegion(region) {
+      if (!challengeMode) return;
+      const selected = Number(region.dataset.region);
+      if (selected === challengeTarget) {
+        region.classList.add('correct-flash');
+        setTimeout(() => region.classList.remove('correct-flash'), 720);
+        feedback.className = 'feedback good';
+        feedback.textContent = 'Correct region.';
+        challengeTarget += 1;
+        if (challengeTarget > 5) {
+          banner.innerHTML = '<small>Challenge complete</small><h2>You located the full sequence</h2>';
+          instruction.textContent = 'Now reset and reconstruct the sequence aloud without labels.';
+          document.querySelector('#quiz p').textContent = 'Roots → trunks → divisions → cords → terminal branches';
+          feedback.textContent = 'Excellent. All five regions were identified in order.';
+          svgWrap.classList.remove('challenge-active');
+          challengeMode = false;
+          challenge.textContent = 'Restart challenge';
+          liveRegion.textContent = 'Challenge complete.';
+        } else {
+          const nextName = stages[challengeTarget - 1].name;
+          banner.innerHTML = '<small>Locate-the-region challenge</small><h2>Find the ' + nextName.toLowerCase() + '</h2>';
+          document.querySelector('#quiz p').textContent = 'Target ' + challengeTarget + ' of 5: ' + nextName;
+          liveRegion.textContent = 'Correct. Now locate ' + nextName.toLowerCase() + '.';
+        }
+      } else {
+        region.classList.add('wrong-flash');
+        setTimeout(() => region.classList.remove('wrong-flash'), 560);
+        feedback.className = 'feedback try';
+        feedback.textContent = 'Not this region. Trace the plexus in its root-to-branch direction and try again.';
+        liveRegion.textContent = 'Incorrect region. Try again.';
+      }
+    }
+
+    stageButtons.forEach((button) => button.addEventListener('click', () => showStage(Number(button.dataset.stage))));
+    hitRegions.forEach((region) => region.addEventListener('click', () => handleRegion(region)));
+    next.addEventListener('click', () => showStage(currentStage + 1));
+    reset.addEventListener('click', () => {
+      score = 0;
+      answered = new Set();
+      scoreText.textContent = '0';
+      showStage(0);
+    });
+    challenge.addEventListener('click', startChallenge);
+    cumulative.addEventListener('change', () => showStage(currentStage));
+
+    showStage(0);
+  </script>
+</body>
+</html>
