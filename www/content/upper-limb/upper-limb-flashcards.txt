@@ -1,0 +1,13 @@
+#separator:Tab
+#html:false
+#tags column:3
+Which bones articulate at the acromioclavicular joint?	The lateral end of the clavicle and the acromion of the scapula.	upper_limb::bones
+Which roots usually contribute to the brachial plexus?	The anterior rami of C5, C6, C7, C8 and T1.	upper_limb::plexus
+How are the cords of the brachial plexus named?	By their relationship to the second part of the axillary artery.	upper_limb::plexus
+Which nerve winds around the surgical neck of the humerus?	The axillary nerve.	upper_limb::nerves
+Which nerve runs in the radial groove of the humerus?	The radial nerve.	upper_limb::nerves
+Which nerve passes behind the medial epicondyle?	The ulnar nerve.	upper_limb::nerves
+Which nerve passes through the carpal tunnel?	The median nerve.	upper_limb::hand
+Which movement do the dorsal interossei of the hand produce?	Abduction of the fingers away from the middle finger.	upper_limb::hand
+Which muscle is the principal supinator when the elbow is flexed against resistance?	Biceps brachii.	upper_limb::muscles
+Which bones form the floor of the anatomical snuffbox?	The scaphoid and trapezium.	upper_limb::hand

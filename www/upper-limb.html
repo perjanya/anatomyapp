@@ -42,8 +42,17 @@
     }
 
     .toc-list {
+      padding-inline-start: 2rem;
+    }
+
+    .resource-list {
       list-style: none;
-      padding: 0;
+    }
+
+    .toc-divider {
+      border: 0;
+      border-top: 1px solid #cbd5e1;
+      margin: 1.5rem 0;
     }
 
     .toc-item {
@@ -87,13 +96,54 @@
   
   <h1>💪 Upper Limb</h1>
   
-  <ul class="toc-list" id="toc-list">
-    <!-- Topics will be loaded dynamically from toc.json -->
+  <ol class="toc-list" aria-label="Upper Limb index">
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Clavicle.html">Clavicle</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Scapula.html">Scapula</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Boundaries%20and%20contents%20of%20axilla.html">Axilla</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Axillary%20artery%20and%20axillary%20vein.html">Axillary artery</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Brachial%20plexus.html">Brachial plexus</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/clavipectoral%20fascia.html">Clavipectoral fascia</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Surgical%20anatomy%20of%20breast.html">Surgical anatomy of breast</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/breastlymphatic.html">Lymphatic drainage of breast</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Intermuscular%20spaces%20in%20scapular%20region.html">Intermuscular spaces in scapular region</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Arterial%20anastomoses%20around%20the%20scapula.html">Arterial anastomoses around the scapula</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/deltoid.html">Deltoid</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Latissimus%20dorsi.html">Latissimus dorsi</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Trapezius.html">Trapezius</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Rotator%20cuff%20muscles.html">Shoulder joint (rotator cuff muscles)</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Shoulder%20joint.html">Shoulder joint</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Humerus.html">Humerus</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Biceps%20brachi%20and%20coracobrachialis.html">Biceps brachi</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Brachial%20artery.html">Brachial artery</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Section%20through%20middle%20of%20right%20arm.html">Section through middle of right arm</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Cubital%20fossa.html">Cubital fossa</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Radius%20and%20Ulna.html">Radius and Ulna</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Elbow%20joint.html">Elbow joint</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Supination%20and%20pronation.html">Supination and pronation</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Bones%20of%20the%20hand.html">Bones of the hand</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Spaces%20of%20hand.html">Spaces of hand</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Palmar%20arterial%20arches.html">Palmar arterial arches</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/First%20carpometacarpal%20joint.html">First carpometacarpal joint</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Anatomical%20snuffbox.html">Anatomical snuffbox</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Muscles%20of%20hand.html">Muscles of hand</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Movements%20of%20thumb%20and%20other%20fingers.html">Movements of thumb and other fingers</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Median%20nerve.html">Median nerve</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Ulnar%20nerve.html">Ulnar nerve</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Radial%20nerve.html">Radial nerve</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/Muscles%20of%20upper%20limb.html">Muscles of upper limb</a></li>
+  </ol>
+
+  <hr class="toc-divider">
+
+  <ul class="toc-list resource-list" role="list" aria-label="Upper Limb study resources">
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/clinical-reasoning-questions.html">Clinical Reasoning Questions</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/case-based-learning-spotters.html">Case Based Learning – Image based Questions for Spotters</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/mcqs.html">MCQs – Upper Limb</a></li>
+    <li class="toc-item"><a class="toc-link" href="content/upper-limb/anki-flashcards.html">Anki Flashcards</a></li>
   </ul>
 </div>
 
 <script type="module" src="https://unpkg.com/@capacitor/core@latest/dist/capacitor.js"></script>
-<script src="js/toc.js"></script>
 <script src="js/app-init.js"></script>
 
 </body>
