@@ -1,0 +1,74 @@
+#separator:Tab
+#html:false
+#tags column:3
+A CT slice separates the upper and lower parts of the abdomen. In which plane was it taken?	Transverse plane.	general_anatomy::terminology
+Which anatomical plane divides the body into left and right halves of equal width?	Median (midsagittal) plane.	general_anatomy::terminology
+Which plane separates the body into anterior and posterior parts?	Coronal (frontal) plane.	general_anatomy::terminology
+A forearm wound lies nearer the elbow than the wrist. How is it positioned relative to the wrist?	Proximal.	general_anatomy::terminology
+What movement takes the upper limb sideways away from the trunk?	Abduction.	general_anatomy::terminology
+Around which finger are finger abduction and adduction described?	The middle finger.	general_anatomy::terminology
+A patient lies face down. What is this position called?	Prone.	general_anatomy::terminology
+What structural feature of simple squamous epithelium suits it to gas exchange in alveoli?	A single layer of flattened cells provides a short diffusion distance.	general_anatomy::tissues
+What feature distinguishes connective tissue from epithelium in a typical tissue section?	Connective tissue has cells dispersed in an extracellular matrix of fibres and ground substance.	general_anatomy::tissues
+Why can a tendon resist tension along its length?	Its densely packed collagen fibres run mainly parallel to the direction of pull.	general_anatomy::tissues
+Which basic tissue covers body surfaces and lines internal cavities and passages?	Epithelial tissue.	general_anatomy::tissues
+What is the principal role of neurons in nervous tissue?	To receive, process, and transmit signals.	general_anatomy::tissues
+What is the shaft of a long bone called?	The diaphysis.	general_anatomy::skeletal_system
+What is the region between the diaphysis and epiphysis called?	The metaphysis.	general_anatomy::skeletal_system
+What structure allows a long bone to grow in length before skeletal maturity?	The epiphyseal (growth) plate.	general_anatomy::skeletal_system
+Where does the primary ossification centre of a typical long bone first appear?	In the diaphysis.	general_anatomy::skeletal_system
+How does intramembranous ossification differ from endochondral ossification?	Intramembranous ossification forms bone directly in mesenchyme. Endochondral ossification replaces a cartilage model.	general_anatomy::skeletal_system
+How does a bone collar differ from the periosteum?	The bone collar is bone deposited around the cartilage model. The periosteum is a connective tissue covering.	general_anatomy::skeletal_system
+What is the sequence of differentiation from an osteoprogenitor cell to a mature cell embedded in bone matrix?	Osteoprogenitor cell → osteoblast → osteocyte.	general_anatomy::skeletal_system
+What type of bone is the patella, and why?	A sesamoid bone because it develops within the quadriceps tendon.	general_anatomy::skeletal_system
+Where does blood-borne osteomyelitis typically begin in a long bone of a school-age child?	In the metaphysis.	general_anatomy::skeletal_system
+Why is a growth plate fracture a concern in a child?	It can disturb longitudinal growth.	general_anatomy::skeletal_system
+How do nutrients generally reach chondrocytes in cartilage?	By diffusion through the matrix because cartilage is avascular.	general_anatomy::cartilage
+Which type of cartilage covers most articular surfaces in synovial joints?	Hyaline cartilage.	general_anatomy::cartilage
+Which type of cartilage helps the auricle retain its shape while bending?	Elastic cartilage.	general_anatomy::cartilage
+Which type of cartilage is characteristic of the annulus fibrosus of an intervertebral disc?	Fibrocartilage.	general_anatomy::cartilage
+How does appositional cartilage growth differ from interstitial growth?	Appositional growth adds cartilage at the surface. Interstitial growth expands it from within.	general_anatomy::cartilage
+Which covering is absent from articular hyaline cartilage and fibrocartilage?	The perichondrium.	general_anatomy::cartilage
+What tissue forms the superficial fascia deep to the dermis?	Loose connective tissue, often containing fat.	general_anatomy::fascia
+What is a retinaculum, and what does it do?	A thickened band of deep fascia that keeps tendons close to the underlying bones and limits bowstringing.	general_anatomy::fascia
+What is an aponeurosis?	A broad, flat sheet of tendon.	general_anatomy::fascia
+How do intermuscular septa help organise a limb?	They extend inward from deep fascia and partition muscles into compartments.	general_anatomy::fascia
+Why can swelling within a muscle compartment compromise local vessels and nerves?	The surrounding deep fascia has limited stretch, so swelling raises pressure inside the compartment.	general_anatomy::fascia
+Which major layers make up the skin proper?	The epidermis and dermis.	general_anatomy::skin
+Why may an abrasion limited to the epidermis produce no bleeding?	The epidermis contains no blood vessels.	general_anatomy::skin
+Where is thick skin found?	On the palms and soles.	general_anatomy::skin
+What are three examples of skin appendages?	Hair, nails, and cutaneous glands such as sweat or sebaceous glands.	general_anatomy::skin
+Why do wound edges tend to separate less when an incision runs parallel to skin tension lines?	The natural tension pulls the edges apart less.	general_anatomy::skin
+What does dermatoglyphics study?	The patterns of epidermal ridges, such as fingerprints and palm prints.	general_anatomy::skin
+What feature distinguishes synovial joints from fibrous and cartilaginous joints?	A joint cavity enclosed by a capsule.	general_anatomy::joints
+Which membrane lines the inside of the fibrous capsule of a synovial joint?	The synovial membrane. It does not cover the articular cartilage.	general_anatomy::joints
+How does an articular labrum improve stability?	It deepens the socket and improves the fit between the joint surfaces.	general_anatomy::joints
+Which type of synovial joint is the first carpometacarpal joint of the thumb?	A saddle joint.	general_anatomy::joints
+How is the pubic symphysis classified structurally?	A secondary cartilaginous joint (symphysis).	general_anatomy::joints
+How is the distal tibiofibular joint classified structurally?	A syndesmosis, a type of fibrous joint.	general_anatomy::joints
+What type of fibrous joint anchors a tooth in its socket?	A gomphosis.	general_anatomy::joints
+What defines an artery regardless of the oxygen content of its blood?	It carries blood away from the heart.	general_anatomy::vascular_system
+Why are arterioles called resistance vessels?	Their smooth muscle adjusts lumen diameter and thereby regulates resistance and flow into capillary beds.	general_anatomy::vascular_system
+Why are veins called capacitance vessels?	Their compliant walls let them hold a large volume of blood at low pressure.	general_anatomy::vascular_system
+What is the main function of valves in many lower-limb veins?	They limit backflow and help keep blood moving toward the heart.	general_anatomy::vascular_system
+Which layer of a vessel wall contains most of its smooth muscle?	The tunica media.	general_anatomy::vascular_system
+How can an arterial anastomosis help preserve perfusion when one artery narrows gradually?	It can provide an alternate route for blood to reach the tissue.	general_anatomy::vascular_system
+What can happen downstream when an anatomical end artery is completely occluded?	Ischaemia, with a risk of infarction because there is no effective alternative arterial supply.	general_anatomy::vascular_system
+Which of the three structural types of muscle is striated and typically under voluntary control?	Skeletal muscle.	general_anatomy::muscles
+What type of muscle has branched striated cells joined by intercalated discs?	Cardiac muscle.	general_anatomy::muscles
+What type of muscle has spindle-shaped, non-striated cells?	Smooth muscle.	general_anatomy::muscles
+What is the advantage of a pennate arrangement compared with a parallel arrangement of similar overall muscle size?	It can pack more fibres into a given volume, favouring greater force.	general_anatomy::muscles
+Which muscle acts as an antagonist when the brachialis flexes the elbow?	Triceps brachii.	general_anatomy::muscles
+What is the role of a synergist in a movement?	It assists the prime mover or limits unwanted movement.	general_anatomy::muscles
+What structures make up the central nervous system?	The brain and spinal cord.	general_anatomy::nervous_system
+Which connective tissue sheath surrounds an individual nerve fibre?	The endoneurium.	general_anatomy::nervous_system
+Which connective tissue sheath surrounds each fascicle of a peripheral nerve?	The perineurium.	general_anatomy::nervous_system
+Which connective tissue sheath surrounds a peripheral nerve as a whole?	The epineurium.	general_anatomy::nervous_system
+A nerve injury causes both loss of skin sensation and weakness of skeletal muscles. What type of nerve was injured?	A mixed nerve containing both sensory and motor fibres.	general_anatomy::nervous_system
+Which part of the brain is especially involved in coordinating movement and balance?	The cerebellum.	general_anatomy::nervous_system
+What feature of initial lymphatic capillaries allows interstitial fluid to enter?	Overlapping endothelial cells that act as flap-like valves.	general_anatomy::lymphatic_system
+What is the segment of a collecting lymphatic vessel between two adjacent valves called?	A lymphangion.	general_anatomy::lymphatic_system
+How do valves help a contracting lymphangion move lymph forward?	They prevent backflow when the segment contracts.	general_anatomy::lymphatic_system
+Where do T lymphocytes mature?	In the thymus.	general_anatomy::lymphatic_system
+Where do B lymphocytes mature in humans?	In the bone marrow.	general_anatomy::lymphatic_system
+Why can axillary lymph node removal lead to persistent swelling in the upper limb?	It can impair lymphatic drainage, allowing fluid to accumulate in the tissues.	general_anatomy::lymphatic_system
