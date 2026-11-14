@@ -193,7 +193,11 @@ function buildPages(html, chapters) {
   const home = '<a href="../../index.html">← Home</a>';
   const book = '<a href="index.html">General Anatomy</a>';
   const pages = new Map();
-  const list = chapters.slice(1).map(chapter => `<li>${chapterLink(chapter)}</li>`).join('\n');
+  const contents = [
+    ...chapters.slice(1),
+    { title: 'Clinical Reasoning Questions', file: 'clinical-reasoning-questions.html' }
+  ];
+  const list = contents.map(chapter => `<li>${chapterLink(chapter)}</li>`).join('\n');
   pages.set('index.html', wrapPage('General Anatomy',
     `<h1>General Anatomy</h1>
     <p>Foundations of anatomy by Dr. Viveka S. ${chapterLink(chapters[0])}</p>
