@@ -1665,43 +1665,28 @@ var flashcardsData = {
   ],
   "rotator-cuff-muscles": [
     {
-      "q": "Articulating surfaces?",
-      "a": "Encloses tendon of long head of biceps.",
+      "q": "Which muscles make up the rotator cuff?",
+      "a": "Supraspinatus, infraspinatus, teres minor, and subscapularis.",
       "svg": null
     },
     {
-      "q": "Orientation of the joint?",
-      "a": "Encloses tendon of long head of biceps.",
+      "q": "How does the rotator cuff dynamically stabilize the shoulder?",
+      "a": "Together, its muscles compress and seat the humeral head against the shallow glenoid cavity.",
       "svg": null
     },
     {
-      "q": "Type of joint?",
-      "a": "Encloses tendon of long head of biceps.",
+      "q": "Which rotator cuff tendon is most frequently injured?",
+      "a": "The supraspinatus tendon.",
       "svg": null
     },
     {
-      "q": "What is Capsule of joint?",
-      "a": "Encloses tendon of long head of biceps.",
+      "q": "What range of abduction is associated with the painful arc described here?",
+      "a": "60° to 120°.",
       "svg": null
     },
     {
-      "q": "What is Synovial membrane?",
-      "a": "Lines the inner aspect of joint capsule. Projects along the tendon of long head of biceps. Communicates with few bursae.",
-      "svg": null
-    },
-    {
-      "q": "What is Stability of shoulder joint?",
-      "a": "Applied aspects:",
-      "svg": null
-    },
-    {
-      "q": "What is Frozen shoulder?",
-      "a": "Definition – painful restriction of both active and passive shoulder movements due to causes within the shoulder joint or remote",
-      "svg": null
-    },
-    {
-      "q": "What is Glenohumeral ligaments?",
-      "a": "Gap between superior and middle glenohumeral ligaments is of noted significance in anterior dislocation of shoulder",
+      "q": "Which muscles do the empty can and lift-off tests evaluate?",
+      "a": "The empty can test evaluates supraspinatus. The lift-off test evaluates subscapularis.",
       "svg": null
     }
   ],
