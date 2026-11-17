@@ -1788,8 +1788,8 @@ var flashcardsData = {
       "svg": null
     },
     {
-      "q": "What is Montegomery tubercles?",
-      "a": "Specialized sebaceous glands enlarge during pregnancy and form subcutaneous tubercles called Montegomery tubercles.",
+      "q": "What is Montgomery tubercles?",
+      "a": "Specialized sebaceous glands enlarge during pregnancy and form subcutaneous tubercles called Montgomery tubercles.",
       "svg": null
     },
     {
